@@ -1,0 +1,11 @@
+.box {
+    width: 568px;
+    height: 80px;
+    
+}
+
+.card {
+    display: flex;
+    top: 50%;
+    
+}

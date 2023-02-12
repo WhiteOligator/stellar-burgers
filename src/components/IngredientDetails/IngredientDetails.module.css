@@ -1,0 +1,50 @@
+.box {
+    display: flex;
+    width: 640px;
+    height: 64px;
+
+    justify-content: space-between;
+}
+
+.icons{
+    display: flex;
+    align-items: center;
+    
+}
+
+.text {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+    margin-left: 112px;
+}
+
+.squer_kall {
+    display: block;
+    text-align: center;
+    width: 120px;
+    height: 56px;
+    color: #8585AD;
+}
+
+.squer {
+    display: block;
+    text-align: center;
+    width: 112px;
+    height: 56px;
+    color: #8585AD;
+}
+
+
+.image_ingr{
+    margin-left: 120px;
+    height: 240px;
+    width: 480px;  
+}

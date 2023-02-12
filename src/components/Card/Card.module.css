@@ -1,0 +1,37 @@
+.card {
+    height: 200px;
+    width: 272px;
+    
+   
+}
+
+.img {
+    width: 240px;
+    height: 120px;
+    
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.textCard {
+    
+    width: 272px;
+    height: 48px;
+    text-align: center;
+}
+
+.price {
+    text-align: center;
+    
+    justify-content: center;
+}  
+
+
+.line {
+    display: flex;
+}
