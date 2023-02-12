@@ -27,7 +27,7 @@ function App() {
 
   },[])
 
-  const handleClick = () => {
+  const handleClick =  () => {
     setModalActive(!modalActive)
   }
 
@@ -46,17 +46,22 @@ function App() {
   
 
   return (
-      <div className={style.app}>
-        <AppHeader />
-        <BurgerIngredients data={data} handleClickIngridients = {handleClickIngridients}/>
-        <BurgerConstructor data={data} handleClick = {handleClick}/>
-        <Modal active={modalActive} setActive={setModalActive} children={OrderDetails(handleClick)} />
-        <Modal 
-          active={modalIngridientsActive} 
-          setActive={setModaIngridientslActive} 
-          children={IngredientDetails({clikIngridients, handleClickClose})} 
-        />
-      </div>
+    <>
+      {data.length !== 0 &&
+        <div className={style.app}>
+          <AppHeader />
+          <BurgerIngredients data={data} handleClickIngridients = {handleClickIngridients}/>
+          <BurgerConstructor data={data} handleClick = {handleClick}/>
+          <Modal active={modalActive} setActive={setModalActive} children={OrderDetails(handleClick)} number={1}/>
+          <Modal 
+            active={modalIngridientsActive} 
+            setActive={setModaIngridientslActive} 
+            children={IngredientDetails({clikIngridients, handleClickClose})} 
+            number={2}
+          />
+        </div>
+      }
+    </>  
   );
 }
 

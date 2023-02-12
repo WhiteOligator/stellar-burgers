@@ -3,11 +3,14 @@ import style from "./BurgerIngredients.module.css"
 import {  Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import './BurgerIngredients.module.css';
 import Card from "../Card/Card";
-
+import PropTypes from 'prop-types';
+import Container from "../Container/Container";
 
 
 
 const BurgerIngredients = (props) => {
+
+
    
     const [current, setCurrent] = React.useState('Булки')
     const array = props.data
@@ -15,7 +18,7 @@ const BurgerIngredients = (props) => {
     const bun = array.filter(el => el.type === "bun")
     const main = array.filter(el => el.type === "main")
     const sauce = array.filter(el => el.type === "sauce")
-  
+    
     
 
     return ( 
@@ -44,98 +47,15 @@ const BurgerIngredients = (props) => {
                         <p className="text text_type_main-medium">
                             Булки
                         </p>
-                        <div className="bul">
-                            <div className="pt-6 pl-4">
-                                <div className={style.flex}>
-                                        {bun.map((mas, index) => 
-                                                    <>{index === 0 ?
-                                                        <Card {...mas} key={index} handleClick={props.handleClickIngridients} />
-                                                        : index === 1 ?
-                                                        <div className="ml-6">
-                                                            <Card {...mas} key={index} handleClick={props.handleClickIngridients} />
-                                                        </div>
-                                                        
-                                                        : index % 2 !== 0 ? 
-                                                            <>
-                                                            <div className="ml-6 mt-8">
-                                                                <Card {...mas} key={index} handleClick={props.handleClickIngridients} />
-                                                            </div>
-                                                            
-                                                            </> : <>
-                                                                <div className="mt-8">
-                                                                    <Card {...mas} key={index} handleClick={props.handleClickIngridients} />
-                                                                </div>   
-                                                            </>
-
-                                                    }</>       
-                                                )}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="mt-10"></div>  
-                        <p className="text text_type_main-medium">
+                        <Container list={bun} handleClickIngridients={props.handleClickIngridients} />
+                        <p className="text text_type_main-medium mt-10">
                             Соусы
                         </p>
-                        <div className="sauce">
-                            <div className="pt-6 pl-4">
-                                <div className={style.flex}>
-                                        {sauce.map((mas, index) => 
-                                                    <>{index === 0 ?
-                                                        <Card {...mas} key={index} handleClick={props.handleClickIngridients} />
-                                                        : index === 1 ?
-                                                        <div className="ml-6">
-                                                            <Card {...mas} key={index} handleClick={props.handleClickIngridients}/>
-                                                        </div>
-                                                        
-                                                        : index % 2 !== 0 ? 
-                                                            <>
-                                                            <div className="ml-6 mt-8">
-                                                                <Card {...mas} key={index} handleClick={props.handleClickIngridients} />
-                                                            </div>
-                                                            
-                                                            </> : <>
-                                                                <div className="mt-8">
-                                                                    <Card {...mas} key={index} handleClick={props.handleClickIngridients} />
-                                                                </div>   
-                                                            </>
-
-                                                    }</>       
-                                                )}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="mt-10"></div>  
-                        <p className="text text_type_main-medium">
+                        <Container list={sauce} handleClickIngridients={props.handleClickIngridients} />
+                        <p className="text text_type_main-medium mt-10">
                             Начинки
                         </p>
-                        <div className="sauce">
-                            <div className="pt-6 pl-4">
-                                <div className={style.flex}>
-                                        {main.map((mas, index) => 
-                                                    <>{index === 0 ?
-                                                        <Card {...mas} key={index} handleClick={props.handleClickIngridients} />
-                                                        : index === 1 ?
-                                                        <div className="ml-6">
-                                                            <Card {...mas} key={index} handleClick={props.handleClickIngridients} />
-                                                        </div>
-                                                        
-                                                        : index % 2 !== 0 ? 
-                                                            <>
-                                                            <div className="ml-6 mt-8">
-                                                                <Card {...mas} key={index}  handleClick={props.handleClickIngridients}/>
-                                                            </div>
-                                                            
-                                                            </> : <>
-                                                                <div className="mt-8">
-                                                                    <Card {...mas} key={index} handleClick={props.handleClickIngridients} />
-                                                                </div>   
-                                                            </>
-
-                                                    }</>       
-                                            )}
-                                </div>
-                            </div>
-                        </div>                          
+                        <Container list={main}  handleClickIngridients={props.handleClickIngridients} />                     
                     </div>
                 </div>
                                                     
@@ -144,6 +64,24 @@ const BurgerIngredients = (props) => {
         </>
      );
 }
+
+BurgerIngredients.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.shape({
+        calories: PropTypes.number,
+        carbohydrates: PropTypes.number,
+        fat: PropTypes.number,
+        image: PropTypes.string,
+        image_large: PropTypes.string,
+        image_mobile: PropTypes.string,
+        name: PropTypes.string,
+        price: PropTypes.number,
+        proteins: PropTypes.number,
+        type: PropTypes.string,
+        __v: PropTypes.number,
+        _id: PropTypes.string,
+  })).isRequired,
+    handleClickIngridients:  PropTypes.func.isRequired,  
+  }; 
  
 
 export default BurgerIngredients;

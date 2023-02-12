@@ -7,11 +7,7 @@ const OrderDetails = (
 ) => {
     return (
         <>
-            <section className={style.icons}>
-                <section className="mt-15 mr-10" >
-                    <CloseIcon onClick={() => handleClick()} type="primary" />
-                </section>
-            </section>
+
             <section className={style.content}>
                 <section className='mt-9'>
                     <p className="text text_type_digits-large">034536</p>

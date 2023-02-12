@@ -1,25 +1,12 @@
 import React from 'react';
 import style from './IngredientDetails.module.css'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
 
 const IngredientDetails = (props) => {
 
-    
-    console.log(props)
     return (
         <>
-        <div className='ml-10 mt-10'  >
-            <section className={style.box}>
-                <section className={style.text}>
-                    <p className="text text_type_main-large">
-                        Детали заказа
-                    </p>
-                </section>
-                <section onClick={() => props.handleClickClose()} className={style.icons}>
-                    <CloseIcon  type="primary" />
-                </section>
-            </section>            
-        </div>
         <img className={style.image_ingr} src={props.clikIngridients.image_large} alt="ingridient img" />
         <div className={style.name}>
             <p  className="text text_type_main-medium mt-4">
@@ -74,5 +61,25 @@ const IngredientDetails = (props) => {
     </>
     );
 }
+
+IngredientDetails.propTypes = {
+    handleClickClose: PropTypes.func,
+    clikIngridients: PropTypes.shape({
+        calories: PropTypes.number,
+        carbohydrates: PropTypes.number,
+        fat: PropTypes.number,
+        image: PropTypes.string,
+        image_large: PropTypes.string,
+        image_mobile: PropTypes.string,
+        handleClick:  PropTypes.func,  
+        name: PropTypes.string,
+        price: PropTypes.number,
+        proteins: PropTypes.number,
+        type: PropTypes.string,
+        __v: PropTypes.number,
+        _id: PropTypes.string,
+    }).isRequired,
+
+  }; 
 
 export default IngredientDetails;

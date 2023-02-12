@@ -1,11 +1,14 @@
 import React from "react";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import style from './ConstructorCard.module.css'
+import style from './ConstructorCard.module.css';
+import PropTypes from 'prop-types';
 
-const ConstructorCard = (
-            mas
-) => {
-    const {name, price, image} = mas
+const ConstructorCard = ({
+    name,
+    price,
+    image,
+}) => {
+    
     return ( 
         <>
             <section className="ml-4">
@@ -27,5 +30,12 @@ const ConstructorCard = (
         </>
      );
 }
+
+ConstructorCard.propTypes = {
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
  
+}
+
 export default ConstructorCard;

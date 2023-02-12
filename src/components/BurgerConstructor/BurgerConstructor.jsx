@@ -1,41 +1,16 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import style from './BurgerConstructor.module.css'
 import { ConstructorElement, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ConstructorCard from "./ConstructorCard/ConstructorCard";
+import PropTypes from 'prop-types';
 
 const BurgerConstructor = (props) => {
-    
- 
+
     const array = props.data
-    const randomIngredient = []
     const bun = array.filter(el => el.type === "bun")
-    const main = array.filter(el => el.type === "main")
-    const sauce = array.filter(el => el.type === "sauce")
-
-
-    const randomIngredients = (mass1, mass2) => {
-        let list1 = mass1;
-        let list2 = mass2
-        let count1 = Math.floor(Math.random() * 9);
-        let count2 = Math.floor(Math.random() * 4);
-        
-        for (let i = 0; i < count1; i++) {
-            randomIngredient.push(list1[Math.floor(Math.random() * 9)])
-        }
-
-        for (let i = 0; i < count2; i++) {
-            randomIngredient.push(list2[Math.floor(Math.random() * 4)])
-        }
-
-        if (randomIngredient.length === 0) {
-            randomIngredient.push(list1[0])
-        }
-
-        return randomIngredient;
-
-    }    
-
-    
+    const main = array.filter(el => el.type === "main" && el.price < 900)
+    const sauce = array.filter(el => el.type === "sauce" && el.price < 700 && el.price !== 90)
+    const randomIngredient = [...main, ...sauce]
 
     const getSum = (mass) => {
         let sum = 0;
@@ -65,24 +40,24 @@ const BurgerConstructor = (props) => {
                                 </section>
                             </section>
                             <section className={style.scroll}>
-                                {randomIngredients(main, sauce).map((el, index) => 
-
-                                           
-                                    (<>
+                                {randomIngredient.length !== 0 && randomIngredient.map((el, index) =>         
+                                    (<div key={el._id} >
                                         {index === 0 ? 
                                             <ConstructorCard 
-                                                {...el}
-                                                key={index}
+                                                name = {el.name}
+                                                price = {el.price}
+                                                image = {el.image}
                                             /> :
                                             <section className="mt-4">
                                                 <ConstructorCard 
-                                                    {...el}
-                                                    key={index}
+                                                    name = {el.name}
+                                                    price = {el.price}
+                                                    image = {el.image}
                                                 />
                                             </section>
 
                                         }
-                                    </>)
+                                    </div> )
                                 )}
                             </section>
                             <section className="ml-8">
@@ -107,7 +82,12 @@ const BurgerConstructor = (props) => {
 
                                                 </section>
                                                 <section className="ml-10">
-                                                    <Button onClick={() => props.handleClick()} htmlType="button" type="primary" size="large">
+                                                    <Button 
+                                                        onClick={() => props.handleClick()} 
+                                                        htmlType="button" 
+                                                        type="primary" 
+                                                        size="large"
+                                                    >
                                                         Оформить заказ
                                                     </Button>
                                                 </section>      
@@ -121,4 +101,23 @@ const BurgerConstructor = (props) => {
     );
 }
  
+BurgerConstructor.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.shape({
+        calories: PropTypes.number,
+        carbohydrates: PropTypes.number,
+        fat: PropTypes.number,
+        image: PropTypes.string,
+        image_large: PropTypes.string,
+        image_mobile: PropTypes.string,
+        name: PropTypes.string,
+        price: PropTypes.number,
+        proteins: PropTypes.number,
+        type: PropTypes.string,
+        __v: PropTypes.number,
+        _id: PropTypes.string,
+  })).isRequired,
+    handleClick:  PropTypes.func.isRequired,  
+  }; 
+ 
+
 export default BurgerConstructor;
