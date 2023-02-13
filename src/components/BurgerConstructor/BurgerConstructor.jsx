@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import style from './BurgerConstructor.module.css'
 import { ConstructorElement, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ConstructorCard from "./ConstructorCard/ConstructorCard";
 import PropTypes from 'prop-types';
+import { ingredientType } from "../../utils/utils";
 
 const BurgerConstructor = (props) => {
 
@@ -23,12 +24,11 @@ const BurgerConstructor = (props) => {
     
 
     return (
-        <>
             <section className={style.box}>
-               <section className="mt-25">
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                            <section className="ml-8">
-                                <section className="ml-4">
+               <div className="mt-25">
+                    <div className={ style.constructor }>
+                            <div className="ml-8">
+                                <div className="ml-4">
                                     <ConstructorElement
                                         type="top"
                                         isLocked={true}
@@ -37,9 +37,9 @@ const BurgerConstructor = (props) => {
                                         thumbnail={bun[0]?.image}
                                     />
 
-                                </section>
-                            </section>
-                            <section className={style.scroll}>
+                                </div>
+                            </div>
+                            <div className={style.scroll}>
                                 {randomIngredient.length !== 0 && randomIngredient.map((el, index) =>         
                                     (<div key={el._id} >
                                         {index === 0 ? 
@@ -48,20 +48,20 @@ const BurgerConstructor = (props) => {
                                                 price = {el.price}
                                                 image = {el.image}
                                             /> :
-                                            <section className="mt-4">
+                                            <div className="mt-4">
                                                 <ConstructorCard 
                                                     name = {el.name}
                                                     price = {el.price}
                                                     image = {el.image}
                                                 />
-                                            </section>
+                                            </div>
 
                                         }
                                     </div> )
                                 )}
-                            </section>
-                            <section className="ml-8">
-                                <section className="ml-4">
+                            </div>
+                            <div className="ml-8">
+                                <div className="ml-4">
                                     <ConstructorElement
                                         type="bottom"
                                         isLocked={true}
@@ -69,19 +69,19 @@ const BurgerConstructor = (props) => {
                                         price={200}
                                         thumbnail={bun[0]?.image}
                                     />
-                                </section>
-                            </section>
-                            <section className="mt-10">
+                                </div>
+                            </div>
+                            <div className="mt-10">
                                
-                                    <section className={style.blockPrice}>
+                                    <div className={style.blockPrice}>
                                                 <p className="text text_type_digits-medium">{getSum(randomIngredient)}</p>
-                                                <section className="ml-2">
+                                                <div className="ml-2">
                                                     <div className={style.icon}>
                                                         <CurrencyIcon type="primary" />
                                                     </div>
 
-                                                </section>
-                                                <section className="ml-10">
+                                                </div>
+                                                <div className="ml-10">
                                                     <Button 
                                                         onClick={() => props.handleClick()} 
                                                         htmlType="button" 
@@ -90,32 +90,17 @@ const BurgerConstructor = (props) => {
                                                     >
                                                         Оформить заказ
                                                     </Button>
-                                                </section>      
-                                    </section>
-                            </section>
+                                                </div>      
+                                    </div>
+                            </div>
                         </div>
-               </section>
-            </section>
-
-        </>  
+               </div>
+            </section> 
     );
 }
  
 BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({
-        calories: PropTypes.number,
-        carbohydrates: PropTypes.number,
-        fat: PropTypes.number,
-        image: PropTypes.string,
-        image_large: PropTypes.string,
-        image_mobile: PropTypes.string,
-        name: PropTypes.string,
-        price: PropTypes.number,
-        proteins: PropTypes.number,
-        type: PropTypes.string,
-        __v: PropTypes.number,
-        _id: PropTypes.string,
-  })).isRequired,
+    data: PropTypes.arrayOf(PropTypes.shape(ingredientType)).isRequired,
     handleClick:  PropTypes.func.isRequired,  
   }; 
  

@@ -1,4 +1,7 @@
 .flex {
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    column-gap: 24px;
+    row-gap:  32px;
+    grid-template-columns: 272px 272px;
+
 }

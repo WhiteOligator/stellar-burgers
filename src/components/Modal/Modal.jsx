@@ -23,10 +23,10 @@ const EscClose = ({setActive}) => {
 }
 
 const Modal = ({
+    title = null,
     active,
     setActive,
-    children = <></>,
-    number
+    children
 }) => 
      
        
@@ -34,34 +34,20 @@ const Modal = ({
         <>  
             <EscClose setActive={setActive} />
             <div className={active ? "modal active" : "modal"} onClick={() => setActive(false)}>
-                <div className={active ? "content active" : "content"} onClick={e => e.stopPropagation()}>
-
-                    {number === 1 ?
-                    <section className={style.icons1}>
-                        <section className="mt-15 mr-10" >
-                            <CloseIcon onClick={() => setActive(false)} type="primary" />
-                        </section>
-                    </section>
-
-                    : 
-                    
-                    <div className='ml-10 mt-10'  >
-                        <section className={style.box}>
-                            <section className={style.text}>
+                <div className={active ? "content active" : "content"} onClick={e => e.stopPropagation()}>               
+                    <header className='ml-10 mt-10'  >
+                        <div className={style.box}>
+                            <div className={style.text}>
                                 <p className="text text_type_main-large">
-                                    Детали заказа
+                                    {title}
                                 </p>
-                            </section>
-                            <section onClick={() => setActive(false)} className={style.icons}>
+                            </div>
+                            <div onClick={() => setActive(false)} className={style.icons}>
                                 <CloseIcon  type="primary" />
-                            </section>
-                        </section>            
-                    </div>
-
-                    }
+                            </div>
+                        </div>            
+                    </header>
                     {children}
-                        
-                    
                 </div>
             </div>
             

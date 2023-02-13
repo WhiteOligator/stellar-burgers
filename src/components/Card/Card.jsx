@@ -2,17 +2,18 @@ import React from "react";
 import style from "./Card.module.css"
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from 'prop-types';
+import { ingredientType } from "../../utils/utils";
 
 const Card = (props) => {
     
                          
                             return (
     
-                                <div className={style.line} onClick={() => props.handleClick(props.mas)}>
+                                <section className={style.line} onClick={() => props.handleClick(props.mas)}>
                                     <div className={style.card}>
                                         <div className="ml-4">
                                             <div className={style.img}>
-                                              <img src={props.mas.image} alt="картинка"/>
+                                              <img src={props.mas.image} alt={props.mas.name}/>
                                             </div>
                                         </div>
                                         <div className="mt-1">
@@ -35,27 +36,13 @@ const Card = (props) => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </section>
                            
                                 );
     }
 
 Card.propTypes = {
-    mas: PropTypes.shape({
-        calories: PropTypes.number,
-        carbohydrates: PropTypes.number,
-        fat: PropTypes.number,
-        image: PropTypes.string,
-        image_large: PropTypes.string,
-        image_mobile: PropTypes.string,
-        handleClick:  PropTypes.func,  
-        name: PropTypes.string,
-        price: PropTypes.number,
-        proteins: PropTypes.number,
-        type: PropTypes.string,
-        __v: PropTypes.number,
-        _id: PropTypes.string,
-    }).isRequired,
+    mas: PropTypes.shape(ingredientType).isRequired,
     handleClick: PropTypes.func.isRequired,
 
   }; 

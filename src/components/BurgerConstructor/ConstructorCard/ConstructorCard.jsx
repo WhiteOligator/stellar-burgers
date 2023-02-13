@@ -12,20 +12,20 @@ const ConstructorCard = ({
     return ( 
         <>
             <section className="ml-4">
-                <section className={style.box}>
-                    <section className={style.card}>
-                        <section className="mt-7">
+                <div className={style.box}>
+                    <div className={style.card}>
+                        <div className="mt-7">
                          <DragIcon type="primary" />
-                        </section>
-                        <section className="ml-2">
+                        </div>
+                        <div className="ml-2">
                             <ConstructorElement
                                 text={name}
                                 price={price}
                                 thumbnail={image}
                             />
-                        </section>
-                    </section>
-                </section>
+                        </div>
+                    </div>
+                </div>
             </section>
         </>
      );

@@ -24,8 +24,8 @@ const AppHeader = () => {
                                 <a className="ml-5" href="/">
                                     <ListIcon type="secondary" />
                                 </a>
-                                <div className="ml-2">
-                                    <p className="text text_type_main-default" style={{color:'#8585AD'}}>
+                                <div className={style.color}>
+                                    <p className="text text_type_main-default ml-2">
                                         Лента заказов
                                     </p>
                                 </div>
@@ -39,8 +39,8 @@ const AppHeader = () => {
                                 <a className="ml-5" href="/">
                                     <ProfileIcon type="secondary" />
                                 </a>
-                                <div className="ml-2">
-                                    <p className="text text_type_main-default" style={{color:'#8585AD'}}>
+                                <div className={style.color}>
+                                    <p className="text text_type_main-default ml-2">
                                         Личный кабинет
                                     </p>
                                 </div>

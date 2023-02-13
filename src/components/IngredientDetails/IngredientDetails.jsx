@@ -1,13 +1,12 @@
 import React from 'react';
 import style from './IngredientDetails.module.css'
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
+import { ingredientType } from '../../utils/utils';
 
-const IngredientDetails = (props) => {
-
+const IngredientDetails = (props) =>  {
     return (
-        <>
-        <img className={style.image_ingr} src={props.clikIngridients.image_large} alt="ingridient img" />
+        <section>
+        <img className={style.image_ingr} src={props.clikIngridients.image_large} alt={props.clikIngridients.name} />
         <div className={style.name}>
             <p  className="text text_type_main-medium mt-4">
                 {props.clikIngridients.name}
@@ -55,30 +54,17 @@ const IngredientDetails = (props) => {
                 </div>
             </div>
         </div>
-        <div className='mt-15'>
-
-        </div>
-    </>
+        <div className='mt-15'></div>
+    </section>
     );
 }
 
 IngredientDetails.propTypes = {
     handleClickClose: PropTypes.func,
-    clikIngridients: PropTypes.shape({
-        calories: PropTypes.number,
-        carbohydrates: PropTypes.number,
-        fat: PropTypes.number,
-        image: PropTypes.string,
-        image_large: PropTypes.string,
-        image_mobile: PropTypes.string,
-        handleClick:  PropTypes.func,  
-        name: PropTypes.string,
-        price: PropTypes.number,
-        proteins: PropTypes.number,
-        type: PropTypes.string,
-        __v: PropTypes.number,
-        _id: PropTypes.string,
-    }).isRequired,
+    clikIngridients: PropTypes.oneOfType([
+        PropTypes.shape(ingredientType).isRequired,
+        PropTypes.array,
+      ]),
 
   }; 
 
