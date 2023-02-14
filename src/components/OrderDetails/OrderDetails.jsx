@@ -2,9 +2,7 @@ import React from 'react';
 import style from './OrderDetails.module.css'
 import { CloseIcon, CheckMarkIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
-const OrderDetails = (
-    handleClick
-) => {
+const OrderDetails = () => {
     return (
         <>
 

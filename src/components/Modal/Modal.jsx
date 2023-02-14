@@ -4,36 +4,31 @@ import PropTypes from 'prop-types';
 import style from './Modal.module.css'
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { createPortal } from 'react-dom';
+import ModalOverlay from "./ModalOverlay";
+
 
 const portal = document.getElementById("portal");
 
-const EscClose = ({setActive}) => {
-   
+const Modal = ({
+    title = null,
+    active,
+    onClose,
+    children
+}) => {
 
     useEffect(() => {
         function handleEscapeKey(event) {
             if (event.code === 'Escape') 
-                setActive(false);
+                onClose()
        
           }
         
         document.addEventListener('keydown', handleEscapeKey)
         return () => document.removeEventListener('keydown', handleEscapeKey)
     },[])
-}
-
-const Modal = ({
-    title = null,
-    active,
-    setActive,
-    children
-}) => 
-     
-       
-        createPortal( 
-        <>  
-            <EscClose setActive={setActive} />
-            <div className={active ? "modal active" : "modal"} onClick={() => setActive(false)}>
+  
+    return createPortal( 
+            <ModalOverlay active={active} onClose={() => onClose()}>
                 <div className={active ? "content active" : "content"} onClick={e => e.stopPropagation()}>               
                     <header className='ml-10 mt-10'  >
                         <div className={style.box}>
@@ -42,18 +37,16 @@ const Modal = ({
                                     {title}
                                 </p>
                             </div>
-                            <div onClick={() => setActive(false)} className={style.icons}>
+                            <div onClick={() => onClose()} className={style.icons}>
                                 <CloseIcon  type="primary" />
                             </div>
                         </div>            
                     </header>
                     {children}
                 </div>
-            </div>
-            
-        </>, portal);
+            </ModalOverlay>, portal);
 
-                
+    }                
 Modal.propTypes = {
     active:  PropTypes.bool,
     setActive: PropTypes.func,

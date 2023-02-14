@@ -9,9 +9,9 @@ const Container = (props) => {
         <section className="bul">
                             <div className="pt-6 pl-4">
                                 <div className={style.flex}>
-                                        {props.list.lenght !== 0 && props.list.map((mas, index) => 
+                                        {props.list.lenght !== 0 && props.list.map((ingredient, index) => 
                                                     
-                                                        <Card key={mas._id} mas={mas}  handleClick={props.handleClickIngridients} />
+                                                        <Card key={ingredient._id} ingredient={ingredient}  handleClick={props.handleClickIngridients} />
                                                           
                                                 )}
                                 </div>

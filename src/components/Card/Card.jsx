@@ -9,18 +9,18 @@ const Card = (props) => {
                          
                             return (
     
-                                <section className={style.line} onClick={() => props.handleClick(props.mas)}>
+                                <section className={style.line} onClick={() => props.handleClick(props.ingredient)}>
                                     <div className={style.card}>
                                         <div className="ml-4">
                                             <div className={style.img}>
-                                              <img src={props.mas.image} alt={props.mas.name}/>
+                                              <img src={props.ingredient.image} alt={props.ingredient.name}/>
                                             </div>
                                         </div>
                                         <div className="mt-1">
                                             <div className={style.price}>
                                                 <div className={style.flex}>
                                                     <p className="text text_type_digits-default">
-                                                        {props.mas.price}
+                                                        {props.ingredient.price}
                                                     </p>
                                                     <div className="ml-2">
                                                             <CurrencyIcon  type="primary" />
@@ -31,7 +31,7 @@ const Card = (props) => {
                                         <div className="mt-1">
                                             <div className={style.textCard}>
                                                 <p className="text text_type_main-small">
-                                                        {props.mas.name}
+                                                        {props.ingredient.name}
                                                 </p>
                                             </div>
                                         </div>
@@ -42,7 +42,7 @@ const Card = (props) => {
     }
 
 Card.propTypes = {
-    mas: PropTypes.shape(ingredientType).isRequired,
+    ingredient: PropTypes.shape(ingredientType).isRequired,
     handleClick: PropTypes.func.isRequired,
 
   }; 

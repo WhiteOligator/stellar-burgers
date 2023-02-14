@@ -20,23 +20,23 @@ function App() {
   useEffect(() => {
     fetch('https://norma.nomoreparties.space/api/ingredients ')
     .then((res) => {
-      if (res.status >= 200 && res.status < 300) {
-          return res;
-      } else {
-          let error = new Error(res.statusText);
-          error.response = res;
-          throw error
+      if (res.ok) {
+        return res.json();
       }
+      return Promise.reject(`Ошибка ${res.status}`);
     })
-    .then(res => res.ok ? res : Promise.reject(res))
-    .then(res => res.json())
-    .then(data => setData(data.data))
+    .then((data) => setData(data.data))
     .catch((e) => {
       console.log('Error: ' + e.message);
       console.log(e.response);
     });
 
   },[])
+
+  const onClose = () => {
+    setModalActive(false)
+    setModaIngridientslActive(false)
+  }
 
   const handleClick =  () => {
     setModalActive(!modalActive)
@@ -49,9 +49,7 @@ function App() {
     setClikIngridients(props)
   }
 
-  const handleClickClose = () => {
-    setModaIngridientslActive(!modalIngridientsActive)
-  }
+
 
 
   
@@ -61,20 +59,22 @@ function App() {
       {data.length !== 0 &&
         <div className={style.content}>
           <AppHeader />
-          <BurgerIngredients data={data} handleClickIngridients = {handleClickIngridients}/>
-          <BurgerConstructor data={data} handleClick = {handleClick}/>
+          <div className={style.flex}>
+            <BurgerIngredients data={data} handleClickIngridients = {handleClickIngridients}/>
+            <BurgerConstructor data={data} handleClick = {handleClick}/>
+          </div>
           <Modal 
             active={modalActive} 
-            setActive={setModalActive}
+            onClose={onClose}
           >
-            <OrderDetails handleClick={handleClick} />
+            <OrderDetails/>
           </Modal>
           <Modal
             title={'Детали ингредиента'}
             active={modalIngridientsActive} 
-            setActive={setModaIngridientslActive} 
+            onClose={onClose} 
           >
-            <IngredientDetails handleClickClose={handleClickClose} clikIngridients={clikIngridients} />
+            <IngredientDetails clikIngridients={clikIngridients} />
           </Modal>
         </div>
       }

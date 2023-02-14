@@ -1,9 +1,8 @@
 .box {
-    position: absolute;
     width: 600px;
     height: 912px;
-    left: 980px;
-    top: 88px;
+    margin-left: 40px;
+   
 }
 
 .scroll{
@@ -29,11 +28,7 @@
     height: 33px;
 }
 
-.button {
-    position: fixed;
-    
-    
-}
+
 
 .blockPrice {
     height: 64px;
