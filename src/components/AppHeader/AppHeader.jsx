@@ -5,7 +5,7 @@ import {BurgerIcon, ListIcon, Logo, ProfileIcon} from '@ya.praktikum/react-devel
 
 const AppHeader = () => {
     return (
-        <>
+      
             <header className={style.head}>
                 <div>
                     <div className={style.margin320}> 
@@ -52,7 +52,7 @@ const AppHeader = () => {
                 </div>
             </header>
         
-        </>
+    
       );
 }
  

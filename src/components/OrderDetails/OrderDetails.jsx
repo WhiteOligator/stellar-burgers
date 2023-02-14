@@ -4,47 +4,45 @@ import { CloseIcon, CheckMarkIcon} from '@ya.praktikum/react-developer-burger-ui
 
 const OrderDetails = () => {
     return (
-        <>
-
-            <section className={style.content}>
-                <section className='mt-9'>
+        <section>
+            <div className={style.content}>
+                <div className='mt-9'>
                     <p className="text text_type_digits-large">034536</p>
-                </section>
-            </section>
-            <section className={style.content}>
-                <section className='mt-8'>
+                </div>
+            </div>
+            <div className={style.content}>
+                <div className='mt-8'>
                     <p className="text text_type_main-medium">
                         индефикатор заказа
                     </p>
-                </section>
-            </section>
-            <section className={style.content}>
-                <section className='mt-15'>
-                    <section className={style.content}>
-                        <section className={style.box}>
+                </div>
+            </div>
+            <div className={style.content}>
+                <div className='mt-15'>
+                    <div className={style.content}>
+                        <div className={style.box}>
                             <CheckMarkIcon type="primary" />
-                        </section>
-                    </section>
-                </section>
-            </section>
-            <section className={style.content}>
-                <section className="mt-15">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className={style.content}>
+                <div className="mt-15">
                     <p className="text text_type_main-duefalt">
                         Ваш заказ начали готовить
                     </p>
-                </section>
-            </section>
-            <section className={style.content_text}>
-                <section className="mt-2">
+                </div>
+            </div>
+            <div className={style.content_text}>
+                <div className="mt-2">
                     <p className="text text_type_main-duefalt">
                         Дождитесь готовности на орбитальной станции
                     </p>
-                </section>
-            </section>
-            <div className='mt-30'>
-
+                </div>
+                
             </div>
-        </>
+            <div className='mt-30'></div>
+        </section>
     );
 }
 
