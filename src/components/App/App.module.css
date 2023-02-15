@@ -1,9 +1,9 @@
 .content {
   background: #131316;
-  margin: auto;
-  max-width: 1980px;
+  inline-size: 1920px;
+  justify-content: center;
+  column-gap: 40px; 
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.flex {
-  display: flex;
-}

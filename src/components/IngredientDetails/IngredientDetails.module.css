@@ -1,9 +1,9 @@
-.box {
+.container {
     display: flex;
-    width: 640px;
-    height: 64px;
-
-    justify-content: space-between;
+    width: 720px;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
 }
 
 .icons{
@@ -17,13 +17,9 @@
     align-items: center;
 }
 
-.name {
-    text-align: center;
-}
 
 .flex {
     display: flex;
-    margin-left: 112px;
 }
 
 .squer_kall {
@@ -44,7 +40,6 @@
 
 
 .image_ingr{
-    margin-left: 120px;
     height: 240px;
     width: 480px;  
 }

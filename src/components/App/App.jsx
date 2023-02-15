@@ -59,10 +59,8 @@ function App() {
       {data.length !== 0 &&
         <div className={style.content}>
           <AppHeader />
-          <div className={style.flex}>
-            <BurgerIngredients data={data} handleClickIngridients = {handleClickIngridients}/>
-            <BurgerConstructor data={data} handleClick = {handleClick}/>
-          </div>
+          <BurgerIngredients data={data} handleClickIngridients = {handleClickIngridients}/>
+          <BurgerConstructor data={data} handleClick = {handleClick}/>
           <Modal 
             active={modalActive} 
             onClose={onClose}
