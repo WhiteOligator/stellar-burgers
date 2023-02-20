@@ -1,0 +1,9 @@
+.content {
+  background: #131316;
+  inline-size: 1920px;
+  justify-content: center;
+  column-gap: 40px; 
+  display: flex;
+  flex-wrap: wrap;
+}
+

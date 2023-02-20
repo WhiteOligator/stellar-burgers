@@ -1,0 +1,47 @@
+.head {
+    align-items: center;
+    display: flex;
+    min-height: 88px;
+    width: 100%;
+    height: 100%;
+    background: #1C1C21;
+    box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+}
+
+
+
+.logo {
+    display: flex;
+    justify-content: center;
+    flex-basis: 290px;
+}
+
+
+.form1 {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    flex-basis: 475px;
+    border-radius: 40px;
+    
+}
+
+.form2 {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    flex-basis: 340px;
+    border-radius: 40px;
+   
+}
+.form_lk {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 40px;
+    flex-basis: 760px;
+}
+
+.color {
+    color: #8585AD;
+}

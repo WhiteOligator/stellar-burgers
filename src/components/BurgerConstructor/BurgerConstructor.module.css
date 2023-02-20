@@ -1,0 +1,44 @@
+.box {
+    width: 600px;
+    height: 912px;
+   
+}
+
+.scroll{
+    height:464px;
+    overflow:scroll;
+    overflow-x:hidden;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 8px; /* ширина для вертикального скролла */
+    background-color: #2F2F37;
+    height:300px;
+}
+
+/* ползунок скроллбара */
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #8585AD;;
+
+}
+
+.icon svg{
+    width: 33px;
+    height: 33px;
+}
+
+
+
+.blockPrice {
+    height: 64px;
+    justify-content: right;
+    display: flex;
+    align-items: center;
+}
+ 
+.constructor  {
+    
+    display: flex;  
+    flex-direction: column;
+    gap: 10px;
+}

@@ -1,0 +1,42 @@
+.box {
+    width: 600px;
+    height: 950px;
+    background: #131316;
+}
+
+.scroll{
+    height:662px;
+    overflow:scroll;
+    overflow-x:hidden;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 8px; /* ширина для вертикального скролла */
+    background-color: #2F2F37;
+    height:300px;
+}
+
+/* ползунок скроллбара */
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #8585AD;;
+
+}
+
+.block1 {
+  height: 300px;
+  background-color: #ffa3f6;
+}
+ 
+.block2 {
+  height: 300px;
+  background-color: #fffc9c;
+}
+
+.flex {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.tab {
+    display: flex;
+}

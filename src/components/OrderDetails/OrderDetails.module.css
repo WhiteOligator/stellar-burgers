@@ -1,0 +1,25 @@
+.icons {
+    
+    justify-content: right;
+    display: flex;
+}
+
+.but {
+    color: #1C1C21;
+}
+
+.content {
+    justify-content: center;
+    display: flex;
+}
+
+.box svg{
+    width: 120px;
+    height: 120px;
+}
+
+.content_text {
+    justify-content: center;
+    display: flex;
+    color: #8585AD;
+}

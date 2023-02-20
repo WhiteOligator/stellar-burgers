@@ -1,0 +1,16 @@
+
+
+
+.content {
+    
+    border-radius: 40px;
+    background-color: #1C1C21;
+    width: 720px;
+    transform: scale(0.5);
+    transition: 0.4s all;
+}
+
+.content.active {
+    transform: scale(1);
+}
+
