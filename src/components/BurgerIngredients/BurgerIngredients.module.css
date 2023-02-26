@@ -40,3 +40,22 @@
 .tab {
     display: flex;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.error {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

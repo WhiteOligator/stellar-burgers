@@ -11,7 +11,7 @@ const Container = (props) => {
                                 <div className={style.flex}>
                                         {props.list.lenght !== 0 && props.list.map((ingredient, index) => 
                                                     
-                                                        <Card key={ingredient._id} ingredient={ingredient}  handleClick={props.handleClickIngridients} />
+                                                        <Card key={ingredient._id} ingredient={ingredient}   />
                                                           
                                                 )}
                                 </div>
@@ -22,7 +22,6 @@ const Container = (props) => {
 
 Container.propTypes = {
     list: PropTypes.arrayOf(PropTypes.shape(ingredientType)).isRequired,
-    handleClickIngridients: PropTypes.func.isRequired,
 
   }; 
 

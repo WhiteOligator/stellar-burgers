@@ -8,6 +8,7 @@
 .img {
     width: 240px;
     height: 120px;
+    position: relative;
     
 }
 
@@ -33,4 +34,21 @@
 
 .line {
     display: flex;
+}
+
+.counter { 
+    left: 200px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    background-color: #4C4CFF;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+}
+
+.text {
+    align-items: center;
+    text-align: center;
 }

@@ -1,80 +1,143 @@
-import React from "react";
+import React, { useEffect} from "react";
 import style from './BurgerConstructor.module.css'
 import { ConstructorElement, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import ConstructorCard from "./ConstructorCard/ConstructorCard";
 import PropTypes from 'prop-types';
 import { ingredientType } from "../../utils/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
+import { addBunConstructorThunk, addIngridientsConstructorThunk, clearConstructorThunk, getCostThunk } from "../../redux/thunk/constructorBurger";
+import { v4 as uuidv4 } from 'uuid';
+import ConstructorIngredientsList from "../ConstructorIngridientList/ConstructorIngredientsList";
+import { createOrderThunk } from "../../redux/thunk/order";
+
 
 const BurgerConstructor = (props) => {
 
-    const array = props.data
-    const bun = array.filter(el => el.type === "bun")
-    const main = array.filter(el => el.type === "main" && el.price < 900)
-    const sauce = array.filter(el => el.type === "sauce" && el.price < 700 && el.price !== 90)
-    const randomIngredient = [...main, ...sauce]
+    const dispatch = useDispatch();
+    const buns = useSelector(state => state.constructorBurger.whatKindOfBun)
+    const ingridientConstructor = useSelector(state => state.constructorBurger.ingridients)
+    const cost = useSelector(state => state.constructorBurger.costOfTheOrder)
 
-    const getSum = (mass) => {
-        let sum = 0;
-        mass.map((el) => {
-            sum = sum + el?.price
-        })
-        sum = sum + 400
-        return sum
-    }
-    
+    const [{ isHover }, dropTargerRef] = useDrop({
+        accept: 'ingredient',
+        collect: monitor => ({
+            isHover: monitor.isOver()
+        }),
+        drop(item) {
+            let addItem = { ...item, dragId: uuidv4()}
+            dispatch(addIngridientsConstructorThunk(addItem))
+            }
+        }
+    );
+
+    const [{ isHoverBun1 }, dropTargerRefBun1] = useDrop({
+        accept: 'bun',
+        collect: monitor => ({
+            isHoverBun1: monitor.isOver()
+        }),
+        drop(item) {
+            let addItem = { ...item, dragId: uuidv4()}
+            dispatch(addBunConstructorThunk(addItem))
+            }
+        }
+    );
+
+    const [{ isHoverBun2 }, dropTargerRefBun2] = useDrop({
+        accept: 'bun',
+        collect: monitor => ({
+            isHoverBun2: monitor.isOver()
+        }),
+        drop(item) {
+            let addItem = { ...item, dragId: uuidv4()}
+            dispatch(addBunConstructorThunk(addItem))
+            }
+        }
+    );
+
+    useEffect(() => {
+        const getSum = (mass1, mass2) => {
+            let sum = 0;
+            mass1?.map((el) => {
+                sum = sum + el?.price
+            })
+            mass2?.map((el) => {
+                sum = sum + el?.price
+            })
+            dispatch(getCostThunk(sum))
+        }
+        getSum(ingridientConstructor, buns)
+        
+    }, [buns, ingridientConstructor]);
+
+
+    const borderColorBun1 = isHoverBun1 ? style.please2 : style.please;
+    const borderColorWithBun1 = isHoverBun1 ? style.borderActiveWithBun : style.borderWithBun;
+    const borderColorWithBun2 = isHoverBun2 ? style.borderActiveWithBun : style.borderWithBun;
+    const borderColorBun2 = isHoverBun2 ? style.please2 : style.please;
+    const borderIngridient = isHover ? style.borderActive : style.border;
+
+   
 
     return (
             <section className={style.box}>
                <div className="mt-25">
                     <div className={ style.constructor }>
-                            <div className="ml-8">
+                            <div  className="ml-8">
                                 <div className="ml-4">
-                                    <ConstructorElement
-                                        type="top"
-                                        isLocked={true}
-                                        text="Краторная булка N-200i (верх)"
-                                        price={200}
-                                        thumbnail={bun[0]?.image}
-                                    />
+                                    <div ref={dropTargerRefBun1} className={`${isHoverBun1 ? style.onHover : ''}`} >
+                                        {buns?.length > 0 ? 
+                                            <div className={isHoverBun1 ? borderColorWithBun1 : borderColorWithBun2}>
+                                                <ConstructorElement
+                                                    type="top"
+                                                    isLocked={true}
+                                                    text={buns[0].name}
+                                                    price={buns[0].price}
+                                                    thumbnail={buns[0].image}
+                                                />
+                                            </div>
+                                        :
+                                        <div className={isHoverBun1 ? borderColorBun1 : borderColorBun2} >
+                                            <p className="text text_type_main-medium">
+                                                Please add buns
+                                            </p>
+                                        </div>}
+                                    </div>
+                                </div>
+                            </div>
+                            <div ref={dropTargerRef} className={borderIngridient}>
+                                <div className={style.scroll} >
+                                        {ingridientConstructor && 
+                                            <ConstructorIngredientsList ingredients={ingridientConstructor} />
+                                        }
 
                                 </div>
                             </div>
-                            <div className={style.scroll}>
-                                {randomIngredient.length !== 0 && randomIngredient.map((el, index) =>         
-                                    (<div key={el._id} >
-                                        {index === 0 ? 
-                                            <ConstructorCard 
-                                                name = {el.name}
-                                                price = {el.price}
-                                                image = {el.image}
-                                            /> :
-                                            <div className="mt-4">
-                                                <ConstructorCard 
-                                                    name = {el.name}
-                                                    price = {el.price}
-                                                    image = {el.image}
-                                                />
-                                            </div>
-
-                                        }
-                                    </div> )
-                                )}
-                            </div>
                             <div className="ml-8">
                                 <div className="ml-4">
-                                    <ConstructorElement
-                                        type="bottom"
-                                        isLocked={true}
-                                        text="Краторная булка N-200i (низ)"
-                                        price={200}
-                                        thumbnail={bun[0]?.image}
-                                    />
+                                    <div ref={dropTargerRefBun2} className={`${isHoverBun2 ? style.onHover : ''}`} >
+                                        {buns?.length > 0 ? 
+                                            <div className={isHoverBun1 ? borderColorWithBun1 : borderColorWithBun2}>
+                                                <ConstructorElement
+                                                    type="bottom"
+                                                    isLocked={true}
+                                                    text={buns[1].name}
+                                                    price={buns[1].price}
+                                                    thumbnail={buns[1].image}
+                                                />
+                                            </div>    
+                                        :
+                                        <div className={isHoverBun1 ? borderColorBun1 : borderColorBun2}>
+                                            <p className="text text_type_main-medium">
+                                                Please add buns
+                                            </p>
+                                        </div>}
+                                    </div>
                                 </div>
                             </div>
                             <div className="mt-10">
                                
                                     <div className={style.blockPrice}>
-                                                <p className="text text_type_digits-medium">{getSum(randomIngredient)}</p>
+                                                <p className="text text_type_digits-medium">{cost}</p>
                                                 <div className="ml-2">
                                                     <div className={style.icon}>
                                                         <CurrencyIcon type="primary" />
@@ -82,14 +145,31 @@ const BurgerConstructor = (props) => {
 
                                                 </div>
                                                 <div className="ml-10">
+                                                    {cost > 0 ?
                                                     <Button 
-                                                        onClick={() => props.handleClick()} 
+                                                        onClick={
+                                                            () => {
+                                                                dispatch(createOrderThunk([buns[0], ...ingridientConstructor, buns[1]], cost))
+                                                                dispatch(clearConstructorThunk())
+                                                            }
+                                                        } 
                                                         htmlType="button" 
                                                         type="primary" 
                                                         size="large"
                                                     >
                                                         Оформить заказ
                                                     </Button>
+                                                    :
+                                                    <Button 
+                                                        onClick={() => alert("добавьте ингридиенты")}
+                                                        htmlType="button" 
+                                                        type="primary" 
+                                                        size="large"
+                                                    >
+                                                        Оформить заказ
+                                                    </Button>
+                                                
+                                                }
                                                 </div>      
                                     </div>
                             </div>
@@ -99,10 +179,6 @@ const BurgerConstructor = (props) => {
     );
 }
  
-BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape(ingredientType)).isRequired,
-    handleClick:  PropTypes.func.isRequired,  
-  }; 
- 
+
 
 export default BurgerConstructor;
