@@ -99,6 +99,7 @@ const Card = (props) => {
                                 );
     }
 
+//sdsdsd   
 Card.propTypes = {
     ingredient: PropTypes.shape(ingredientType).isRequired,
 
