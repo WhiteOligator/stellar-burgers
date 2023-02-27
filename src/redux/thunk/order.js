@@ -5,19 +5,33 @@ import {
     createOrderFailed,
     cleareOrder,
 } from '../actionCreators/order'
-
+import { API_ENDPOINT } from '../../api/makeRequest'
 
 export const createOrderThunk = (ingridients, cost) => {
     return async (dispatch) => {
-        let ingridients_id = []
+        let ingredients = []
         ingridients.map((el) => {
-            ingridients_id.push(el?._id)
+            ingredients.push(el?._id)
         })
         try {
             dispatch(createOrderStarted())
 
-            dispatch(createOrderSuccess(ingridients, cost));
-            const response = await api.ingridients.postIngridients(ingridients_id);
+            const response = await fetch(`${API_ENDPOINT}/orders`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+                },
+                body: JSON.stringify({
+                    ingredients,
+                }),
+            });
+            if (response.status === 200) {
+                let result = await response.json();
+                let number = result.order.number;
+                dispatch(createOrderSuccess(ingridients, cost, number))
+            }
+           
+            
 
         } catch (error) {
             dispatch(createOrderFailed())

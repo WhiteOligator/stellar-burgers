@@ -10,7 +10,7 @@ const OrderDetails = () => {
 
     return (
         <>
-        {isPost === true ?
+        {isPost  ?
             <ProgressBar 
             height="140"
             width="140"

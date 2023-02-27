@@ -23,7 +23,7 @@ export const orderReducer = (state = initialState, action) => {
                 ...state,
                 ingridients: action.ingridients,
                 costOfTheOrder: action.cost,
-                orderNumber: Math.floor((Math.random() * 1000000) + 1),
+                orderNumber: action.orderNumber,
                 isPost: false,
                 openOrder: true,
             }

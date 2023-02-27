@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const API_ENDPOINT = 'https://norma.nomoreparties.space/api'
+export const API_ENDPOINT = 'https://norma.nomoreparties.space/api'
 
 
 export const makeRequest = (config) => {

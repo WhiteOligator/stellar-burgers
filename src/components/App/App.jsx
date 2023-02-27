@@ -19,22 +19,6 @@ function App() {
   const openIngridient = useSelector(state => state.openIngridient.openIngridient)
   const openOrder = useSelector(state => state.order.openOrder)
   
-  // useEffect(() => {
-  //   fetch('https://norma.nomoreparties.space/api/ingredients')
-  //   .then((res) => {
-  //     if (res.ok) {
-  //       return res.json();
-  //     }
-  //     return Promise.reject(`Ошибка ${res.status}`);
-  //   })
-  //   .then((data) => setData(data.data))
-  //   .catch((e) => {
-  //     console.log('Error: ' + e.message);
-  //     console.log(e.response);
-  //   });
-
-  // },[])
-
   return (
     <>
         <div className={style.content}>

@@ -5,6 +5,6 @@ import { postIngridients } from "./postIngridients";
 export const api = {
     ingridients: {
         getIngridients,
-        postIngridients,
+        // postIngridients,
     },
 };

@@ -6,10 +6,11 @@ import {
     CLEARE_ORDER
 } from "../actionType/order"
 
-export const createOrderSuccess = (ingridients, cost) => ({
+export const createOrderSuccess = (ingridients, cost, orderNumber) => ({
     type: CREATE_ORDER_SUCCESS,
     ingridients: ingridients,
     cost: cost,
+    orderNumber: orderNumber,
 })
 
 export const createOrderStarted = () => ({
