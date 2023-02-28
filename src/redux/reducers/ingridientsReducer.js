@@ -17,6 +17,7 @@ export const ingridientsReducer = (state = initialState, action) => {
         case GET_INGRIDIENTS_FAILED: 
             return {
                 ...state,
+                ingridients: [],
                 isIngridientsLoading: false,
                 error: true,
             }

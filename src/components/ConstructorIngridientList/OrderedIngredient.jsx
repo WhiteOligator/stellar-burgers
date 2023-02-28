@@ -1,8 +1,14 @@
 import { useDrag, useDrop } from "react-dnd";
 import React, {useRef} from "react";
 import ConstructorCard from "../BurgerConstructor/ConstructorCard/ConstructorCard";
+import PropTypes from 'prop-types';
+import { ingredientType } from "../../utils/utils";
 
-const OrderedIngredient = ({ item, index, moveCard }) => {
+const OrderedIngredient = ({ 
+    item, 
+    index, 
+    moveCard, 
+}) => {
     const ref = useRef(null);
     const [{ handlerId }, drop] = useDrop({
         accept: 'component',
@@ -85,6 +91,12 @@ const OrderedIngredient = ({ item, index, moveCard }) => {
             }
         </div>
     )
+}
+
+OrderedIngredient.propTypes = {
+    item: PropTypes.shape(ingredientType).isRequired,
+    index: PropTypes.number.isRequired,
+    moveCard: PropTypes.func,
 }
 
 export default OrderedIngredient;

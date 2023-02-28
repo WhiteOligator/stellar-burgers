@@ -1,0 +1,17 @@
+.ItemList {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: start;
+    flex-direction: column;
+    text-align: center;
+    width: 600px;
+}
+
+.Container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 568px;
+}

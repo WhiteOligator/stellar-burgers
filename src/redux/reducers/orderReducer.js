@@ -47,12 +47,7 @@ export const orderReducer = (state = initialState, action) => {
         case CLEARE_ORDER: 
             return {
                 ...state,
-                ingridients: [],
-                costOfTheOrder: 0,
-                orderNumber: 0,
-                isPost: false,
-                error: false,
-                openOrder: false, 
+                ...initialState,
             }     
         default: {
             return {

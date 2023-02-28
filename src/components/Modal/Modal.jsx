@@ -15,7 +15,6 @@ const portal = document.getElementById("portal");
 const Modal = ({
     title = null,
     active,
-    onClose,
     children
 }) => {
 
@@ -56,7 +55,6 @@ const Modal = ({
     }                
 Modal.propTypes = {
     active:  PropTypes.bool,
-    setActive: PropTypes.func,
     children:  PropTypes.element,  
   }; 
  

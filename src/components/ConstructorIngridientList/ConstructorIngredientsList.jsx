@@ -2,6 +2,8 @@ import OrderedIngredient from "./OrderedIngredient";
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { moveIngridientsConstructorThunk } from "../../redux/thunk/constructorBurger";
+import PropTypes from 'prop-types';
+import { ingredientType } from "../../utils/utils";
 
 const ConstructorIngredientsList = ({ ingredients }) => {
     const dispatch = useDispatch();
@@ -24,6 +26,10 @@ const ConstructorIngredientsList = ({ ingredients }) => {
             <OrderedIngredient key={item.dragId} index={index} item={item} moveCard={moveCard} />
         ))
     )
+}
+
+ConstructorIngredientsList.propTypes = {
+    ingredients: PropTypes.arrayOf(PropTypes.shape(ingredientType)).isRequired,
 }
 
 export default ConstructorIngredientsList;

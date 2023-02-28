@@ -45,7 +45,7 @@ ConstructorCard.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
- 
+    dragId: PropTypes.string.isRequired,
 }
 
 export default ConstructorCard;

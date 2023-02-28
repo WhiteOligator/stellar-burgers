@@ -9,14 +9,15 @@ import { addBunConstructorThunk, addIngridientsConstructorThunk, clearConstructo
 import { v4 as uuidv4 } from 'uuid';
 import ConstructorIngredientsList from "../ConstructorIngridientList/ConstructorIngredientsList";
 import { createOrderThunk } from "../../redux/thunk/order";
+import { getBuns, getCost, getIngridientConstructor } from "../../redux/selectors/selectors";
 
 
-const BurgerConstructor = (props) => {
+const BurgerConstructor = () => {
 
     const dispatch = useDispatch();
-    const buns = useSelector(state => state.constructorBurger.whatKindOfBun)
-    const ingridientConstructor = useSelector(state => state.constructorBurger.ingridients)
-    const cost = useSelector(state => state.constructorBurger.costOfTheOrder)
+    const buns = useSelector(getBuns)
+    const ingridientConstructor = useSelector(getIngridientConstructor)
+    const cost = useSelector(getCost)
 
     const [{ isHover }, dropTargerRef] = useDrop({
         accept: 'ingredient',

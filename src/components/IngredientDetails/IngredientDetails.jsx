@@ -1,13 +1,11 @@
 import React from 'react';
 import style from './IngredientDetails.module.css'
-import PropTypes from 'prop-types';
-import { ingredientType } from '../../utils/utils';
 import { useSelector } from 'react-redux';
-import { openIngridientReducer } from '../../redux/reducers/openIngridientReducer';
+import { getClikIngridients } from '../../redux/selectors/selectors';
 
 const IngredientDetails = () =>  {
 
-    const clikIngridients = useSelector(state => state.openIngridient.ingridient)
+    const clikIngridients = useSelector(getClikIngridients)
 
     return (
         <section>
@@ -63,14 +61,5 @@ const IngredientDetails = () =>  {
         </section>
     );
 }
-
-IngredientDetails.propTypes = {
-    handleClickClose: PropTypes.func,
-    clikIngridients: PropTypes.oneOfType([
-        PropTypes.shape(ingredientType).isRequired,
-        PropTypes.array,
-      ]),
-
-  }; 
 
 export default IngredientDetails;

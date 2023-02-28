@@ -1,0 +1,21 @@
+.Ingredients {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 262px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.Image {
+    width: 240px;
+    height: 120px;
+}
+
+.Cost {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
