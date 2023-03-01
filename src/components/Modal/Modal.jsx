@@ -5,6 +5,9 @@ import style from './Modal.module.css'
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { createPortal } from 'react-dom';
 import ModalOverlay from "./ModalOverlay";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteIngridientThunk } from "../../redux/thunk/openIngridients";
+import { cleareOrderThunk } from "../../redux/thunk/order";
 
 
 const portal = document.getElementById("portal");
@@ -12,14 +15,17 @@ const portal = document.getElementById("portal");
 const Modal = ({
     title = null,
     active,
-    onClose,
     children
 }) => {
 
+    const dispatch = useDispatch();
+   
+    
     useEffect(() => {
         function handleEscapeKey(event) {
             if (event.code === 'Escape') 
-                onClose()
+                dispatch(deleteIngridientThunk())
+                dispatch(cleareOrderThunk())
        
           }
         
@@ -28,7 +34,7 @@ const Modal = ({
     },[])
   
     return createPortal( 
-            <ModalOverlay active={active} onClose={() => onClose()}>
+            <ModalOverlay active={active} onClose={() => { dispatch(deleteIngridientThunk());  dispatch(cleareOrderThunk())}}>
                 <div className={active ? "content active" : "content"} onClick={e => e.stopPropagation()}>               
                     <header className='ml-10 mt-10'  >
                         <div className={style.box}>
@@ -37,7 +43,7 @@ const Modal = ({
                                     {title}
                                 </p>
                             </div>
-                            <div onClick={() => onClose()} className={style.icons}>
+                            <div onClick={() => { dispatch(deleteIngridientThunk());  dispatch(cleareOrderThunk())}} className={style.icons}>
                                 <CloseIcon  type="primary" />
                             </div>
                         </div>            
@@ -49,7 +55,6 @@ const Modal = ({
     }                
 Modal.propTypes = {
     active:  PropTypes.bool,
-    setActive: PropTypes.func,
     children:  PropTypes.element,  
   }; 
  

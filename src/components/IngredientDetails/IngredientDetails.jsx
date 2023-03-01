@@ -1,15 +1,18 @@
 import React from 'react';
 import style from './IngredientDetails.module.css'
-import PropTypes from 'prop-types';
-import { ingredientType } from '../../utils/utils';
+import { useSelector } from 'react-redux';
+import { getClikIngridients } from '../../redux/selectors/selectors';
 
-const IngredientDetails = (props) =>  {
+const IngredientDetails = () =>  {
+
+    const clikIngridients = useSelector(getClikIngridients)
+
     return (
         <section>
             <div className={style.container}>
-                <img className={style.image_ingr} src={props.clikIngridients.image_large} alt={props.clikIngridients.name} />
+                <img className={style.image_ingr} src={clikIngridients.image_large} alt={clikIngridients.name} />
                 <p  className="text text_type_main-medium mt-4">
-                        {props.clikIngridients.name}
+                        {clikIngridients.name}
                 </p>
                 <div className='mt-8'>
                     <div className={style.flex}>
@@ -18,7 +21,7 @@ const IngredientDetails = (props) =>  {
                                 Калории,ккал
                             </p>
                             <p className="text text_type_main-duefalt mt-2">
-                                {props.clikIngridients.calories}
+                                {clikIngridients.calories}
                             </p>
                         </div>
                         <div className="ml-5">
@@ -27,7 +30,7 @@ const IngredientDetails = (props) =>  {
                                     Белки, г
                                 </p>
                                 <p className="text text_type_main-duefalt mt-2">
-                                    {props.clikIngridients.proteins}
+                                    {clikIngridients.proteins}
                                 </p>
                             </div>
                         </div>
@@ -37,7 +40,7 @@ const IngredientDetails = (props) =>  {
                                     Жиры, г
                                 </p>
                                 <p className="text text_type_main-duefalt mt-2">
-                                    {props.clikIngridients.fat}
+                                    {clikIngridients.fat}
                                 </p>
                             </div>
                         </div>
@@ -47,7 +50,7 @@ const IngredientDetails = (props) =>  {
                                     Углеводы, г
                                 </p>
                                 <p className="text text_type_main-duefalt mt-2">
-                                    {props.clikIngridients.carbohydrates}
+                                    {clikIngridients.carbohydrates}
                                 </p>
                             </div>
                         </div>
@@ -58,14 +61,5 @@ const IngredientDetails = (props) =>  {
         </section>
     );
 }
-
-IngredientDetails.propTypes = {
-    handleClickClose: PropTypes.func,
-    clikIngridients: PropTypes.oneOfType([
-        PropTypes.shape(ingredientType).isRequired,
-        PropTypes.array,
-      ]),
-
-  }; 
 
 export default IngredientDetails;

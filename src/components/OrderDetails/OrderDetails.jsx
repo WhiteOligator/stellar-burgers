@@ -1,13 +1,31 @@
 import React from 'react';
 import style from './OrderDetails.module.css'
 import { CloseIcon, CheckMarkIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import { useSelector } from 'react-redux';
+import { ProgressBar } from 'react-loader-spinner'
+import { getIsPost, getOrder } from '../../redux/selectors/selectors';
 
 const OrderDetails = () => {
+    const order = useSelector(getOrder)
+    const isPost = useSelector(getIsPost)
+
     return (
+        <>
+        {isPost  ?
+            <ProgressBar 
+            height="140"
+            width="140"
+            ariaLabel="progress-bar-loading"
+            wrapperStyle={{}}
+            wrapperClass="progress-bar-wrapper"
+            barColor = '#8B00FF'
+            borderColor = '#51E5FF'
+            />   
+        :
         <section>
             <div className={style.content}>
                 <div className='mt-9'>
-                    <p className="text text_type_digits-large">034536</p>
+                    <p className="text text_type_digits-large">{order}</p>
                 </div>
             </div>
             <div className={style.content}>
@@ -43,6 +61,10 @@ const OrderDetails = () => {
             </div>
             <div className='mt-30'></div>
         </section>
+
+
+        }
+       </>
     );
 }
 

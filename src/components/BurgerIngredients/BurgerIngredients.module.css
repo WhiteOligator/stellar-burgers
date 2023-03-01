@@ -1,42 +1,61 @@
-.box {
+.BurgerIngredients {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
     width: 600px;
-    height: 950px;
-    background: #131316;
+    height: 80vh;
+    max-height: 920px;
 }
 
-.scroll{
-    height:662px;
+.BurgerIngredientsContainer {
+    overflow-y: scroll;
     overflow:scroll;
     overflow-x:hidden;
 }
 
-.scroll::-webkit-scrollbar {
+.BurgerIngredientsContainer::-webkit-scrollbar {
     width: 8px; /* ширина для вертикального скролла */
     background-color: #2F2F37;
     height:300px;
 }
 
 /* ползунок скроллбара */
-.scroll::-webkit-scrollbar-thumb {
+.BurgerIngredientsContainer::-webkit-scrollbar-thumb {
     background-color: #8585AD;;
 
 }
 
-.block1 {
-  height: 300px;
-  background-color: #ffa3f6;
-}
- 
-.block2 {
-  height: 300px;
-  background-color: #fffc9c;
+.BurgerIngredientsItemList {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: start;
+    flex-direction: column;
+    text-align: center;
+    width: 600px;
 }
 
-.flex {
+.IngredientsContainer {
     display: flex;
-    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 568px;
 }
 
-.tab {
+.error {
+    margin-top: 100px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.loading {
+    display: flex;
+    margin-left: 220px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
