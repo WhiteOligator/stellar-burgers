@@ -10,9 +10,13 @@ import { v4 as uuidv4 } from 'uuid';
 import ConstructorIngredientsList from "../ConstructorIngridientList/ConstructorIngredientsList";
 import { createOrderThunk } from "../../redux/thunk/order";
 import { getBuns, getCost, getIngridientConstructor } from "../../redux/selectors/selectors";
+import { GetCookie } from "../../hooks/Cookie";
+import { useNavigate } from "react-router-dom";
 
 
 const BurgerConstructor = () => {
+
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     const buns = useSelector(getBuns)
@@ -77,6 +81,19 @@ const BurgerConstructor = () => {
     const borderColorBun2 = isHoverBun2 ? style.please2 : style.please;
     const borderIngridient = isHover ? style.borderActive : style.border;
 
+
+    const makeOrder = () => {
+        let cookieAccessToken = GetCookie('accessToken')
+        let cookieRefreshToken = GetCookie('refreshToken')
+        if (cookieAccessToken) {
+            dispatch(createOrderThunk([buns[0], ...ingridientConstructor, buns[1]], cost))
+            dispatch(clearConstructorThunk());
+        } else if (cookieRefreshToken) {
+            console.log("update token POST")
+        } else {
+            navigate("/login")
+        }
+    }
    
 
     return (
@@ -148,12 +165,7 @@ const BurgerConstructor = () => {
                                                 <div className="ml-10">
                                                     {cost > 0 ?
                                                     <Button 
-                                                        onClick={
-                                                            () => {
-                                                                dispatch(createOrderThunk([buns[0], ...ingridientConstructor, buns[1]], cost))
-                                                                dispatch(clearConstructorThunk())
-                                                            }
-                                                        } 
+                                                        onClick={makeOrder} 
                                                         htmlType="button" 
                                                         type="primary" 
                                                         size="large"
