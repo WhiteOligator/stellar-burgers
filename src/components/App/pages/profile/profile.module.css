@@ -1,0 +1,40 @@
+.content {
+    background: #131316;
+    max-width: 1280px;
+    justify-content: center;
+    column-gap: 60px; 
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+
+.firstBox {
+    margin-top: 120px;
+    display: flex;
+    column-gap: 40px; 
+    row-gap: 32px;
+    flex-wrap: wrap;
+    height: 320px;
+    width: 320px;
+  
+}
+
+.secondBox {
+    height: 240px;
+    width: 480px;
+    margin-top: 120px;
+    display: flex;
+    row-gap: 24px;
+    flex-wrap: wrap;
+  
+}
+
+.activeRef {
+    text-decoration: none;
+    color: #F2F2F3;
+}
+
+.ref {
+    text-decoration: none;
+    color: #8585AD;
+}

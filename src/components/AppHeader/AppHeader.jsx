@@ -1,16 +1,16 @@
 import React from "react";
 import style from "./AppHeader.module.css"
 import {BurgerIcon, ListIcon, Logo, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components'
-
+import { NavLink } from "react-router-dom";
 
 const AppHeader = () => {
     return (
       
             <header className={style.head}>
                     <div className={style.form1}>
-                        <a className="ml-5" href="/">
+                        <NavLink className="ml-5" to="/">
                             <BurgerIcon type="primary" />
-                        </a>
+                        </NavLink>
                         <div className="ml-2">
                             <p className="text text_type_main-default">
                                 Конструктор
@@ -34,9 +34,9 @@ const AppHeader = () => {
                     </div>
                         
                     <div className={style.form_lk}>
-                        <a className="ml-5" href="/">
+                        <NavLink className="ml-5" to="/profile">
                             <ProfileIcon type="secondary" />
-                        </a>
+                        </NavLink>
                         <div className={style.color}>
                             <p className="text text_type_main-default ml-2">
                                 Личный кабинет

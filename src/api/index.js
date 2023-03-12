@@ -1,10 +1,18 @@
 import { getIngridients } from "./getIngridients"
-import { postIngridients } from "./postIngridients";
-
+import { registerUser, loginUser, updateToken, logout, forgotPassword, resetPassword, getUser, updateUser } from "./user";
 
 export const api = {
     ingridients: {
         getIngridients,
-        // postIngridients,
     },
+    user: {
+        registerUser,
+        loginUser,
+        updateToken,
+        logout,
+        forgotPassword,
+        resetPassword,
+        getUser,
+        updateUser,
+    }
 };
