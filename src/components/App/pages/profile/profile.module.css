@@ -38,3 +38,15 @@
     text-decoration: none;
     color: #8585AD;
 }
+
+.textError {
+    color: #9b2d30;
+}
+
+.loading {
+    display: flex;
+    margin-left: 220px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

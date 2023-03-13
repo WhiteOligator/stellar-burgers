@@ -15,7 +15,7 @@ const Registration = () => {
     const navigate = useNavigate()
 
     const register = useSelector(isRegister)
-    console.log(register)
+  
 
     useEffect(() => {
         dispatch(registerUserErorrNull())
@@ -74,12 +74,14 @@ const Registration = () => {
                     name={'email'}
                     isIcon={false}
                     extraClass="mt-6"
+                   
                 />
                 <PasswordInput
                     onChange={onChangePassword}
                     value={password}
                     name={'password'}
                     extraClass="mt-6"
+                    isIcon={false}
                 />
                 <Button htmlType="button" type="primary" size="large" extraClass="mt-6" onClick={handleRegister}>
                     Зарегистрироваться

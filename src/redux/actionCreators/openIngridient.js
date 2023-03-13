@@ -1,6 +1,7 @@
 import {
     OPEN_INGRIDIENT,
     DELETE_INGRIDIENT,
+    OPEN_MODAL
 } from "../actionType/openIngridient"
 
 export const openIngridient = (ingridient) => ({
@@ -10,4 +11,8 @@ export const openIngridient = (ingridient) => ({
 
 export const deleteIngridient = () => ({
     type: DELETE_INGRIDIENT,
+})
+
+export const openModal = () => ({
+    type: OPEN_MODAL,
 })

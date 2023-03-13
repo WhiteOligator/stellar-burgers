@@ -46,14 +46,14 @@ const Passwordreset = () => {
                     value={password}
                     placeholder={'Введите новый пароль'}
                     name={'Введите новый пароль'}
-                    isIcon={false}
+                  
                 />
                  <Input
                     onChange={onChangeToken}
                     value={token}
                     placeholder={'Введите код из письма'}
                     name={'Введите код из письма'}
-                    isIcon={false}
+                
                 />
                 <Button htmlType="button" type="primary" size="large" onClick={handleReset}>
                     Сохранить

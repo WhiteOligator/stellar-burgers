@@ -14,7 +14,7 @@ const ForgotPassword = () => {
 
     const {forgotPassword, errorForgotPassword} = useSelector(forgotSelector)
 
-    const [value, setValue] = React.useState()
+    const [value, setValue] = React.useState('')
     const onChange = e => {
         setValue(e.target.value)
     }
@@ -27,7 +27,7 @@ const ForgotPassword = () => {
 
     }
     
-    if (forgotPassword) {dispatch(forgotPasswordFalseThunk()); navigate('/reset-password')}
+    if (forgotPassword) { navigate('/reset-password'); }
 
     return (
         <div className={style.content}>

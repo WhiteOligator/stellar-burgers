@@ -13,6 +13,10 @@ import {
     RESET_PASSWORD_ERROR,
     RESET_PASSWORD_SUCCESS,
     GET_USER,
+    UPDATE_USER,
+    UPDATE_ERROR,
+    UPDATE_SUCCESS,
+    UPDATE_START
 } from "../actionType/userType"
 
 const initialState = {
@@ -21,10 +25,14 @@ const initialState = {
     errorLogin: "",
     errorForgotPassword: "",
     errorResetPassword: "",
+    errorUser: "",
+    error: "",
     login: false,
     register: false,
     forgotPassword: false,
     resetPassword: false,
+    updateSuccess: false,
+    updateStart: false,
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -47,8 +55,6 @@ export const userReducer = (state = initialState, action) => {
         case SET_USER: 
             return {
                 ...state,
-                refreshToken: action.refreshToken,
-                accessToken: action.accessToken,
                 user: action.user,
                 errorLogin: "",
                 login: true,
@@ -65,7 +71,17 @@ export const userReducer = (state = initialState, action) => {
             }  
         case LOGOUT: 
             return {
-                initialState,
+                user: [],
+                errorRegestration: "",
+                errorLogin: "",
+                errorForgotPassword: "",
+                errorResetPassword: "",
+                errorUser: "",
+                login: false,
+                register: false,
+                forgotPassword: false,
+                resetPassword: false,
+                updateSuccess: false,
             }   
         case FORGOT_PASSWORD_ERROR: 
             return {
@@ -103,6 +119,29 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 user: action.payload,
             }   
+        case UPDATE_USER: 
+            return {
+                ...state,
+                user: action.payload,
+            }  
+        case UPDATE_ERROR: 
+            return {
+                ...state,
+                error: action.payload,
+                updateStart: false,
+            }
+        case UPDATE_SUCCESS: 
+            return {
+                ...state,
+                updateSuccess: !state.updateSuccess,
+                updateStart: false,
+                error: "",
+            }   
+        case UPDATE_START: 
+            return {
+                ...state,
+                updateStart: true,
+            }  
         default: {
             return {
                 ...state

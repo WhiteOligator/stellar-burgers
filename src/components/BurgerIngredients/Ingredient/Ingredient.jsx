@@ -6,11 +6,13 @@ import { IngredientItem } from '../../../utils/utils';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { openIngridientThunk } from '../../../redux/thunk/openIngridients';
 import { getConstructorItems, getConstructorItemsBuns } from '../../../redux/selectors/selectors';
+import { Link, useLocation } from 'react-router-dom';
 
 const Ingredient = ({ 
     item,
 }) => {
 
+    const location = useLocation();
 
     const getType = (type) => {
         if (type === "bun") return 'bun'
@@ -40,21 +42,29 @@ const Ingredient = ({
     }, [dispatch]);
 
     return (
-        <div
-            ref={dragRef}
-            className={`${styles.Ingredients} mb-8`}
-            onClick={() => {handleOpen(item)}}
+
+        <Link
+            className={styles.Link}
+            to={`/ingredients/${item._id}`}
+            state={{ background: location }}
+            
         >
-            <img src={item.image} alt="bun" className={styles.Image} />
-            {countItem > 0 && <Counter count={countItem} size='default' extraClass='m-1' />}
-            <p className={`text text_type_digits-default m-1 ${styles.Cost}`}>
-                {item.price}
-                <CurrencyIcon type='primary' />
-            </p>
-            <p className='text text_type_main-default mb-4'>
-                {item.name}
-            </p>
-        </div>
+            <div
+                ref={dragRef}
+                className={`${styles.Ingredients} mb-8`}
+                onClick={() => {handleOpen(item)}}
+            >
+                <img src={item.image} alt="bun" className={styles.Image} />
+                {countItem > 0 && <Counter count={countItem} size='default' extraClass='m-1' />}
+                <p className={`text text_type_digits-default m-1 ${styles.Cost}`}>
+                    {item.price}
+                    <CurrencyIcon type='primary' />
+                </p>
+                <p className='text text_type_main-default mb-4'>
+                    {item.name}
+                </p>
+            </div>
+        </Link>
     );
 };
 

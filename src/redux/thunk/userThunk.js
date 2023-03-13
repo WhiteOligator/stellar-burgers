@@ -15,14 +15,19 @@ import {
     resetPasswordErrorNull,
     getUserCreators,
     updateUserCreators,
+    updateUserCreatorsError,
+    updateUserCreatorsSuccess,
+    updateUserCreatorsStart,
 } from '../actionCreators/userCreators'
 import { SetCookie, GetCookie } from '../../hooks/Cookie';
-
+import { checkResponse } from '../../utils/Response';
+import { fetchWithRefresh } from '../../api/user';
+import { API_ENDPOINT } from '../../api/user';
 
 export const registerThunk = (config) => {
     return async (dispatch) => {
         try {
-            const response = await api.user.registerUser(config);
+            const response = await api.user.registerUser(config)
             if (response.status !== 200) {
                 let result = await response.json();
                 dispatch(registerUserErorr(result.message))
@@ -54,7 +59,7 @@ export const loginThunk = (config) => {
 
                 SetCookie('accessToken', result.accessToken.slice(number))
                 SetCookie('refreshToken', result.refreshToken)
-
+               
                 dispatch(setUser(result.user))
             } else {
                 let result = await response.json();
@@ -153,35 +158,61 @@ export const resetPasswordFalseThunk = () => {
 
 export const getUserThunk = () => {
     return async (dispatch) => {
+
+            fetchWithRefresh(`${API_ENDPOINT}/auth/user`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+                    Authorization: 'Bearer' + GetCookie('accessToken'),
+                },
+            })
        
             const response = await api.user.getUser()
 
             if (response.status === 200) {
                 let result = await response.json();
-                console.log(result.user)
+                
                 dispatch(getUserCreators(result.user))
+                dispatch(updateUserCreatorsSuccess())
             } 
     }
 }
 
-// export const updateUserThunk = () => {
-//     return async (dispatch) => {
-//         try {
+export const updateUserThunk = (config) => {
+    return async (dispatch) => {
+        try {
+            dispatch(updateUserCreatorsStart())
 
-//             const response = await api.user.getUser()
+            fetchWithRefresh(`${API_ENDPOINT}/auth/user`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+                    Authorization: 'Bearer' + GetCookie('accessToken'),
+                },
+                body: JSON.stringify(config),
+            })
 
-//             if (response.status !== 200) {
-//                 let result = await response.json();
-//                 dispatch(resetPasswordError(result))
-//             } else {
-//                 dispatch(resetPasswordSuccess())
-//                 dispatch(resetPasswordErrorNull())
-//             }
+            const response = await api.user.updateUser(config)
 
-//         } catch (error) {
-//             dispatch(resetPasswordError(error))
-//         }
+            if (response.status === 200) {
+                let result = await response.json();
+                dispatch(updateUserCreators(result.user))
+                dispatch(updateUserCreatorsSuccess())
+               
+            } else {
+                let result = await response.json();
+                dispatch(updateUserCreatorsError(result.message))
+            }
+        } catch (error) {
+            dispatch(updateUserCreatorsError(error))
+        }
 
 
-//     }
-// }
+    }
+}
+
+export const updateUserCreatorNull = () => {
+    return async (dispatch) => {
+        dispatch(updateUserCreatorsSuccess())
+    }
+}

@@ -6,6 +6,8 @@ import {
     cleareOrder,
 } from '../actionCreators/order'
 import { API_ENDPOINT } from '../../api/makeRequest'
+import { GetCookie } from '../../hooks/Cookie'
+import { fetchWithRefresh } from '../../api/user'
 
 export const createOrderThunk = (ingridients, cost) => {
     return async (dispatch) => {
@@ -15,6 +17,19 @@ export const createOrderThunk = (ingridients, cost) => {
         })
         try {
             dispatch(createOrderStarted())
+
+
+            fetchWithRefresh(`${API_ENDPOINT}/orders`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+                    Authorization: 'Bearer' + GetCookie('accessToken'),
+                },
+                body: JSON.stringify({
+                    ingredients,
+                }),
+            })
+
 
             const response = await fetch(`${API_ENDPOINT}/orders`, {
                 method: "POST",

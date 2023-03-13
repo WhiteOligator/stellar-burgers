@@ -19,3 +19,6 @@ export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
 
 export const GET_USER = 'GET_USER';
 export const UPDATE_USER = 'UPDATE_USER';
+export const UPDATE_ERROR = 'UPDATE_ERROR';
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
+export const UPDATE_START = 'UPDATE_START';

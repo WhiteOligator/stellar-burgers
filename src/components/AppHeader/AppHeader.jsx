@@ -2,31 +2,41 @@ import React from "react";
 import style from "./AppHeader.module.css"
 import {BurgerIcon, ListIcon, Logo, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { GetCookie } from "../../hooks/Cookie";
 
 const AppHeader = () => {
+
+    const user = useSelector(state => state.user.user);
+    const isLoggedIn = GetCookie('accessToken')
+
     return (
       
             <header className={style.head}>
                     <div className={style.form1}>
-                        <NavLink className="ml-5" to="/">
-                            <BurgerIcon type="primary" />
+                        <NavLink to='/' className={`${style.AppHeaderItem} p-5`}>
+                            {({ isActive }) => (
+                                <>
+                                    <BurgerIcon type={isActive ? 'primary' : 'secondary'} />
+                                    <span className={`text text_type_main-default ${isActive ? style.text_color_active : 'text_color_inactive'} ml-2`}>
+                                        Конструктор
+                                    </span>
+                                </>
+                            )}
                         </NavLink>
-                        <div className="ml-2">
-                            <p className="text text_type_main-default">
-                                Конструктор
-                            </p>
-                        </div>
                     </div>
-                        <div className={style.form2}>
-                            <a className="ml-10 " href="/">
-                                <ListIcon type="secondary" />
-                            </a>
-                            <div className={style.color}>
-                                <p className="text text_type_main-default ml-2">
-                                    Лента заказов
-                                </p>
-                            </div>
-                        </div>
+                    <div className={style.form2}>
+                        <NavLink to='/feed' className={`${style.AppHeaderItem} p-5`}>
+                            {({ isActive }) => (
+                                <>
+                                    <ListIcon type={isActive ? 'primary' : 'secondary'} />
+                                    <span className={`text text_type_main-default ${isActive ? style.text_color_active : 'text_color_inactive'} ml-2`}>
+                                        Лента заказов
+                                    </span>
+                                </>
+                            )}
+                        </NavLink>
+                    </div>
                     <div className={style.logo}>
                         <div className="">
                             <Logo/>
@@ -34,15 +44,20 @@ const AppHeader = () => {
                     </div>
                         
                     <div className={style.form_lk}>
-                        <NavLink className="ml-5" to="/profile">
-                            <ProfileIcon type="secondary" />
-                        </NavLink>
-                        <div className={style.color}>
-                            <p className="text text_type_main-default ml-2">
-                                Личный кабинет
-                            </p>
-                        </div>
-                       
+                    <NavLink
+                        to='/profile'
+                        className={`${style.AppHeaderItem} p-5`}
+                        title={isLoggedIn ? 'Перейти в личный кабинет' : 'Войти/Зарегистрироваться'}
+                    >
+                        {({ isActive }) => (
+                            <>
+                                <ProfileIcon type={isActive ? 'primary' : 'secondary'} />
+                                <span className={`text text_type_main-default ${isActive ? style.text_color_active : 'text_color_inactive'} ml-2`}>
+                                    {isLoggedIn ? user.name : 'Личный кабинет'}
+                                </span>
+                            </>
+                        )}
+                    </NavLink>
                     </div>
             </header>
         

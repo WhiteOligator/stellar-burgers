@@ -15,6 +15,9 @@ import {
     RESET_PASSWORD_ERROR_NULL,
     GET_USER,
     UPDATE_USER,
+    UPDATE_ERROR,
+    UPDATE_SUCCESS,
+    UPDATE_START,
 } from "../actionType/userType"
 
 export const registerUserErorr = (error) => ({
@@ -39,10 +42,8 @@ export const loginUserErorrNull = () => ({
     type: LOGIN_USER_ERROR_NULL,
 })
 
-export const setUser = (accessToken, refreshToken, user) => ({
+export const setUser = (user) => ({
     type: SET_USER,
-    accessToken: accessToken,
-    refreshToken: refreshToken,
     user: user,
 })
 
@@ -94,4 +95,17 @@ export const getUserCreators = (config) => ({
 export const updateUserCreators = (config) => ({
     type: UPDATE_USER,
     payload: config,
+})
+
+export const updateUserCreatorsError = (error) => ({
+    type: UPDATE_ERROR,
+    payload: error,
+})
+
+export const updateUserCreatorsSuccess = () => ({
+    type: UPDATE_SUCCESS,
+})
+
+export const updateUserCreatorsStart = () => ({
+    type: UPDATE_START,
 })

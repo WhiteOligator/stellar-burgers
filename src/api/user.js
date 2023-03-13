@@ -1,4 +1,4 @@
-import { GetCookie } from "../hooks/Cookie"
+import { GetCookie, SetCookie } from "../hooks/Cookie"
 
 export const API_ENDPOINT = 'https://norma.nomoreparties.space/api'
 
@@ -131,3 +131,47 @@ export const updateUser = (config) => {
 
     return response
 }
+
+
+const checkResponse = (res) => {
+    return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+   }
+   
+const saveTokens = (refreshToken, accessToken) => {
+    SetCookie('accessToken', accessToken);
+    SetCookie('refreshToken', refreshToken);
+   }
+   
+export const refreshTokenRequest = () => {
+    return fetch(`${API_ENDPOINT}/auth/token`, {
+     method: 'POST',
+     headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+     },
+     body: JSON.stringify({
+      token: GetCookie('refreshToken')
+     })
+    })
+     .then(checkResponse)
+   }
+   
+export const fetchWithRefresh = async(url, options) => {
+    try {
+     const res = await fetch(url, options);
+   
+     return await checkResponse(res);
+    } catch (err) {
+     if (err.message === 'jwt expired') {
+      const {refreshToken, accessToken} = await refreshTokenRequest();
+      saveTokens(refreshToken, accessToken);
+   
+      options.headers.authorization = accessToken;
+   
+      const res = await fetch(url, options);
+   
+      return await checkResponse(res);
+     } else {
+      return Promise.reject(err);
+     }
+    }
+   }
