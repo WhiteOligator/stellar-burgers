@@ -30,7 +30,6 @@ const ProfileOrders = () => {
 
     return (
         <div className={style.content}>
-            <AppHeader />
             <div className={style.firstBox}>
                 <NavLink className={({ isActive }) => (isActive ? style.activeRef: style.ref)} to="/profile">
                     <p className="text text_type_main-medium">

@@ -29,7 +29,6 @@ const IngredientDetailsPage = () =>  {
 
     return (
         <div className={style.content}>
-        <AppHeader/>
         {ingredientItem &&
         <section className={style.margin}>
             <div className={style.container}>

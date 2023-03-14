@@ -15,7 +15,8 @@ import NotFound404 from './pages/notFound404/NotFound404';
 import IngredientDetailsPage from './pages/IngredientDetailsPage/IngredientDetailsPage';
 import ModalSwitch from './pages/ModalSwitch';
 import { GetCookie } from '../../hooks/Cookie';
-
+import AppHeader from '../AppHeader/AppHeader';
+import style from './App.module.css'
 
 
 
@@ -33,7 +34,8 @@ function App() {
   let background = location.state && location.state.background ? true : false;
 
   return (
-   <>
+   <div className={style.content}> 
+      <AppHeader />
       <Routes location={background || location}>
         <Route element={<Home />} path="/"/>
         <Route
@@ -50,7 +52,7 @@ function App() {
         <Route path='*' element={<NotFound404 />} />
       </Routes>
       <ModalSwitch background={background} />
-    </>
+    </div>
   );
 }
 

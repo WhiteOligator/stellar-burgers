@@ -19,7 +19,6 @@ const Home = () =>  {
     return (
       <>
           <div className={style.content}>
-            <AppHeader />
             <DndProvider backend={HTML5Backend}>
                 <BurgerIngredients />
                 <BurgerConstructor />

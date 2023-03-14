@@ -36,7 +36,6 @@ const Passwordreset = () => {
 
     return (
         <div className={style.content}>
-            <AppHeader />
             <div className={style.box}>
                 <p className="text text_type_main-medium">
                     Восстановление пароля

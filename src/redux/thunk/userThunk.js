@@ -87,7 +87,6 @@ export const logoutThunk = (config) => {
     return async (dispatch) => {
         const response = await api.user.logout(config);
         let result = await response.json();
-        console.log(result)
         if (response.status === 200) {
             dispatch(logout())
             
