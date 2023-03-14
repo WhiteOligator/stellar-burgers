@@ -13,14 +13,12 @@ const IngredientDetailsPage = () =>  {
 
     useEffect(() => {
         dispatch(getIngridients())
-        console.log(location.state)
     }, [location.state]);   
 
 
     const { ingredientId } = useParams();
     const ingredientsItems = useSelector(state => state.ingridients.ingridients);
 
-    console.log(ingredientsItems)
 
     const ingredientItem = useMemo(() => {
         return ingredientsItems.find(item => item._id === ingredientId);

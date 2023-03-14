@@ -28,12 +28,6 @@ const Home = () =>  {
             >
                 <OrderDetails />
             </Modal>
-            <Modal
-               title={'Детали ингредиента'}
-               active={openIngridient} 
-            >
-                <IngredientDetails />
-            </Modal>
           </div>
       </>
     );

@@ -105,7 +105,6 @@ const Profile = () => {
                                 height="140"
                                 width="140"
                                 ariaLabel="progress-bar-loading"
-                                wrapperStyle={{}}
                                 wrapperClass="progress-bar-wrapper"
                                 barColor = '#8B00FF'
                                 borderColor = '#51E5FF'
@@ -115,20 +114,20 @@ const Profile = () => {
             <div className={style.secondBox}>
                 <Input
                     onChange={onChangeName}
-                    value={name}
+                    value={name ? name : ''}
                     placeholder={'Имя'}
                     name={'Имя'}
                     icon={'EditIcon'}
                 />
                 <EmailInput
                     onChange={onChangeEmail}
-                    value={email}
+                    value={email ? email : ''}
                     name={'Укажите email'}
                     icon={'EditIcon'}
                 />
                 <PasswordInput
                      onChange={onChangePassword}
-                     value={password}
+                     value={password ? password : ''}
                      name={'password'}
                      icon={'EditIcon'}
                 />
