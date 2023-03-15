@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
-import { GetCookie } from '../../../../hooks/Cookie';
+import { GetCookie } from '../../hooks/Cookie';
 
 
 export const ProtectedRoute = ({ autorizeStatus, element, name = false }) => {

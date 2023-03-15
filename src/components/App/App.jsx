@@ -1,22 +1,22 @@
 import { Router, Route, Routes, useLocation, Switch } from 'react-router-dom';
-import Authorization from './pages/authorization/authorization';
-import Home from './pages/home/home';
-import ForgotPassword from './pages/forgotPassword/forgotPassword';
-import Passwordreset from './pages/passwordReset/passwordReset';
-import Profile from './pages/profile/profile';
-import ProfileOrders from './pages/profileOrders/profileOrders';
-import Registration from './pages/registration/registration';
 import { getUserThunk } from '../../redux/thunk/userThunk';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react'
-import {ProtectedRoute} from './pages/ProtectedRoute/ProtectedRoute'
-import { isLog } from '../../redux/selectors/selectors';
-import NotFound404 from './pages/notFound404/NotFound404';
-import IngredientDetailsPage from './pages/IngredientDetailsPage/IngredientDetailsPage';
-import ModalSwitch from './pages/ModalSwitch';
+import IngredientDetailsPage from '../../pages/IngredientDetailsPage/IngredientDetailsPage';
 import { GetCookie } from '../../hooks/Cookie';
 import AppHeader from '../AppHeader/AppHeader';
 import style from './App.module.css'
+import Authorization from '../../pages/authorization/authorization';
+import ForgotPassword from '../../pages/forgotPassword/forgotPassword';
+import Home from '../../pages/home/home';
+import Registration from '../../pages/registration/registration';
+import Passwordreset from '../../pages/passwordReset/passwordReset';
+import Profile from '../../pages/profile/profile';
+import ProfileOrders from '../../pages/profileOrders/profileOrders';
+import NotFound404 from '../../pages/notFound404/NotFound404';
+import ModalSwitch from '../../pages/ModalSwitch';
+import { ProtectedRoute } from '../../pages/ProtectedRoute/ProtectedRoute';
+import { getIngridients } from '../../redux/thunk/getIngridients';
 
 
 
@@ -25,6 +25,7 @@ function App() {
 
   const dispatch = useDispatch()
   useEffect(() => {
+    dispatch(getIngridients())
     if (GetCookie('accessToken')) {
       dispatch(getUserThunk())
     }

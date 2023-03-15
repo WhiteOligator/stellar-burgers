@@ -1,10 +1,10 @@
 import React from 'react';
-import AppHeader from '../../../AppHeader/AppHeader';
+import AppHeader from '../../components/AppHeader/AppHeader';
 import style from './profileOrders.module.css'
 import { NavLink, useNavigate } from 'react-router-dom';
-import { GetCookie, RemoveCookie } from '../../../../hooks/Cookie';
+import { GetCookie, RemoveCookie } from '../../hooks/Cookie';
 import { useDispatch } from 'react-redux';
-import { logoutThunk } from '../../../../redux/thunk/userThunk';
+import { logoutThunk } from '../../redux/thunk/userThunk';
 
 const ProfileOrders = () => {
 

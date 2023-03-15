@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
-import AppHeader from '../../../AppHeader/AppHeader';
 import style from "./authorization.module.css"
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { loginErrorNullThunk, loginThunk } from '../../../../redux/thunk/userThunk';
-import { isLog, LoginError } from '../../../../redux/selectors/selectors';
-
+import { loginErrorNullThunk, loginThunk } from '../../redux/thunk/userThunk';
+import { isLog, LoginError } from '../../redux/selectors/selectors';
+import { useFormik } from 'formik';
 
 const Authorization = () => {
 
@@ -19,25 +18,22 @@ const Authorization = () => {
         dispatch(loginErrorNullThunk())
     },[])
 
-    const [email, setEmail] = React.useState('')
-    const onChangeEmail = e => {
-        setEmail(e.target.value)
-    }
+    const formik = useFormik({
+          initialValues: {
+            email: '',
+            password: '',
+          },
+          onSubmit: values => {
+            let config = {
+                email: values.email,
+                password: values.password,
+            }
+            dispatch(loginThunk(config))
+          },
+    });
 
-    const [password, setPassword] = React.useState('')
-    const onChangePassword = e => {
-        setPassword(e.target.value)
-    }
 
-    const authorizateUser = () => {
-        let config = {
-            email: email,
-            password: password,
-        }
-        dispatch(loginThunk(config))
-    }
-
-    if (isLoggedIn) return navigate('/')
+    if (isLoggedIn) return navigate(navigate(-1))
 
     return (
         <div className={style.content}>
@@ -45,20 +41,25 @@ const Authorization = () => {
                 <p className="text text_type_main-medium">
                     Вход
                 </p>
-                <EmailInput
-                    onChange={onChangeEmail}
-                    value={email}
-                    name={'email'}
-                    isIcon={false}
-                />
-                <PasswordInput
-                    onChange={onChangePassword}
-                    value={password}
-                    name={'password'}
-                />
-                <Button htmlType="button" type="primary" size="large" onClick={authorizateUser}>
-                    Войти
-                </Button>
+                <form onSubmit={formik.handleSubmit} className={style.form}>
+                    <EmailInput
+                            onChange={formik.handleChange}
+                            value={formik.values.email}
+                            name='email'
+                            isIcon={false}
+                            id='email'
+                    />
+                    <PasswordInput
+                            onChange={formik.handleChange}
+                            value={formik.values.password}
+                            name='password'
+                            extraClass="mt-4"
+                            id="password"
+                    />
+                     <Button type="primary" size="large" htmlType='submit' extraClass='mt-4'>
+                        Войти
+                    </Button>
+                </form>
                 {errorLog  &&
                     <div className={style.textError}>
                         <p className="text text_type_main-default mt-4">

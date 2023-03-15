@@ -3,9 +3,7 @@ import style from './IngredientDetails.module.css'
 import { useSelector } from 'react-redux';
 import { getClikIngridients } from '../../redux/selectors/selectors';
 
-const IngredientDetails = () =>  {
-
-    const clikIngridients = useSelector(getClikIngridients)
+const IngredientDetails = ({clikIngridients}) =>  {
 
     return (
         <section>

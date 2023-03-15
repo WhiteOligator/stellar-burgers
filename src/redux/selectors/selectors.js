@@ -16,8 +16,8 @@ export const getClikIngridients = state => state.openIngridient.ingridient;
 export const getOrder = state => state.order.orderNumber;
 export const getIsPost = state => state.order.isPost;
 
-export const registerError = state => state.user.errorRegestration;
-export const LoginError = state => state.user.errorLogin;
+export const registerError = state => state.user.error;
+export const LoginError = state => state.user.error;
 
 export const isLog = state => state.user.login;
 export const isRegister = state => state.user.register;

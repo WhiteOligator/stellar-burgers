@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, useNavigate, Routes, useLocation } from 'react-router-dom';
-import { deleteIngridientThunk, openIngridientThunk }from '../../../redux/thunk/openIngridients'
-import Modal from '../../Modal/Modal'
-import IngredientDetails from '../../IngredientDetails/IngredientDetails';
-import { cleareOrderThunk } from '../../../redux/thunk/order';
-import { ingridientsSelector, openItem } from '../../../redux/selectors/selectors';
+import { deleteIngridientThunk, openIngridientThunk }from '../redux/thunk/openIngridients'
+import Modal from '../components/Modal/Modal'
+import IngredientDetails from '../components/IngredientDetails/IngredientDetails';
+import { getClikIngridients, ingridientsSelector, openItem } from '../redux/selectors/selectors';
 import { useEffect } from 'react';
 
 
@@ -18,10 +17,10 @@ const ModalSwitch = ({ background }) => {
 
     const dispatch = useDispatch();
     const openIngredient = useSelector(openItem)
+    const clikIngridients = useSelector(getClikIngridients)
 
     const handleCloseModal = () => {
         dispatch(deleteIngridientThunk());
-        dispatch(cleareOrderThunk())
         navigate(-1);
     }
 
@@ -48,7 +47,7 @@ const ModalSwitch = ({ background }) => {
                                 active={openIngredient}
                                 onClose={handleCloseModal}
                             >
-                                <IngredientDetails />
+                                <IngredientDetails clikIngridients={clikIngridients}/>
                             </Modal>
                         }
                     />

@@ -21,11 +21,6 @@ import {
 
 const initialState = {
     user: [],
-    errorRegestration: "",
-    errorLogin: "",
-    errorForgotPassword: "",
-    errorResetPassword: "",
-    errorUser: "",
     error: "",
     login: false,
     register: false,
@@ -40,12 +35,12 @@ export const userReducer = (state = initialState, action) => {
         case REGISTER_USER_ERROR: 
             return {
                 ...state,
-                errorRegestration: action.payload
+                error: action.payload
             }  
         case REGISTER_USER_ERROR_NULL: 
             return {
                 ...state,
-                errorRegestration: ""
+                error: ""
             } 
         case REGISTER_USER_SUCCESS: 
             return {
@@ -56,27 +51,23 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: action.user,
-                errorLogin: "",
+                error: "",
                 login: true,
             }  
         case LOGIN_USER_ERROR: 
             return {
                 ...state,
-                errorLogin: action.payload
+                error: action.payload
             }
         case LOGIN_USER_ERROR_NULL: 
             return {
                 ...state,
-                errorLogin: ""
+                error: ""
             }  
         case LOGOUT: 
             return {
                 user: [],
-                errorRegestration: "",
-                errorLogin: "",
-                errorForgotPassword: "",
-                errorResetPassword: "",
-                errorUser: "",
+                error: "",
                 login: false,
                 register: false,
                 forgotPassword: false,
@@ -86,12 +77,12 @@ export const userReducer = (state = initialState, action) => {
         case FORGOT_PASSWORD_ERROR: 
             return {
                 ...state,
-                errorForgotPassword: action.payload,
+                error: action.payload,
             }   
         case FORGOT_PASSWORD_ERROR_NULL: 
             return {
                 ...state,
-                errorForgotPassword: "",
+                error: "",
             }   
         case FORGOT_PASSWORD_SUCCESS: 
             return {
@@ -102,12 +93,12 @@ export const userReducer = (state = initialState, action) => {
         case RESET_PASSWORD_ERROR: 
             return {
                 ...state,
-                errorResetPassword: action.payload,
+                error: action.payload,
             }   
         case RESET_PASSWORD_ERROR_NULL: 
             return {
                 ...state,
-                errorResetPassword: "",
+                error: "",
             }   
         case RESET_PASSWORD_SUCCESS: 
             return {

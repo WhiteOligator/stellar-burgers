@@ -1,31 +1,30 @@
 import React from 'react';
-import AppHeader from '../../../AppHeader/AppHeader';
 import style from "./forgotPassword.module.css"
 import { useNavigate, NavLink } from "react-router-dom";
 import { EmailInput,  Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { forgotPasswordThunk, forgotPasswordFalseThunk } from '../../../../redux/thunk/userThunk';
-import { forgotSelector } from '../../../../redux/selectors/selectors';
-
+import { forgotPasswordThunk, forgotPasswordFalseThunk } from '../../redux/thunk/userThunk';
+import { forgotSelector } from '../../redux/selectors/selectors';
+import { useFormik } from 'formik';
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const {forgotPassword, errorForgotPassword} = useSelector(forgotSelector)
+    const {forgotPassword, error} = useSelector(forgotSelector)
 
-    const [value, setValue] = React.useState('')
-    const onChange = e => {
-        setValue(e.target.value)
-    }
+    const formik = useFormik({
+        initialValues: {
+          email: '',
+        },
+        onSubmit: values => {
+          let config = {
+              email: values.email,
+          }
+          dispatch(forgotPasswordThunk(config))
+        },
+    });
 
-    const handleForgotPassword = () => {
-        let email = {
-            email: value
-        }
-        dispatch(forgotPasswordThunk(email))
-
-    }
     
     if (forgotPassword) { navigate('/reset-password'); }
 
@@ -35,19 +34,22 @@ const ForgotPassword = () => {
                 <p className="text text_type_main-medium">
                     Восстановление пароля
                 </p>
-                <EmailInput
-                    onChange={onChange}
-                    value={value}
-                    name={'Укажите email'}
-                    isIcon={false}
-                />
-                <Button htmlType="button" type="primary" size="large" onClick={handleForgotPassword}>
-                    Восстановить
-                </Button>
-                {errorForgotPassword  &&
+                <form onSubmit={formik.handleSubmit} className={style.form}>
+                    <EmailInput
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                        name='email'
+                        id='email'
+                        isIcon={false}
+                    />
+                    <Button type="primary" size="large" htmlType='submit' extraClass='mt-4'>
+                        Восстановить
+                    </Button>
+                </form>
+                {error  &&
                     <div className={style.textError}>
                         <p className="text text_type_main-default mt-4">
-                            Error: {errorForgotPassword} !!!
+                            Error: {error} !!!
                         </p>
                     </div>       
                 }

@@ -1,14 +1,17 @@
 import React, { useEffect, useMemo } from 'react';
-import AppHeader from '../../../AppHeader/AppHeader';
+import AppHeader from '../../components/AppHeader/AppHeader';
 import style from './profile.module.css'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Input, EmailInput, PasswordInput, EditIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { GetCookie, RemoveCookie } from '../../../../hooks/Cookie';
-import { getUserThunk, logoutThunk, updateUserCreatorNull, updateUserThunk } from '../../../../redux/thunk/userThunk';
+import { GetCookie, RemoveCookie } from '../../hooks/Cookie';
+import { getUserThunk, logoutThunk, updateUserCreatorNull, updateUserThunk } from '../../redux/thunk/userThunk';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser, updateSuccess } from '../../../../redux/selectors/selectors';
+import { getUser, updateSuccess } from '../../redux/selectors/selectors';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ProgressBar } from 'react-loader-spinner'
+import { useFormik } from 'formik';
+
+
 const Profile = () => {
 
     const isLoggedIn = useSelector(state => state.user.updateStart)
@@ -19,44 +22,36 @@ const Profile = () => {
     const dispatch = useDispatch();
  
     const success = useSelector(updateSuccess)
-    
-    const [email, setEmail] = React.useState('')
-    const onChangeEmail = e => {
-        setEmail(e.target.value)
-    }
-
-    const [password, setPassword] = React.useState('PapaPevegivemybody')
-    const onChangePassword = e => {
-        setPassword(e.target.value)
-    }
-    const [name, setName] = React.useState('')
-    const onChangeName = e => {
-        setName(e.target.value)
-    }
-    
-
+  
+    const formik = useFormik({
+        initialValues: {
+          name: user.name,
+          email: user.email,
+          password: ''
+        },
+        onSubmit: values => {
+          let config = {
+            name: values.name,
+            email: values.email,
+            password: values.password
+          }
+          dispatch(updateUserThunk(config))
+        },
+  });
 
    
     useEffect(() => {
-        setEmail(user.email)
-        setName(user.name)
+        formik.values.name = user.name
+        formik.values.email = user.email
+        formik.values.password = ''
     }, [success]);
 
  
-    
-    const handleUpdate = () => {
-        let config = {
-            email: email,
-            name: name,
-        }
-        dispatch(updateUserThunk(config))
-
-    }
-
-    const handleUser = () => {
+    const handleUserCleare = () => {
         dispatch(getUserThunk())
-        setEmail(user.email)
-        setName(user.name)
+        formik.values.name = user.name
+        formik.values.email = user.email
+        formik.values.password = ''
     }
 
     const logout = () => {
@@ -112,37 +107,42 @@ const Profile = () => {
                 </div>
             :
             <div className={style.secondBox}>
-                <Input
-                    onChange={onChangeName}
-                    value={name ? name : ''}
-                    placeholder={'Имя'}
-                    name={'Имя'}
-                    icon={'EditIcon'}
-                />
-                <EmailInput
-                    onChange={onChangeEmail}
-                    value={email ? email : ''}
-                    name={'Укажите email'}
-                    icon={'EditIcon'}
-                />
-                <PasswordInput
-                     onChange={onChangePassword}
-                     value={password ? password : ''}
-                     name={'password'}
-                     icon={'EditIcon'}
-                />
-                {error !== "" &&
-                    <div className={style.textError}>
-                        <p className="text text_type_main-default mt-4">
-                            Error: {error} !!!
-                        </p>
-                    </div>    
-                }
-                <Button htmlType="button" type="primary" size="medium" onClick={handleUpdate}>
-                    Сохранить
-                </Button>
-                <Button htmlType="button" type="secondary" size="medium" onClick={handleUser}>
-                    Отмена
+                <form onSubmit={formik.handleSubmit} className={style.form}>
+                    <Input
+                        onChange={formik.handleChange}
+                        value={formik.values.name ? formik.values.name : ''}
+                        placeholder={'Имя'}
+                        name='name'
+                        id='name'
+                        icon={'EditIcon'}
+                    />
+                    <EmailInput
+                        onChange={formik.handleChange}
+                        value={formik.values.email  ? formik.values.email  : ''}
+                        name='email'
+                        id='email'
+                        icon={'EditIcon'}
+                    />
+                    <PasswordInput
+                        onChange={formik.handleChange}
+                        value={formik.values.password ? formik.values.password : ''}
+                        name='password'
+                        id='password'
+                        icon={'EditIcon'}
+                    />
+                    {error !== "" &&
+                        <div className={style.textError}>
+                            <p className="text text_type_main-default mt-4">
+                                Error: {error} !!!
+                            </p>
+                        </div>    
+                    }
+                    <Button htmlType="submit" type="primary" size="medium">
+                        Сохранить
+                    </Button>
+                </form>
+                <Button htmlType="button" type="secondary" size="medium" onClick={handleUserCleare} extraClass={style.button}>
+                        Отмена
                 </Button>
             </div>}
         </div>}

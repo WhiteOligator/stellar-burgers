@@ -10,12 +10,8 @@ import { VscWarning } from "react-icons/vsc";
 
 const BurgerIngredients = () => {
 
-    const dispatch = useDispatch();
-    const {ingridients, isIngridientsLoading, error} = useSelector(ingridientsSelector)
-
-    useEffect(() => {
-        dispatch(getIngridients())
-    }, []);   
+    
+    const {ingridients, isIngridientsLoading, error} = useSelector(ingridientsSelector) 
 
     const buns = useMemo(() => ingridients.filter(item => item.type === 'bun'), [ingridients]);
     const mains = useMemo(() => ingridients.filter(item => item.type === 'main'), [ingridients]);

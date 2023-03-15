@@ -105,15 +105,14 @@ export const resetPassword = (config) => {
 
 export const getUser = () => {  
 
-    const response = fetch(`${API_ENDPOINT}/${userURL}`, {
+    return  fetch(`${API_ENDPOINT}/${userURL}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
             Authorization: 'Bearer' + GetCookie('accessToken'),
         },
-    });
-
-    return response
+    })
+    .then(checkResponse)
 }
 
 
@@ -127,7 +126,8 @@ export const updateUser = (config) => {
             Authorization: 'Bearer' + GetCookie('accessToken'),
         },
         body: JSON.stringify(config),
-    });
+    })
+        
 
     return response
 }

@@ -50,3 +50,14 @@
     align-items: center;
     flex-direction: column;
 }
+
+.form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 18px;
+}
+
+.button {
+    margin-left: 170px;
+}

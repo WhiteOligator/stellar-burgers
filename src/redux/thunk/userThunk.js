@@ -167,11 +167,9 @@ export const getUserThunk = () => {
             })
        
             const response = await api.user.getUser()
-
-            if (response.status === 200) {
-                let result = await response.json();
-                
-                dispatch(getUserCreators(result.user))
+        
+            if (response.success) {
+                dispatch(getUserCreators(response.user))
                 dispatch(updateUserCreatorsSuccess())
             } 
     }
@@ -190,9 +188,10 @@ export const updateUserThunk = (config) => {
                 },
                 body: JSON.stringify(config),
             })
+           
 
             const response = await api.user.updateUser(config)
-
+                
             if (response.status === 200) {
                 let result = await response.json();
                 dispatch(updateUserCreators(result.user))
