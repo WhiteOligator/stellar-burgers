@@ -45,3 +45,29 @@
 .color {
     color: #8585AD;
 }
+
+.activeRef {
+    text-decoration: none;
+    color: #F2F2F3;
+}
+
+.ref {
+    text-decoration: none;
+    color: #8585AD;
+}
+
+.AppHeaderItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.AppHeaderItem:hover {
+    background-color: rgba(255, 255, 255, .1);
+}
+
+.text_color_active {
+    color: #fff;
+}

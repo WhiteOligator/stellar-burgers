@@ -1,47 +1,59 @@
+import { Router, Route, Routes, useLocation, Switch } from 'react-router-dom';
+import { getUserThunk } from '../../redux/thunk/userThunk';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react'
+import IngredientDetailsPage from '../../pages/IngredientDetailsPage/IngredientDetailsPage';
+import { GetCookie } from '../../hooks/Cookie';
 import AppHeader from '../AppHeader/AppHeader';
 import style from './App.module.css'
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import Modal from '../Modal/Modal';
-import OrderDetails from '../OrderDetails/OrderDetails';
-import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import {  useSelector } from 'react-redux';
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
-import { openItem, openOderState } from '../../redux/selectors/selectors';
-
-
-
+import Authorization from '../../pages/authorization/authorization';
+import ForgotPassword from '../../pages/forgotPassword/forgotPassword';
+import Home from '../../pages/home/home';
+import Registration from '../../pages/registration/registration';
+import Passwordreset from '../../pages/passwordReset/passwordReset';
+import Profile from '../../pages/profile/profile';
+import ProfileOrders from '../../pages/profileOrders/profileOrders';
+import NotFound404 from '../../pages/notFound404/NotFound404';
+import ModalSwitch from '../../pages/ModalSwitch';
+import { ProtectedRoute } from '../../pages/ProtectedRoute/ProtectedRoute';
+import { getIngridients } from '../../redux/thunk/getIngridients';
 
 
 
 
 function App() {
 
-  const openIngridient = useSelector(openItem)
-  const openOrder = useSelector(openOderState)
-  
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getIngridients())
+    if (GetCookie('accessToken')) {
+      dispatch(getUserThunk())
+    }
+  }, []);
+
+  const location = useLocation();
+  let background = location.state && location.state.background ? true : false;
+
   return (
-    <>
-        <div className={style.content}>
-          <AppHeader />
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </DndProvider>
-          <Modal 
-            active={openOrder} 
-          >
-            <OrderDetails/>
-          </Modal>
-          <Modal
-            title={'Детали ингредиента'}
-            active={openIngridient}   
-          >
-            <IngredientDetails  />
-          </Modal>
-        </div>
-    </>
+   <div className={style.content}> 
+      <AppHeader />
+      <Routes location={background || location}>
+        <Route element={<Home />} path="/"/>
+        <Route
+            exact
+            path='/ingredients/:ingredientId'
+            element={<IngredientDetailsPage />}
+        />
+        <Route element={<ProtectedRoute autorizeStatus={true} element={<Authorization />} />} path="/login"/>
+        <Route element={<ProtectedRoute autorizeStatus={true} element={<Registration />} />} path="/register"/>
+        <Route element={<ProtectedRoute autorizeStatus={true} element={<ForgotPassword />} />} path="/forgot-password"/>
+        <Route element={<ProtectedRoute autorizeStatus={true} element={<Passwordreset />} name = {true} />} path="/reset-password"/>
+        <Route element={<ProtectedRoute autorizeStatus={false} element={<Profile />} />} path="/profile"/>
+        <Route element={<ProtectedRoute autorizeStatus={false} element={<ProfileOrders />} />} path="/profile/orders"/>
+        <Route path='*' element={<NotFound404 />} />
+      </Routes>
+      <ModalSwitch background={background} />
+    </div>
   );
 }
 

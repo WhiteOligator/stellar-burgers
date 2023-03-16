@@ -15,26 +15,30 @@ const portal = document.getElementById("portal");
 const Modal = ({
     title = null,
     active,
+    onClose,
     children
 }) => {
 
-    const dispatch = useDispatch();
+   
    
     
     useEffect(() => {
         function handleEscapeKey(event) {
-            if (event.code === 'Escape') 
-                dispatch(deleteIngridientThunk())
-                dispatch(cleareOrderThunk())
+            if (event.code === 'Escape' && onClose !== undefined) {
+                onClose()
+            }
+               
        
           }
         
         document.addEventListener('keydown', handleEscapeKey)
         return () => document.removeEventListener('keydown', handleEscapeKey)
     },[])
+
+   
   
     return createPortal( 
-            <ModalOverlay active={active} onClose={() => { dispatch(deleteIngridientThunk());  dispatch(cleareOrderThunk())}}>
+            <ModalOverlay active={active} onClose={onClose}>
                 <div className={active ? "content active" : "content"} onClick={e => e.stopPropagation()}>               
                     <header className='ml-10 mt-10'  >
                         <div className={style.box}>
@@ -43,7 +47,7 @@ const Modal = ({
                                     {title}
                                 </p>
                             </div>
-                            <div onClick={() => { dispatch(deleteIngridientThunk());  dispatch(cleareOrderThunk())}} className={style.icons}>
+                            <div onClick={onClose} className={style.icons}>
                                 <CloseIcon  type="primary" />
                             </div>
                         </div>            
@@ -54,7 +58,9 @@ const Modal = ({
 
     }                
 Modal.propTypes = {
+    title: PropTypes.string,
     active:  PropTypes.bool,
+    onClose:  PropTypes.func,
     children:  PropTypes.element,  
   }; 
  

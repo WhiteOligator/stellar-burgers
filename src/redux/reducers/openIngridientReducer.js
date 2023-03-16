@@ -1,6 +1,7 @@
 import {
     OPEN_INGRIDIENT,
     DELETE_INGRIDIENT,
+    OPEN_MODAL,
 } from "../actionType/openIngridient"
 
 
@@ -21,6 +22,11 @@ export const openIngridientReducer = (state = initialState, action) => {
             return {
                 ingridient: [],
                 openIngridient: false,
+            } 
+        case OPEN_MODAL: 
+            return {
+                ingridient: [],
+                openIngridient: true,
             }    
         default: {
             return {

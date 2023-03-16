@@ -3,12 +3,11 @@ import style from './IngredientDetails.module.css'
 import { useSelector } from 'react-redux';
 import { getClikIngridients } from '../../redux/selectors/selectors';
 
-const IngredientDetails = () =>  {
-
-    const clikIngridients = useSelector(getClikIngridients)
+const IngredientDetails = ({clikIngridients}) =>  {
 
     return (
         <section>
+            {clikIngridients &&
             <div className={style.container}>
                 <img className={style.image_ingr} src={clikIngridients.image_large} alt={clikIngridients.name} />
                 <p  className="text text_type_main-medium mt-4">
@@ -56,7 +55,7 @@ const IngredientDetails = () =>  {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>}
             <div className='mt-15'></div>
         </section>
     );

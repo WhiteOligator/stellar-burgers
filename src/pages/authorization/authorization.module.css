@@ -1,0 +1,33 @@
+.content {
+    background: #131316;
+    max-width: 1280px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+  
+.box {
+    margin-top: 180px;
+    height: 430px;
+    width: 480px;
+    display: flex;
+    align-items: flex-start;
+    flex-flow:  wrap;
+    justify-content: center;
+}  
+
+.ref {
+    text-decoration: none;
+}
+
+.textError {
+    color: #9b2d30;
+
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

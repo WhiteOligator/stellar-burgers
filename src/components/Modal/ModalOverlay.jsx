@@ -5,8 +5,10 @@ import PropTypes from 'prop-types';
 const ModalOverlay = ({
     active,
     onClose,
-    children
+    children,
 }) => {
+
+ 
     return (
         <div className={active ? "modal active" : "modal"} onClick={onClose}>
             {children}
@@ -17,7 +19,7 @@ const ModalOverlay = ({
 ModalOverlay.propTypes = {
     active:  PropTypes.bool,
     children:  PropTypes.element,
-    onClose:  PropTypes.func.isRequired   
+    onClose:  PropTypes.func, 
   }; 
 
 export default ModalOverlay;
