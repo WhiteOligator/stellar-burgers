@@ -3,8 +3,7 @@ import { makeRequest } from "./makeRequest"
 
 const URL = 'ingredients'
 
-export const getIngridients = (config) => makeRequest({
+export const getIngridients = () => makeRequest({
     method: 'GET',
     url: URL,
-    ...config,
 })

@@ -130,7 +130,7 @@ export const resetPasswordThunk = (config) => {
     return async (dispatch) => {
         try {
 
-            const response = await api.user.resetPassword(config)
+            const response = await api.user.ResetPassword(config)
             if (response.status !== 200) {
                 let result = await response.json();
                 dispatch(resetPasswordError(result))
@@ -191,15 +191,13 @@ export const updateUserThunk = (config) => {
            
 
             const response = await api.user.updateUser(config)
-                
-            if (response.status === 200) {
-                let result = await response.json();
-                dispatch(updateUserCreators(result.user))
+            console.log(response)
+            if (response.success) {
+                dispatch(updateUserCreators(response.user))
                 dispatch(updateUserCreatorsSuccess())
                
             } else {
-                let result = await response.json();
-                dispatch(updateUserCreatorsError(result.message))
+                dispatch(updateUserCreatorsError(response.message))
             }
         } catch (error) {
             dispatch(updateUserCreatorsError(error))

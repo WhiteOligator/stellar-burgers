@@ -2,8 +2,12 @@ import axios from "axios"
 
 export const API_ENDPOINT = 'https://norma.nomoreparties.space/api'
 
+type ConfigType = {
+    method: string,
+    url: string
+};
 
-export const makeRequest = (config) => {
+export const makeRequest = (config: ConfigType) => {
     config.url = `${API_ENDPOINT}/${config.url}`
 
     return axios(config.url)

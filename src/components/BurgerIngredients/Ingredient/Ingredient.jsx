@@ -12,6 +12,8 @@ const Ingredient = ({
     item,
 }) => {
 
+    console.log(item)
+
     const location = useLocation();
 
     const getType = (type) => {

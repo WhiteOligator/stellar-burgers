@@ -130,13 +130,13 @@ const Profile = () => {
                         id='password'
                         icon={'EditIcon'}
                     />
-                    {error !== "" &&
+                    {/* {error !== "" &&
                         <div className={style.textError}>
                             <p className="text text_type_main-default mt-4">
                                 Error: {error} !!!
                             </p>
                         </div>    
-                    }
+                    } */}
                     <Button htmlType="submit" type="primary" size="medium">
                         Сохранить
                     </Button>

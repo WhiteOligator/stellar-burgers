@@ -1,11 +1,19 @@
 import { useSelector } from 'react-redux';
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { GetCookie } from '../../hooks/Cookie';
+import React, {FC} from 'react'
+import {useAppSelector} from '../../hooks/hooks'
+import { forgotPassword } from '../../redux/selectors/selectors';
 
+interface ProtectedRouteProps {
+    autorizeStatus?: boolean;
+    element: React.ReactNode;
+    name?: boolean;
+}
 
-export const ProtectedRoute = ({ autorizeStatus, element, name = false }) => {
+export const ProtectedRoute: FC<ProtectedRouteProps> = ({ autorizeStatus, element, name = false }) => {
     const isLoggedIn = GetCookie('accessToken')
-    const forgot = useSelector(state => state.user.forgotPassword)
+    const forgot = useAppSelector(forgotPassword)
     
     const location = useLocation();
     const from = location.state?.from || '/';
@@ -22,5 +30,5 @@ export const ProtectedRoute = ({ autorizeStatus, element, name = false }) => {
         return <Navigate to='/login' state={{ from: location }} />
     }
 
-    return element;
+    return <>{element}</>;
 }

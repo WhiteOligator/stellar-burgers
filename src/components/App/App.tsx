@@ -1,6 +1,5 @@
-import { Router, Route, Routes, useLocation, Switch } from 'react-router-dom';
+import { Router, Route, Routes, useLocation } from 'react-router-dom';
 import { getUserThunk } from '../../redux/thunk/userThunk';
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react'
 import IngredientDetailsPage from '../../pages/IngredientDetailsPage/IngredientDetailsPage';
 import { GetCookie } from '../../hooks/Cookie';
@@ -17,13 +16,15 @@ import NotFound404 from '../../pages/notFound404/NotFound404';
 import ModalSwitch from '../../pages/ModalSwitch';
 import { ProtectedRoute } from '../../pages/ProtectedRoute/ProtectedRoute';
 import { getIngridients } from '../../redux/thunk/getIngridients';
+import React, {FC} from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 
 
 
+const App: FC = () => {
 
-function App() {
+  const dispatch = useAppDispatch()
 
-  const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getIngridients())
     if (GetCookie('accessToken')) {
@@ -32,7 +33,7 @@ function App() {
   }, []);
 
   const location = useLocation();
-  let background = location.state && location.state.background ? true : false;
+  let background = location.state && location.state.background;
 
   return (
    <div className={style.content}> 
@@ -40,11 +41,10 @@ function App() {
       <Routes location={background || location}>
         <Route element={<Home />} path="/"/>
         <Route
-            exact
             path='/ingredients/:ingredientId'
             element={<IngredientDetailsPage />}
         />
-        <Route element={<ProtectedRoute autorizeStatus={true} element={<Authorization />} />} path="/login"/>
+        <Route element={<ProtectedRoute  autorizeStatus={true} element={<Authorization />} />} path="/login"/>
         <Route element={<ProtectedRoute autorizeStatus={true} element={<Registration />} />} path="/register"/>
         <Route element={<ProtectedRoute autorizeStatus={true} element={<ForgotPassword />} />} path="/forgot-password"/>
         <Route element={<ProtectedRoute autorizeStatus={true} element={<Passwordreset />} name = {true} />} path="/reset-password"/>

@@ -1,4 +1,12 @@
 import { GetCookie, SetCookie } from "../hooks/Cookie"
+import { 
+    RegisterUser,
+    LoginUser,
+    Logout,
+    ForgotPassword,
+    resetPassword,
+    UpdateUser,
+ } from "../utils/TypesAndIntareface"
 
 export const API_ENDPOINT = 'https://norma.nomoreparties.space/api'
 
@@ -10,7 +18,8 @@ const forgotPasswordURL = 'password-reset'
 const resetPasswordURL = 'password-reset/reset'
 const userURL = 'auth/user'
 
-export const registerUser = (config) => {  
+
+export const registerUser = (config: RegisterUser) => {  
 
     const response = fetch(`${API_ENDPOINT}/${registerURL}`, {
         method: "POST",
@@ -24,7 +33,7 @@ export const registerUser = (config) => {
 }
 
 
-export const loginUser = (config) => {  
+export const loginUser = (config: LoginUser) => {  
 
     const response = fetch(`${API_ENDPOINT}/${loginURL}`, {
         method: "POST",
@@ -37,20 +46,8 @@ export const loginUser = (config) => {
     return response
 }
 
-export const updateToken = (config) => {  
 
-    const response = fetch(`${API_ENDPOINT}/${tokenURL}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify(config),
-    });
-
-    return response
-}
-
-export const logout = (config) => {  
+export const logout = (config: Logout) => {  
 
     const response = fetch(`${API_ENDPOINT}/${logoutURL}`, {
         method: "POST",
@@ -63,7 +60,7 @@ export const logout = (config) => {
     return response
 }
 
-export const ResetPassword = (config) => {  
+export const ResetPassword = (config: resetPassword) => {  
 
     const response = fetch(`${API_ENDPOINT}/${resetPasswordURL}`, {
         method: "POST",
@@ -76,20 +73,7 @@ export const ResetPassword = (config) => {
     return response
 }
 
-export const forgotPassword = (config) => {  
-
-    const response = fetch(`${API_ENDPOINT}/${forgotPasswordURL}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify(config),
-    });
-
-    return response
-}
-
-export const resetPassword = (config) => {  
+export const forgotPassword = (config: ForgotPassword) => {  
 
     const response = fetch(`${API_ENDPOINT}/${forgotPasswordURL}`, {
         method: "POST",
@@ -117,9 +101,9 @@ export const getUser = () => {
 
 
 
-export const updateUser = (config) => {  
+export const updateUser = (config: UpdateUser) => {  
 
-    const response = fetch(`${API_ENDPOINT}/${userURL}`, {
+    return fetch(`${API_ENDPOINT}/${userURL}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -127,17 +111,16 @@ export const updateUser = (config) => {
         },
         body: JSON.stringify(config),
     })
+    .then(checkResponse)
         
-
-    return response
 }
 
 
-const checkResponse = (res) => {
+const checkResponse = (res: Response) => {
     return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
    }
    
-const saveTokens = (refreshToken, accessToken) => {
+const saveTokens = (refreshToken : string, accessToken: string) => {
     SetCookie('accessToken', accessToken);
     SetCookie('refreshToken', refreshToken);
    }
@@ -155,17 +138,23 @@ export const refreshTokenRequest = () => {
      .then(checkResponse)
    }
    
-export const fetchWithRefresh = async(url, options) => {
+export const fetchWithRefresh = async(url: string, options: RequestInit) => {
     try {
      const res = await fetch(url, options);
    
      return await checkResponse(res);
-    } catch (err) {
+    } catch (err: any) {
      if (err.message === 'jwt expired') {
       const {refreshToken, accessToken} = await refreshTokenRequest();
       saveTokens(refreshToken, accessToken);
-   
-      options.headers.authorization = accessToken;
+      
+      options = {
+          ...options,
+          headers: {
+              ...options?.headers,
+              authorization: accessToken
+          }
+      }
    
       const res = await fetch(url, options);
    

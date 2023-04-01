@@ -1,10 +1,8 @@
 import React from 'react';
 import style from './IngredientDetails.module.css'
-import { useSelector } from 'react-redux';
-import { getClikIngridients } from '../../redux/selectors/selectors';
+import type { Ingredient } from '../../utils/TypesAndIntareface';
 
-const IngredientDetails = ({clikIngridients}) =>  {
-
+const IngredientDetails = ({clikIngridients}: any ) =>  {
     return (
         <section>
             {clikIngridients &&

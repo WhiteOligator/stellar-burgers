@@ -47,10 +47,6 @@ export const setUser = (user) => ({
     user: user,
 })
 
-export const updateToken = (token) => ({
-    type: REGISTER_USER_SUCCESS,
-    token: token,
-})
 
 export const logout = (config) => ({
     type: LOGOUT,
