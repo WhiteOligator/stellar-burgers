@@ -7,14 +7,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetPasswordFalseThunk, resetPasswordThunk } from '../../redux/thunk/userThunk';
 import { ResetSelector } from '../../redux/selectors/selectors';
 import { useFormik } from 'formik';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 
 const Passwordreset = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate();
 
-    const {resetPassword, error} = useSelector(ResetSelector)
+    const {resetPassword, error} = useAppSelector(ResetSelector)
 
     const formik = useFormik({
         initialValues: {

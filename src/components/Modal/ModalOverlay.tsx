@@ -1,8 +1,9 @@
-import React from "react";
+import React, {FC} from "react";
 import './ModalOverlay.css'
 import PropTypes from 'prop-types';
+import { ModalOverlayProps } from "../../utils/TypesAndIntareface";
 
-const ModalOverlay = ({
+const ModalOverlay: FC<ModalOverlayProps> = ({
     active,
     onClose,
     children,
@@ -16,10 +17,5 @@ const ModalOverlay = ({
     );
 }
 
-ModalOverlay.propTypes = {
-    active:  PropTypes.bool,
-    children:  PropTypes.element,
-    onClose:  PropTypes.func, 
-  }; 
 
 export default ModalOverlay;

@@ -1,16 +1,38 @@
 import { useDrag, useDrop } from "react-dnd";
-import React, {useRef} from "react";
+import React, {useRef, FC} from "react";
 import ConstructorCard from "../BurgerConstructor/ConstructorCard/ConstructorCard";
-import PropTypes from 'prop-types';
-import { ingredientType } from "../../utils/utils";
+import { TIngredientItemDragId } from "../../utils/TypesAndIntareface";
+import type { Identifier, XYCoord } from 'dnd-core'
 
-const OrderedIngredient = ({ 
+type moveItem = {
+    id: string,
+    index: number
+}
+
+interface OrderedIngredientProps {
+    item: TIngredientItemDragId;
+    index: number;
+    moveCard: (dragIndex: number, hoverIndex: number) => void;
+}
+
+interface DragItem {
+    index: number
+    id: string
+    type: string
+  }
+
+const OrderedIngredient: FC<OrderedIngredientProps> = ({ 
     item, 
     index, 
     moveCard, 
 }) => {
-    const ref = useRef(null);
-    const [{ handlerId }, drop] = useDrop({
+
+    const ref = useRef<HTMLDivElement>(null);
+    const [{ handlerId }, drop] = useDrop<
+        DragItem,
+        void,
+        { handlerId: Identifier | null }>
+        ({
         accept: 'component',
         collect(monitor) {
             return {
@@ -18,12 +40,14 @@ const OrderedIngredient = ({
             }
         },
 
-        hover(item, monitor) {
+        hover: (item, monitor) => {
             if (!ref.current) {
                 return;
             }
 
-            const dragIndex = item.index;
+            
+            
+            const dragIndex = item.index  ;
             const hoverIndex = index;
            
             if (dragIndex === hoverIndex) {
@@ -36,7 +60,7 @@ const OrderedIngredient = ({
     
             const clientOffset = monitor.getClientOffset();
          
-            const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+            const hoverClientY = clientOffset !==null && clientOffset.y - hoverBoundingRect.top;
           
             if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
                 return;
@@ -54,7 +78,7 @@ const OrderedIngredient = ({
 
     const [{ isDragging }, drag] = useDrag({
         type: 'component',
-        item: () => ({ id: item.id, index }),
+        item: () => ({ id: item._id, index }),
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
@@ -64,7 +88,7 @@ const OrderedIngredient = ({
  
     if (item.type !== 'bun') drag(drop(ref));
 
-    const preventDefault = (e) => e.preventDefault();
+    const preventDefault = (e: React.MouseEvent<HTMLElement>) => e.preventDefault();
     return (
         <div
             ref={ref}
@@ -93,10 +117,6 @@ const OrderedIngredient = ({
     )
 }
 
-OrderedIngredient.propTypes = {
-    item: PropTypes.shape(ingredientType).isRequired,
-    index: PropTypes.number.isRequired,
-    moveCard: PropTypes.func,
-}
+
 
 export default OrderedIngredient;

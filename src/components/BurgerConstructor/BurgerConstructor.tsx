@@ -1,8 +1,7 @@
-import React, { useEffect} from "react";
+import React, { useEffect, FC} from "react";
 import style from './BurgerConstructor.module.css'
 import { ConstructorElement, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from 'prop-types';
-import { ingredientType } from "../../utils/utils";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { addBunConstructorThunk, addIngridientsConstructorThunk, clearConstructorThunk, getCostThunk } from "../../redux/thunk/constructorBurger";
@@ -12,47 +11,52 @@ import { createOrderThunk } from "../../redux/thunk/order";
 import { getBuns, getCost, getIngridientConstructor } from "../../redux/selectors/selectors";
 import { GetCookie } from "../../hooks/Cookie";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { TIngredientItem, TIngredientItemDragId } from "../../utils/TypesAndIntareface";
 
+type TIngredientItemMass = TIngredientItemDragId[] 
 
-const BurgerConstructor = () => {
+const BurgerConstructor: FC = () => {
 
     const navigate = useNavigate();
 
-    const dispatch = useDispatch();
-    const buns = useSelector(getBuns)
-    const ingridientConstructor = useSelector(getIngridientConstructor)
-    const cost = useSelector(getCost)
+    const dispatch = useAppDispatch();
+    const buns = useAppSelector(getBuns)
+    const ingridientConstructor = useAppSelector(getIngridientConstructor)
+    const cost = useAppSelector(getCost)
 
-    const [{ isHover }, dropTargerRef] = useDrop({
+   
+
+    const [{isHover}, dropTargerRef] = useDrop({
         accept: 'ingredient',
         collect: monitor => ({
             isHover: monitor.isOver()
         }),
-        drop(item) {
+        drop: (item: TIngredientItem) => {
             let addItem = { ...item, dragId: uuidv4()}
             dispatch(addIngridientsConstructorThunk(addItem))
             }
         }
     );
 
-    const [{ isHoverBun1 }, dropTargerRefBun1] = useDrop({
+    const [{isHoverBun1}, dropTargerRefBun1]  = useDrop({
         accept: 'bun',
         collect: monitor => ({
             isHoverBun1: monitor.isOver()
         }),
-        drop(item) {
+        drop: (item: TIngredientItem) => {
             let addItem = { ...item, dragId: uuidv4()}
             dispatch(addBunConstructorThunk(addItem))
             }
         }
     );
 
-    const [{ isHoverBun2 }, dropTargerRefBun2] = useDrop({
+    const [{isHoverBun2}, dropTargerRefBun2] = useDrop({
         accept: 'bun',
         collect: monitor => ({
             isHoverBun2: monitor.isOver()
         }),
-        drop(item) {
+        drop: (item: TIngredientItem) => {
             let addItem = { ...item, dragId: uuidv4()}
             dispatch(addBunConstructorThunk(addItem))
             }
@@ -60,12 +64,12 @@ const BurgerConstructor = () => {
     );
 
     useEffect(() => {
-        const getSum = (mass1, mass2) => {
+        const getSum = (mass1: TIngredientItemMass, mass2: TIngredientItemMass) => {
             let sum = 0;
-            mass1?.map((el) => {
+            mass1.map((el) => {
                 sum = sum + el?.price
             })
-            mass2?.map((el) => {
+            mass2.map((el) => {
                 sum = sum + el?.price
             })
             dispatch(getCostThunk(sum))
@@ -99,7 +103,7 @@ const BurgerConstructor = () => {
     return (
             <section className={style.box}>
                <div className="mt-25">
-                    <div className={ style.constructor }>
+                    <div className={ style.constructorPole }>
                             <div  className="ml-8">
                                 <div className="ml-4">
                                     <div ref={dropTargerRefBun1} className={`${isHoverBun1 ? style.onHover : ''}`} >
@@ -134,7 +138,7 @@ const BurgerConstructor = () => {
                                 <div className="ml-4">
                                     <div ref={dropTargerRefBun2} className={`${isHoverBun2 ? style.onHover : ''}`} >
                                         {buns?.length > 0 ? 
-                                            <div className={isHoverBun1 ? borderColorWithBun1 : borderColorWithBun2}>
+                                            <div className={isHoverBun1 ? borderColorWithBun2 : borderColorWithBun1}>
                                                 <ConstructorElement
                                                     type="bottom"
                                                     isLocked={true}

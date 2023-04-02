@@ -8,10 +8,11 @@ import { registerThunk, setRegisterThunk } from '../../redux/thunk/userThunk';
 import { isRegister, registerError } from '../../redux/selectors/selectors';
 import { registerUserErorrNull } from '../../redux/actionCreators/userCreators';
 import { useFormik } from 'formik';
+import { useAppDispatch } from '../../hooks/hooks';
 
 const Registration = () => {
     
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const erorrReg = useSelector(registerError)
     const navigate = useNavigate()
 
@@ -24,19 +25,6 @@ const Registration = () => {
     },[])
 
 
-    const [name, setName] = React.useState('')
-    const onChangeName = e => {
-        setName(e.target.value)
-    }
-    const [password, setPassword] = React.useState('')
-    const onChangePassword = e => {
-        setPassword(e.target.value)
-    }
-
-    const [email, setEmail] = React.useState('')
-    const onChangeEmail = e => {
-        setEmail(e.target.value)
-    }
 
 
     const formik = useFormik({
@@ -57,18 +45,8 @@ const Registration = () => {
         },
     });
 
-    // const handleRegister = () => {
-    //     dispatch(registerUserErorrNull())
-
-    //     let config = {
-    //         email: email,
-    //         password: password, 
-    //         name: name,
-    //     }; 
-    //     dispatch(registerThunk(config))
-    // }
-
   
+
 
     if (register)  {dispatch(setRegisterThunk()); navigate('/login')}
 
@@ -84,7 +62,6 @@ const Registration = () => {
                         onChange={formik.handleChange}
                         value={formik.values.name}
                         name='name'
-                        isIcon={false}
                         type='text'
                         id='name'
                         placeholder={'Имя'}
@@ -105,7 +82,7 @@ const Registration = () => {
                         name='password'
                         id='password'
                         extraClass="mt-6"
-                        isIcon={false}
+                       
                     />
                     <Button htmlType="submit" type="primary" size="large" extraClass="mt-6">
                         Зарегистрироваться

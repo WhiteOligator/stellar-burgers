@@ -1,29 +1,25 @@
-import React, {useEffect} from "react";
+import React, {useEffect, FC} from "react";
 import './Modal.css'
-import PropTypes from 'prop-types';
 import style from './Modal.module.css'
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { createPortal } from 'react-dom';
 import ModalOverlay from "./ModalOverlay";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteIngridientThunk } from "../../redux/thunk/openIngridients";
-import { cleareOrderThunk } from "../../redux/thunk/order";
+import {ModalProps} from '../../utils/TypesAndIntareface'
 
+const portal: HTMLElement = document.getElementById("portal")!;
 
-const portal = document.getElementById("portal");
-
-const Modal = ({
-    title = null,
+const Modal: FC<ModalProps>  = ({
+    title,
     active,
     onClose,
-    children
+    children,
 }) => {
 
    
    
     
     useEffect(() => {
-        function handleEscapeKey(event) {
+        function handleEscapeKey(event: KeyboardEvent) {
             if (event.code === 'Escape' && onClose !== undefined) {
                 onClose()
             }
@@ -57,11 +53,5 @@ const Modal = ({
             </ModalOverlay>, portal);
 
     }                
-Modal.propTypes = {
-    title: PropTypes.string,
-    active:  PropTypes.bool,
-    onClose:  PropTypes.func,
-    children:  PropTypes.element,  
-  }; 
  
 export default Modal;

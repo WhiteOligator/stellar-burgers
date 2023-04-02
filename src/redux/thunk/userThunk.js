@@ -191,7 +191,7 @@ export const updateUserThunk = (config) => {
            
 
             const response = await api.user.updateUser(config)
-            console.log(response)
+          
             if (response.success) {
                 dispatch(updateUserCreators(response.user))
                 dispatch(updateUserCreatorsSuccess())

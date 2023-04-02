@@ -1,20 +1,26 @@
-import React from "react";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from './ConstructorCard.module.css';
-import PropTypes from 'prop-types';
-import { useDispatch } from "react-redux";
 import { deleteIngridientsConstructorThunk } from "../../../redux/thunk/constructorBurger";
+import { useAppDispatch } from "../../../hooks/hooks";
+
+type ConstructorCardProps = {
+    name: string,
+    price: number,
+    image: string,
+    dragId: string,
+}
+
 
 const ConstructorCard = ({
     name,
     price,
     image,
     dragId, 
-}) => {
+}: ConstructorCardProps) => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const handleDelete = (id) => {
+    const handleDelete = (id: string) => {
         dispatch(deleteIngridientsConstructorThunk(id))
     }
     
@@ -39,13 +45,6 @@ const ConstructorCard = ({
             </section>
         </>
      );
-}
-
-ConstructorCard.propTypes = {
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    dragId: PropTypes.string.isRequired,
 }
 
 export default ConstructorCard;

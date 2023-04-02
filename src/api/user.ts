@@ -6,6 +6,7 @@ import {
     ForgotPassword,
     resetPassword,
     UpdateUser,
+    IResponse,
  } from "../utils/TypesAndIntareface"
 
 export const API_ENDPOINT = 'https://norma.nomoreparties.space/api'
@@ -19,6 +20,7 @@ const resetPasswordURL = 'password-reset/reset'
 const userURL = 'auth/user'
 
 
+
 export const registerUser = (config: RegisterUser) => {  
 
     const response = fetch(`${API_ENDPOINT}/${registerURL}`, {
@@ -28,7 +30,7 @@ export const registerUser = (config: RegisterUser) => {
         },
         body: JSON.stringify(config),
     });
-
+    
     return response
 }
 

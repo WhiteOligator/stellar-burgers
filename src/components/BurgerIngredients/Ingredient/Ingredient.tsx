@@ -1,22 +1,26 @@
-import { memo, useMemo, useCallback } from 'react';
+import { memo, useMemo, useCallback, FC } from 'react';
 import styles from './Ingredient.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd';
-import { IngredientItem } from '../../../utils/utils';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { openIngridientThunk } from '../../../redux/thunk/openIngridients';
 import { getConstructorItems, getConstructorItemsBuns } from '../../../redux/selectors/selectors';
 import { Link, useLocation } from 'react-router-dom';
+import { TIngredientItem, TIngredientItemMass } from '../../../utils/TypesAndIntareface';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 
-const Ingredient = ({ 
-    item,
-}) => {
+interface IngredientProps {
+    item: TIngredientItem;
+}
 
-    console.log(item)
+const Ingredient: FC<IngredientProps> = ({item}) => {
+
+
+
 
     const location = useLocation();
 
-    const getType = (type) => {
+    const getType = (type: string) => {
         if (type === "bun") return 'bun'
             return 'ingredient'
     }
@@ -29,17 +33,17 @@ const Ingredient = ({
         })
     });
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const constructorItems = useSelector(getConstructorItems);
-    const constructorItemsBuns = useSelector(getConstructorItemsBuns)
+    const constructorItems = useAppSelector(getConstructorItems);
+    const constructorItemsBuns = useAppSelector(getConstructorItemsBuns)
 
     const countItem = useMemo(() => {
-        if (item.type === 'bun') return constructorItemsBuns.filter(el => el._id === item._id).length;
-          else   return constructorItems.filter(el => el._id === item._id).length;
+        if (item.type === 'bun') return constructorItemsBuns.filter((el: TIngredientItem) => el._id === item._id).length;
+          else   return constructorItems.filter((el: TIngredientItem) => el._id === item._id).length;
     }, [constructorItems, item._id, constructorItemsBuns]);
 
-    const handleOpen = useCallback((item) => {
+    const handleOpen = useCallback((item: TIngredientItem) => {
         dispatch(openIngridientThunk(item))
     }, [dispatch]);
 
@@ -70,8 +74,6 @@ const Ingredient = ({
     );
 };
 
-Ingredient.propTypes = {
-    item: IngredientItem.isRequired
-}
+
 
 export default Ingredient;

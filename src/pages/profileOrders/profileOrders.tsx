@@ -3,13 +3,13 @@ import AppHeader from '../../components/AppHeader/AppHeader';
 import style from './profileOrders.module.css'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { GetCookie, RemoveCookie } from '../../hooks/Cookie';
-import { useDispatch } from 'react-redux';
 import { logoutThunk } from '../../redux/thunk/userThunk';
+import { useAppDispatch } from '../../hooks/hooks';
 
 const ProfileOrders = () => {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const logout = () => {
 

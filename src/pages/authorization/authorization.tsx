@@ -2,13 +2,14 @@ import React, {useEffect, FC } from 'react';
 import style from "./authorization.module.css"
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
 import { loginErrorNullThunk, loginThunk } from '../../redux/thunk/userThunk';
 import { isLog, LoginError } from '../../redux/selectors/selectors';
 import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
-const Authorization = () => {
+
+
+const Authorization: FC = () => {
 
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(isLog)
@@ -34,7 +35,7 @@ const Authorization = () => {
     });
 
 
-    if (isLoggedIn) return navigate(-1)
+    if (isLoggedIn) {navigate(-1)}
 
     return (
         <div className={style.content}>

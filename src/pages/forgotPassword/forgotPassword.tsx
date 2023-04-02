@@ -6,10 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { forgotPasswordThunk, forgotPasswordFalseThunk } from '../../redux/thunk/userThunk';
 import { forgotSelector } from '../../redux/selectors/selectors';
 import { useFormik } from 'formik';
+import { useAppDispatch } from '../../hooks/hooks';
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const {forgotPassword, error} = useSelector(forgotSelector)
 

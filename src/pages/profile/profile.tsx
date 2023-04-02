@@ -1,27 +1,27 @@
 import React, { useEffect, useMemo } from 'react';
-import AppHeader from '../../components/AppHeader/AppHeader';
 import style from './profile.module.css'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Input, EmailInput, PasswordInput, EditIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { GetCookie, RemoveCookie } from '../../hooks/Cookie';
 import { getUserThunk, logoutThunk, updateUserCreatorNull, updateUserThunk } from '../../redux/thunk/userThunk';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUser, updateSuccess } from '../../redux/selectors/selectors';
+import { getUser, updateSuccess, userError, userUpdateStart } from '../../redux/selectors/selectors';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ProgressBar } from 'react-loader-spinner'
 import { useFormik } from 'formik';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 
 const Profile = () => {
 
-    const isLoggedIn = useSelector(state => state.user.updateStart)
-    const error = useSelector(state => state.user.error)
-    const user = useSelector(getUser)
+    const isLoggedIn = useAppSelector(userUpdateStart)
+    const user = useAppSelector(getUser)
 
+
+   
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
  
-    const success = useSelector(updateSuccess)
+    const success = useAppSelector(updateSuccess)
   
     const formik = useFormik({
         initialValues: {
@@ -73,7 +73,7 @@ const Profile = () => {
 
     return (
         <>
-        {user !== [] && 
+        {user && 
             <div className={style.content}>
            
             <div className={style.firstBox}>
@@ -121,7 +121,7 @@ const Profile = () => {
                         value={formik.values.email  ? formik.values.email  : ''}
                         name='email'
                         id='email'
-                        icon={'EditIcon'}
+                        
                     />
                     <PasswordInput
                         onChange={formik.handleChange}
@@ -130,13 +130,6 @@ const Profile = () => {
                         id='password'
                         icon={'EditIcon'}
                     />
-                    {/* {error !== "" &&
-                        <div className={style.textError}>
-                            <p className="text text_type_main-default mt-4">
-                                Error: {error} !!!
-                            </p>
-                        </div>    
-                    } */}
                     <Button htmlType="submit" type="primary" size="medium">
                         Сохранить
                     </Button>
