@@ -3,20 +3,20 @@ import AppHeader from '../../components/AppHeader/AppHeader';
 import style from "./registration.module.css"
 import { NavLink, useNavigate } from "react-router-dom";
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { registerThunk, setRegisterThunk } from '../../redux/thunk/userThunk';
 import { isRegister, registerError } from '../../redux/selectors/selectors';
 import { registerUserErorrNull } from '../../redux/actionCreators/userCreators';
 import { useFormik } from 'formik';
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 const Registration = () => {
     
     const dispatch = useAppDispatch()
-    const erorrReg = useSelector(registerError)
+    const erorrReg = useAppSelector(registerError)
     const navigate = useNavigate()
 
-    const register = useSelector(isRegister)
+    const register = useAppSelector(isRegister)
   
 
     useEffect(() => {

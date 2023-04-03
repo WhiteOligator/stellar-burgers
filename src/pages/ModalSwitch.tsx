@@ -1,12 +1,10 @@
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
 import { Route, useNavigate, Routes, useLocation } from 'react-router-dom';
 import { deleteIngridientThunk, openIngridientThunk }from '../redux/thunk/openIngridients'
 import Modal from '../components/Modal/Modal'
 import IngredientDetails from '../components/IngredientDetails/IngredientDetails';
 import { getClikIngridients, ingridientsSelector, openItem } from '../redux/selectors/selectors';
 import { useEffect } from 'react';
-import { useAppDispatch } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { TIngredientItem } from '../utils/TypesAndIntareface';
 
 type backgroundType = {
@@ -17,11 +15,11 @@ const ModalSwitch = ({ background }: backgroundType) => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const {ingridients} = useSelector(ingridientsSelector)
+    const {ingridients} = useAppSelector(ingridientsSelector)
 
     const dispatch = useAppDispatch();
-    const openIngredient = useSelector(openItem)
-    const clikIngridients = useSelector(getClikIngridients)
+    const openIngredient = useAppSelector(openItem)
+    const clikIngridients: TIngredientItem = useAppSelector(getClikIngridients)
 
     const handleCloseModal = () => {
         dispatch(deleteIngridientThunk());

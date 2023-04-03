@@ -77,6 +77,28 @@ interface ModalOverlayProps  {
 
 type TIngredientItemMass = TIngredientItem[];
 
+type TUseLocation = {
+    hash: string,
+    key: string,
+    pathname: string,
+    search: string,
+    state: null | {
+        background: {
+            hash: string,
+            key: string,
+            pathname: string,
+            search: string,
+            state: null,
+        }
+    }
+}
+
+type HeadersObj = {
+    0: boolean,
+    1: boolean,
+    2: boolean,
+}
+ 
 interface IResponse {
     success: boolean
 }
@@ -95,4 +117,7 @@ export type {
     ModalProps,
     ModalOverlayProps,
     IResponse,
+    TUseLocation,
+    HeadersObj,
+    
 }

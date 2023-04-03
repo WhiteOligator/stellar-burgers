@@ -3,7 +3,6 @@ import AppHeader from '../../components/AppHeader/AppHeader';
 import style from "./passwordReset.module.css"
 import { NavLink, useNavigate } from "react-router-dom";
 import { Input,  Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
 import { resetPasswordFalseThunk, resetPasswordThunk } from '../../redux/thunk/userThunk';
 import { ResetSelector } from '../../redux/selectors/selectors';
 import { useFormik } from 'formik';

@@ -18,6 +18,7 @@ import { ProtectedRoute } from '../../pages/ProtectedRoute/ProtectedRoute';
 import { getIngridients } from '../../redux/thunk/getIngridients';
 import React, {FC} from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { TUseLocation } from '../../utils/TypesAndIntareface';
 
 
 
@@ -33,7 +34,9 @@ const App: FC = () => {
   }, []);
 
   const location = useLocation();
-  let background: null | object = location.state && location.state.background;
+
+ 
+  let background: TUseLocation = location.state && location.state.background;
 
  
   return (

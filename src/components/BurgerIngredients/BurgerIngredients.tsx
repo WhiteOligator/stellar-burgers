@@ -1,18 +1,18 @@
 import {  useEffect, useMemo, useRef, useState, FC } from 'react';
 import styles from './BurgerIngredients.module.css';
-import { useDispatch, useSelector } from 'react-redux';
 import ItemList from './ItemList/ItemList';
 import Tabs from './Tabs/Tabs';
 import { getIngridients } from '../../redux/thunk/getIngridients';
 import { getIngredient, ingridientsSelector } from '../../redux/selectors/selectors';
 import { ProgressBar } from 'react-loader-spinner'
 import { VscWarning } from "react-icons/vsc";
-import { TIngredientItem } from '../../utils/TypesAndIntareface';
+import { HeadersObj, TIngredientItem } from '../../utils/TypesAndIntareface';
+import { useAppSelector } from '../../hooks/hooks';
 
 const BurgerIngredients: FC = () => {
 
     
-    const {ingridients, isIngridientsLoading, error} = useSelector(ingridientsSelector) 
+    const {ingridients, isIngridientsLoading, error} = useAppSelector(ingridientsSelector) 
 
     const buns = useMemo(() => ingridients.filter((item : TIngredientItem) => item.type === 'bun'), [ingridients]);
     const mains = useMemo(() => ingridients.filter((item : TIngredientItem) => item.type === 'main'), [ingridients]);
@@ -29,15 +29,18 @@ const BurgerIngredients: FC = () => {
     }
 
     useEffect(() => {
-        const headers: any = {};
+        const headers: {[key: string ]: string | boolean} = {};
 
+        console.log(headers[1], "1")
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 headers[entry.target.id] = entry.isIntersecting;
+                console.log(entry.isIntersecting)
             });
             for (const header in headers) {
                 if (headers[header]) {
                     setCategory(Number(header));
+                    console.log(headers)
                     break;
                 }
             }

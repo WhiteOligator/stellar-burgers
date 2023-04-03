@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { GetCookie } from '../../hooks/Cookie';
 import React, {FC} from 'react'

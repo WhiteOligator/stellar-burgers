@@ -1,6 +1,5 @@
 import { memo, useMemo, useCallback, FC } from 'react';
 import styles from './Ingredient.module.css';
-import { useSelector, useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { openIngridientThunk } from '../../../redux/thunk/openIngridients';

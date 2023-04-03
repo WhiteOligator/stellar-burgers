@@ -1,13 +1,13 @@
 import React from 'react';
 import style from './OrderDetails.module.css'
 import { CloseIcon, CheckMarkIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
 import { ProgressBar } from 'react-loader-spinner'
 import { getIsPost, getOrder } from '../../redux/selectors/selectors';
+import { useAppSelector } from '../../hooks/hooks';
 
 const OrderDetails = () => {
-    const order = useSelector(getOrder)
-    const isPost = useSelector(getIsPost)
+    const order = useAppSelector(getOrder)
+    const isPost = useAppSelector(getIsPost)
 
     return (
         <>
