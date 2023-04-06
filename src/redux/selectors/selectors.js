@@ -27,3 +27,8 @@ export const ResetSelector = state => state.user;
 
 export const getUser = state => state.user.user;
 export const updateSuccess = state => state.user.updateSuccess;
+
+export const forgotPassword = state => state.user.forgotPassword;
+export const userError = state => state.user.error
+
+export const userUpdateStart = state => state.user.updateStart
