@@ -1,16 +1,23 @@
+import { TIngredientItem } from "../../utils/TypesAndIntareface"
+import { TOpenIngredientAction } from "../actionCreators/openIngridient"
 import {
     OPEN_INGRIDIENT,
     DELETE_INGRIDIENT,
     OPEN_MODAL,
 } from "../actionType/openIngridient"
 
+type openIngridientState = {
+    ingridient: TIngredientItem[],
+    openIngridient: boolean,
+}
 
-const initialState = {
+
+const initialState: openIngridientState = {
     ingridient: [],
     openIngridient: false,  
 }
 
-export const openIngridientReducer = (state = initialState, action) => {
+export const openIngridientReducer = (state = initialState, action: TOpenIngredientAction): openIngridientState => {
     switch(action.type) {
         case OPEN_INGRIDIENT: 
             return {

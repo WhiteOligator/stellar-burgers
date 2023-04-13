@@ -1,3 +1,5 @@
+import { TConstructorBurger } from './../actionCreators/constructorBurger';
+import { TIngredientItem, TIngredientItemDragId } from '../../utils/TypesAndIntareface';
 import {
     ADD_INGRIDIENT_CONSTRUCTOR,
     DELETE_INGRIDIENT_CONSTRUCTOR,
@@ -7,13 +9,19 @@ import {
     CLEAR_CONSTRUCTOR,
 } from "../actionType/constructorBurger"
 
-const initialState = {
+type TConstructorBurgerState = {
+    ingridients: TIngredientItemDragId[],
+    costOfTheOrder: number,
+    whatKindOfBun: TIngredientItemDragId[],
+};
+
+const initialState: TConstructorBurgerState = {
     ingridients: [],
     costOfTheOrder: 0,
     whatKindOfBun: [],
 }
 
-export const constructorBurgerReducer = (state = initialState, action) => {
+export const constructorBurgerReducer = (state = initialState, action: TConstructorBurger): TConstructorBurgerState => {
     switch(action.type) {
         case ADD_INGRIDIENT_CONSTRUCTOR: 
             return {
@@ -23,7 +31,7 @@ export const constructorBurgerReducer = (state = initialState, action) => {
         case DELETE_INGRIDIENT_CONSTRUCTOR: 
             return {
                 ...state,
-                ingridients: state.ingridients.filter(el => el.dragId !== action.payload),
+                ingridients: state.ingridients.filter((el : TIngredientItemDragId) => el.dragId !== action.payload),
             }
         case MOVE_INGRIDIENT_CONSTRUCTOR: 
             return {

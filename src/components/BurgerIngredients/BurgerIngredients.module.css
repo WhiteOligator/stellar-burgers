@@ -10,7 +10,7 @@
 
 .BurgerIngredientsContainer {
     overflow-y: scroll;
-    overflow:scroll;
+    overflow: scroll;
     overflow-x:hidden;
 }
 

@@ -5,6 +5,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { GetCookie, RemoveCookie } from '../../hooks/Cookie';
 import { logoutThunk } from '../../redux/thunk/userThunk';
 import { useAppDispatch } from '../../hooks/hooks';
+import FeedCard from '../../components/feedCard/feedCard';
+import ProfileOrdersCard from '../../components/profileOrdersCard/profileOrdersCard';
 
 const ProfileOrders = () => {
 
@@ -49,9 +51,16 @@ const ProfileOrders = () => {
                 </p>
             </div>
             <div className={style.secondBox}>
-                <p className="text text_type_main-large mt-20">
-                    Лента заказов (СКОРО)
-                </p>
+                <div className={style.FeedsIngredients}>
+                    <div className={style.FeedsIngredientsContainer}>
+                        <ProfileOrdersCard />
+                        <ProfileOrdersCard />
+                        <ProfileOrdersCard />
+                        <ProfileOrdersCard />
+                        <ProfileOrdersCard />
+                         <ProfileOrdersCard />
+                    </div>
+                </div>
             </div>
         </div>
     );

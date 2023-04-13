@@ -1,5 +1,6 @@
+import { TIngredientItem } from "../../utils/TypesAndIntareface"
+import { TOrderAction } from "../actionCreators/order"
 import {
-    
     CLEARE_ORDER,
     CREATE_ORDER_FAILED,
     CREATE_ORDER_STARTED,
@@ -7,7 +8,17 @@ import {
     UPDATE_ORDER,
 } from "../actionType/order"
 
-const initialState = {
+
+type orderState = {
+    ingridients: TIngredientItem[],
+    costOfTheOrder: number,
+    orderNumber: number,
+    isPost: boolean,
+    error: boolean,
+    openOrder: boolean,
+}
+
+const initialState: orderState = {
     ingridients: [],
     costOfTheOrder: 0,
     orderNumber: 0,
@@ -16,7 +27,7 @@ const initialState = {
     openOrder: false,
 }
  
-export const orderReducer = (state = initialState, action) => {
+export const orderReducer = (state = initialState, action: TOrderAction): orderState => {
     switch(action.type) {
         case CREATE_ORDER_SUCCESS: 
             return {
@@ -37,13 +48,7 @@ export const orderReducer = (state = initialState, action) => {
                 ...state,
                 error: true,
                 isPost: false,
-            }    
-
-        case UPDATE_ORDER: 
-            return {
-                ...state,
-                isIngridientsLoading: false,
-            }     
+            }       
         case CLEARE_ORDER: 
             return {
                 ...state,

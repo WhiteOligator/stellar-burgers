@@ -1,3 +1,5 @@
+import { TUser } from "../../utils/TypesAndIntareface"
+import { TUserCreatorsAction } from "../actionCreators/userCreators"
 import {
     REGISTER_USER_ERROR,
     REGISTER_USER_ERROR_NULL,
@@ -19,8 +21,22 @@ import {
     UPDATE_START
 } from "../actionType/userType"
 
-const initialState = {
-    user: [],
+type userState = {
+    user: TUser,
+    error: string,
+    login: boolean,
+    register: boolean,
+    forgotPassword: boolean,
+    resetPassword: boolean,
+    updateSuccess: boolean,
+    updateStart: boolean,
+}
+
+const initialState: userState = {
+    user: {
+        email: '',
+        name: '',
+    },
     error: "",
     login: false,
     register: false,
@@ -30,7 +46,7 @@ const initialState = {
     updateStart: false,
 }
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action: TUserCreatorsAction): userState => {
     switch(action.type) {
         case REGISTER_USER_ERROR: 
             return {
@@ -66,13 +82,7 @@ export const userReducer = (state = initialState, action) => {
             }  
         case LOGOUT: 
             return {
-                user: [],
-                error: "",
-                login: false,
-                register: false,
-                forgotPassword: false,
-                resetPassword: false,
-                updateSuccess: false,
+                ...initialState
             }   
         case FORGOT_PASSWORD_ERROR: 
             return {

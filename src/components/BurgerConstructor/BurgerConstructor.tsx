@@ -2,7 +2,6 @@ import React, { useEffect, FC} from "react";
 import style from './BurgerConstructor.module.css'
 import { ConstructorElement, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { addBunConstructorThunk, addIngridientsConstructorThunk, clearConstructorThunk, getCostThunk } from "../../redux/thunk/constructorBurger";
 import { v4 as uuidv4 } from 'uuid';
@@ -11,7 +10,7 @@ import { createOrderThunk } from "../../redux/thunk/order";
 import { getBuns, getCost, getIngridientConstructor } from "../../redux/selectors/selectors";
 import { GetCookie } from "../../hooks/Cookie";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import {  useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { TIngredientItem, TIngredientItemDragId } from "../../utils/TypesAndIntareface";
 
 type TIngredientItemMass = TIngredientItemDragId[] 
@@ -39,7 +38,7 @@ const BurgerConstructor: FC = () => {
         }
     );
 
-    const [{isHoverBun1}, dropTargerRefBun1]  = useDrop({
+    const [{isHoverBun1}, dropTargerRefBun1]  = useDrop({ 
         accept: 'bun',
         collect: monitor => ({
             isHoverBun1: monitor.isOver()

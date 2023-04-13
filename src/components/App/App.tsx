@@ -18,6 +18,7 @@ import { ProtectedRoute } from '../../pages/ProtectedRoute/ProtectedRoute';
 import { getIngridients } from '../../redux/thunk/getIngridients';
 import React, {FC} from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import FeedsPage from '../../pages/feedsPage/feedsPage';
 
 
 
@@ -44,6 +45,10 @@ const App: FC = () => {
         <Route
             path='/ingredients/:ingredientId'
             element={<IngredientDetailsPage />}
+        />
+        <Route
+            path='/feed'
+            element={<FeedsPage />}
         />
         <Route element={<ProtectedRoute  autorizeStatus={true} element={<Authorization />} />} path="/login"/>
         <Route element={<ProtectedRoute autorizeStatus={true} element={<Registration />} />} path="/register"/>

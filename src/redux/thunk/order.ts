@@ -8,11 +8,13 @@ import {
 import { API_ENDPOINT } from '../../api/makeRequest'
 import { GetCookie } from '../../hooks/Cookie'
 import { fetchWithRefresh } from '../../api/user'
+import { AppDispatch,  AppThunk } from "../store";
+import { TIngredientItem } from '../../utils/TypesAndIntareface'
 
-export const createOrderThunk = (ingridients, cost) => {
-    return async (dispatch) => {
-        let ingredients = []
-        ingridients.map((el) => {
+export const createOrderThunk: AppThunk = (ingridients, cost) => {
+    return async (dispatch: AppDispatch) => {
+        let ingredients: string[] = []
+        ingridients.map((el: TIngredientItem) => {
             ingredients.push(el?._id)
         })
         try {
@@ -48,14 +50,14 @@ export const createOrderThunk = (ingridients, cost) => {
            
             
 
-        } catch (error) {
-            dispatch(createOrderFailed())
+        } catch (error: any) {
+            dispatch(createOrderFailed(error))
         }
     }
 }
 
-export const cleareOrderThunk = () => {
-    return async (dispatch) => {
+export const cleareOrderThunk: AppThunk = () => {
+    return async (dispatch: AppDispatch) => {
        dispatch(cleareOrder())
     }
 }

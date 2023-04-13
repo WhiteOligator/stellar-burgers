@@ -1,7 +1,7 @@
 .content {
     background: #131316;
     max-width: 1280px;
-    justify-content: center;
+    justify-content: space-between;
     column-gap: 60px; 
     display: flex;
     flex-wrap: wrap;
@@ -20,9 +20,8 @@
 }
 
 .secondBox {
-    height: 240px;
-    width: 480px;
-    margin-top: 120px;
+
+    margin-top: 40px;
     display: flex;
     row-gap: 24px;
     flex-wrap: wrap;
@@ -37,4 +36,32 @@
 .ref {
     text-decoration: none;
     color: #8585AD;
+}
+
+.FeedsIngredientsContainer {
+    overflow-y: scroll;
+    overflow: scroll;
+    overflow-x:hidden;
+  }
+  
+.FeedsIngredientsContainer::-webkit-scrollbar {
+    width: 8px; /* ширина для вертикального скролла */
+    background-color: #2F2F37;
+    height:300px;
+  }
+  
+  /* ползунок скроллбара */
+.FeedsIngredientsContainer::-webkit-scrollbar-thumb {
+    background-color: #8585AD;;
+  
+}
+
+.FeedsIngredients {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 600px;
+    height: 75vh;
+    max-height: 920px;
 }

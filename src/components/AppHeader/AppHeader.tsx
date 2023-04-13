@@ -9,7 +9,7 @@ import { getUser } from "../../redux/selectors/selectors";
 const AppHeader: FC = () => {
 
     const user = useSelector(getUser);
-    const isLoggedIn = GetCookie('accessToken')
+    const isLoggedIn = GetCookie('accessToken');
 
     return (
       
