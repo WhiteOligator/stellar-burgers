@@ -19,6 +19,9 @@ import { getIngridients } from '../../redux/thunk/getIngridients';
 import React, {FC} from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import FeedsPage from '../../pages/feedsPage/feedsPage';
+import { FeedPage } from '../../pages/feedsPage/feedPage/feedPage';
+import ModalSwitchOrder from '../../pages/ModalSwitchOrder';
+import { WS_CONNECTION_START } from '../../redux/actionType/middlewareActions';
 
 
 
@@ -28,6 +31,7 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(getIngridients())
+    dispatch({ type: WS_CONNECTION_START });
     if (GetCookie('accessToken')) {
       dispatch(getUserThunk())
     }
@@ -50,6 +54,10 @@ const App: FC = () => {
             path='/feed'
             element={<FeedsPage />}
         />
+        <Route
+            path='/feed/:id'
+            element={<FeedPage />}
+        />
         <Route element={<ProtectedRoute  autorizeStatus={true} element={<Authorization />} />} path="/login"/>
         <Route element={<ProtectedRoute autorizeStatus={true} element={<Registration />} />} path="/register"/>
         <Route element={<ProtectedRoute autorizeStatus={true} element={<ForgotPassword />} />} path="/forgot-password"/>
@@ -59,6 +67,7 @@ const App: FC = () => {
         <Route path='*' element={<NotFound404 />} />
       </Routes>
       <ModalSwitch background={background} />
+      <ModalSwitchOrder background={background} />
     </div>
   );
 }

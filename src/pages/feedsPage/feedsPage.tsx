@@ -1,12 +1,27 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
+import { ProgressBar } from "react-loader-spinner";
 import FeedCard from "../../components/feedCard/feedCard";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { WS_CONNECTION_START } from "../../redux/actionType/middlewareActions";
+import { get_all_orders } from "../../redux/selectors/selectors";
+import { RootState } from "../../redux/store";
+import { ElementOrders, TIngredientItem } from "../../utils/TypesAndIntareface";
 import style from "./feedsPage.module.css";
 
 const FeedsPage: FC = () => {
 
+    const dispatch = useAppDispatch()
+
+    
+    const {wsConnected, messages} = useAppSelector(get_all_orders)
+   
+    let done = messages.orders.filter((el: ElementOrders) => el.status === "done" )
+    let inwork = messages.orders.filter((el: ElementOrders) => el.status === "created" )
 
     return (
         <div className={style.content}>
+            {wsConnected ? 
+            <>
             <div className={style.text}>
                     <p className="text text_type_main-large ml-4">
                         Лента заказов
@@ -14,11 +29,17 @@ const FeedsPage: FC = () => {
             </div>
             <div className={style.FeedsIngredients}>
                 <div className={style.FeedsIngredientsContainer}>
-                    <FeedCard />
-                    <FeedCard />
-                    <FeedCard />
-                    <FeedCard />
-                    <FeedCard />
+                    {messages.orders.map((el: ElementOrders) => 
+                        <FeedCard 
+                            key={el._id}
+                            id={el._id}
+                            ingredients={el.ingredients}
+                            name={el.name}
+                            createdAt={el.createdAt}
+                            number={el.number}
+                            order={el}
+                        />
+                    )}
                 </div>
             </div>
             <div className={style.order}>
@@ -27,12 +48,9 @@ const FeedsPage: FC = () => {
                         Готовы:
                     </p>
                     <div className={style.numbers}>
-                        <p className="text text_type_digits-default" style={{color: '#00CCCC'}}>034533</p>
-                        <p className="text text_type_digits-default" style={{color: '#00CCCC'}}>034533</p>
-                        <p className="text text_type_digits-default" style={{color: '#00CCCC'}}>034533</p>
-                        <p className="text text_type_digits-default" style={{color: '#00CCCC'}}>034533</p>
-                        <p className="text text_type_digits-default" style={{color: '#00CCCC'}}>034533</p>
-                        <p className="text text_type_digits-default" style={{color: '#00CCCC'}}>034533</p>
+                        {done.slice(0, 10).map((el: ElementOrders) => 
+                            <p className="text text_type_digits-default" style={{color: '#00CCCC'}}>{el.number}</p>
+                        )}
                     </div>
                 </div>
                 <div className={style.inwork}>
@@ -40,9 +58,9 @@ const FeedsPage: FC = () => {
                         В работе:
                     </p>
                     <div className={style.numbers}>
-                        <p className="text text_type_digits-default">034533</p>
-                        <p className="text text_type_digits-default">034533</p>
-                        <p className="text text_type_digits-default">034533</p>
+                        {inwork.slice(0, 10).map((el: ElementOrders) => 
+                                <p className="text text_type_digits-default" style={{color: '#00CCCC'}}>{el.number}</p>
+                            )}
                     </div>
                 </div>
                 <div className={style.successGotIt}>
@@ -52,7 +70,7 @@ const FeedsPage: FC = () => {
                         </p>
                     </div>
                     <div className={style.gotIt2}>
-                        <p className={`${style.shadow} text text_type_digits-large`} >28 725</p>
+                        <p className={`${style.shadow} text text_type_digits-large`} >{messages.total}</p>
                     </div>
                 </div>
                 <div className={style.successGotIt}>
@@ -62,10 +80,23 @@ const FeedsPage: FC = () => {
                         </p>
                     </div>
                     <div className={style.gotIt2}>
-                        <p className={`${style.shadow} text text_type_digits-large`} >138</p>
+                        <p className={`${style.shadow} text text_type_digits-large`} >{messages.totalToday}</p>
                     </div>
                 </div>
+            </div></>
+            :
+            <div className={style.loading}>
+                <ProgressBar 
+                    height="140"
+                    width="140"
+                    ariaLabel="progress-bar-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="progress-bar-wrapper"
+                    barColor = '#8B00FF'
+                    borderColor = '#51E5FF'
+                />   
             </div>
+            }
         </div>
     );
 

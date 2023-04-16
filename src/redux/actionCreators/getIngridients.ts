@@ -8,6 +8,7 @@ import {TIngredientItem} from '../../utils/TypesAndIntareface'
 interface getIngridientsSuccessAction {
     readonly type: typeof GET_INGRIDIENTS_SUCCESS;
     readonly payload: TIngredientItem[]
+    readonly payloadId: string[]
 }
 
 interface getIngridientsFailedAction {
@@ -24,9 +25,10 @@ export type TGetIngredientsAction =
     | getIngridientsFailedAction
     | getIngridientsStartedAction;
 
-export const getIngridientsSuccess = (ingridients: TIngredientItem[]): getIngridientsSuccessAction => ({
+export const getIngridientsSuccess = (ingridients: TIngredientItem[], allId: string[]): getIngridientsSuccessAction => ({
     type: GET_INGRIDIENTS_SUCCESS,
     payload: ingridients,
+    payloadId: allId,
 })
 
 export const getIngridientsFailed = (error: string): getIngridientsFailedAction => ({

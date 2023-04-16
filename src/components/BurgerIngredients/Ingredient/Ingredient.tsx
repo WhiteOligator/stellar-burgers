@@ -15,9 +15,6 @@ interface IngredientProps {
 
 const Ingredient: FC<IngredientProps> = ({item}) => {
 
-
-
-
     const location = useLocation();
 
     const getType = (type: string) => {

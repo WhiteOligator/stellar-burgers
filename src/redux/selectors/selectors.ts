@@ -35,3 +35,11 @@ export const userError = (state: RootState) => state.user.error
 
 export const userUpdateStart = (state: RootState) => state.user.updateStart
 export const ingredient = (state: RootState) => state.ingridients.ingridients
+
+export const get_all_orders = (state: RootState) => state.Ws
+export const get_orders = (state: RootState) => state.Ws.messages.orders
+
+export const get_open_order = (state: RootState) => state.openOrder
+export const get_open_order_order = (state: RootState) => state.openOrder.order
+
+export const get_status_modal = (state: RootState) => state.openOrder.openOrderPage

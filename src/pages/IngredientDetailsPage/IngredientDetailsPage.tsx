@@ -10,6 +10,8 @@ import { ingredient } from '../../redux/selectors/selectors';
 const IngredientDetailsPage = () =>  {
        
     const { ingredientId } = useParams();
+
+    
     const ingredientsItems = useAppSelector(ingredient);
 
     const ingredientItem = useMemo(() => {

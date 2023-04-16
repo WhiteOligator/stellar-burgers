@@ -9,13 +9,19 @@ import { AppDispatch,  AppThunk } from '../store'
 export const getIngridients: AppThunk = () => {
     return async (dispatch: AppDispatch) => {
         try {
+
+            let massId: string[] = []
             dispatch(getIngridientsStarted());
 
             const response: any = await api.ingridients.getIngridients();
           
             let data: TIngredientItem[] = response.data.data 
 
-            dispatch(getIngridientsSuccess(data));
+            data.map((el: TIngredientItem) => {
+                massId.push(el._id)
+            })
+
+            dispatch(getIngridientsSuccess(data, massId));
 
 
         } catch(error: any) {

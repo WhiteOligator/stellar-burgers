@@ -6,7 +6,7 @@ import { GetCookie, RemoveCookie } from '../../hooks/Cookie';
 import { logoutThunk } from '../../redux/thunk/userThunk';
 import { useAppDispatch } from '../../hooks/hooks';
 import FeedCard from '../../components/feedCard/feedCard';
-import ProfileOrdersCard from '../../components/profileOrdersCard/profileOrdersCard';
+
 
 const ProfileOrders = () => {
 
@@ -53,12 +53,7 @@ const ProfileOrders = () => {
             <div className={style.secondBox}>
                 <div className={style.FeedsIngredients}>
                     <div className={style.FeedsIngredientsContainer}>
-                        <ProfileOrdersCard />
-                        <ProfileOrdersCard />
-                        <ProfileOrdersCard />
-                        <ProfileOrdersCard />
-                        <ProfileOrdersCard />
-                         <ProfileOrdersCard />
+                     
                     </div>
                 </div>
             </div>

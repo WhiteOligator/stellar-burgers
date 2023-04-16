@@ -19,6 +19,8 @@ const ModalSwitch = ({ background }: backgroundType) => {
 
     const {ingridients} = useSelector(ingridientsSelector)
 
+    
+
     const dispatch = useAppDispatch();
     const openIngredient = useSelector(openItem)
     const clikIngridients = useSelector(getClikIngridients)

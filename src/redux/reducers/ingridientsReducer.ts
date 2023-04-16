@@ -1,3 +1,4 @@
+import { ingredient } from './../selectors/selectors';
 import { TGetIngredientsAction } from './../actionCreators/getIngridients';
 import { TIngredientItem } from "../../utils/TypesAndIntareface"
 import { GET_INGRIDIENTS_FAILED, GET_INGRIDIENTS_STARTED, GET_INGRIDIENTS_SUCCESS } from "../actionType/getIngridients"
@@ -5,12 +6,14 @@ import { GET_INGRIDIENTS_FAILED, GET_INGRIDIENTS_STARTED, GET_INGRIDIENTS_SUCCES
 
 type ingridientsReducerState = {
     ingridients: TIngredientItem[],
+    ingredientsId: string[],
     isIngridientsLoading: boolean,
     error: boolean,
 }
 
 const initialState: ingridientsReducerState = {
     ingridients: [],
+    ingredientsId: [],
     isIngridientsLoading: true,
     error: false
 }
@@ -26,6 +29,7 @@ export const ingridientsReducer = (state = initialState, action: TGetIngredients
             return {
                 ...state,
                 ingridients: [],
+                ingredientsId: [],
                 isIngridientsLoading: false,
                 error: true,
             }
@@ -34,6 +38,7 @@ export const ingridientsReducer = (state = initialState, action: TGetIngredients
                 ...state,
                 isIngridientsLoading: false,
                 ingridients: action.payload,
+                ingredientsId: action.payloadId,
             }       
         default: {
             return {
