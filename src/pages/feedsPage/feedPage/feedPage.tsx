@@ -8,6 +8,16 @@ import { ElementOrders, TIngredientItem } from "../../../utils/TypesAndIntarefac
 import style from './feedPage.module.css'
 import { useParams } from 'react-router-dom';
 
+
+
+export const howStatus = (statusOrder: string) => {
+    switch(statusOrder) {
+        case 'done':  return 'Выполнен'
+        case 'pending':  return 'Готовится'
+        case 'created':  return 'Создан'
+      }
+}
+
 export const FeedPage = () => {
 
     const {id} = useParams();
@@ -15,13 +25,7 @@ export const FeedPage = () => {
     const openModal = useAppSelector(get_status_modal)
     const ingredients = useAppSelector(ingridientsSelector)
 
-    const howStatus = (statusOrder: string) => {
-        switch(statusOrder) {
-            case 'done':  return 'Выполнен'
-            case 'pending':  return 'Готовится'
-            case 'created':  return 'Создан'
-          }
-    }
+
     const ingredientList =  order.ingredients 
 
   
@@ -31,8 +35,12 @@ export const FeedPage = () => {
   
 
     return(
+        <>
+        {order.number !== 0 &&
+        
         <div className={`${!openModal ? style.box: style.boxPage } ml-10 mr-10`} >
-            {openModal &&
+            
+            {openModal  &&
             <div className={style.stroke_center}>
                 <p className="text text_type_digits-default">#{order.number}</p>
             </div>}
@@ -68,5 +76,6 @@ export const FeedPage = () => {
                 </div>
             </div>
         </div>
+        }</>
     )
 }

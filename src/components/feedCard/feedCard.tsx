@@ -1,5 +1,5 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, {FC, useCallback} from "react";
+import React, {FC, useCallback, useState} from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getIngredient } from "../../redux/selectors/selectors";
 import { RootState } from "../../redux/store";
@@ -9,6 +9,7 @@ import { IngredientIcon } from "./IngredientIconGroup/IngredientIconGroup";
 import { Link, useLocation } from 'react-router-dom';
 import { openOrder, openOrderModal } from "../../redux/actionCreators/ActionOrder";
 import { dateСhange } from "../../utils/function";
+import { howStatus } from "../../pages/feedsPage/feedPage/feedPage";
 
 interface FeedCardProps {
     id: string,
@@ -30,12 +31,6 @@ const FeedCard: FC<FeedCardProps> = ({
 }) => {
 
 
-    console.log(id,
-        ingredients,
-        name,
-        createdAt,
-        number,
-        order,)
 
     const location = useLocation();
     const dispatch = useAppDispatch();
@@ -46,23 +41,39 @@ const FeedCard: FC<FeedCardProps> = ({
         let ingrCard: TIngredientItem[] = []
         allIngredients.map((el: string) => {
             let ingr = burgerIngredients.filter((ingr: TIngredientItem) => ingr._id === el)
-            if (ingr.length !== 0) {
+           
+            if (ingr.length !== 0 ) {
                 ingrCard.push(ingr[0])
+                
             }
         })
         return(ingrCard)
+    }
+
+    const IngredientIconList = (ingrList: TIngredientItem[]) => {
+        let newIconList: TIngredientItem[] = []
+        ingrList.map((el: TIngredientItem) => {
+            if (newIconList.includes(el) === false) {
+                newIconList.push(el)
+            }
+        })
+
+        return newIconList
     }
   
 
     const GetCostOrder = (massIngredient: TIngredientItem[]) => {
         let cost: number = 0
         massIngredient.map((el) => {
-            cost = cost + el?.price
+            if (el !== undefined) {
+                cost = cost + el?.price
+            }
+            
         })
         return cost
     }
  
-    const icons = IngredientCardList(ingredients).map((el, index) => (
+    const icons = IngredientIconList(IngredientCardList(ingredients)).map((el, index) => (
         <IngredientIcon
           key={index}
           src={el?.image}
@@ -76,19 +87,24 @@ const FeedCard: FC<FeedCardProps> = ({
       const handleOpen = useCallback((order: ElementOrders) => {
         dispatch(openOrderModal(false))
         dispatch(openOrder(order))
+        
     }, [dispatch]);
-  
+
+    const path = location.pathname === '/feed' ? 'feed' : 'profile/orders'
+    
+   
+
     return (
         <Link
             className="Link"
-            to={`/feed/${id}`}
+            to={`/${path}/${id}`}
             state={{ background: location }}
         >
             <div 
-                className="card mb-4 mr-2"
+                className={path === 'feed' ? "card mb-4 mr-2" : "cardProfile mb-4 mr-2"}
                 onClick={() => {handleOpen(order)}}
             >
-                <div className="block1">
+                <div className={path === 'feed' ? "block1" : 'block1Profile'}>
                     <p className="text text_type_main-default">
                         #{number}
                     </p>
@@ -96,12 +112,17 @@ const FeedCard: FC<FeedCardProps> = ({
                         {dateСhange(createdAt)} 
                     </p>
                 </div>
-                <div className="block2">
+                <div className={path === 'feed' ? "block2" : 'block2Profile'}>
                     <p className="text text_type_main-medium">
                     {name.slice(0, 60)}
                     </p>
+                    {path === 'profile/orders' &&
+                        <p className="text text_type_main-small mt-2 mb-6">
+                            {howStatus(order.status)}
+                        </p>
+                    }
                 </div>
-                <div className="block3">
+                <div className={path === 'feed' ? "block3" : 'block3Profile'}>
                     <div className="items_list">{icons}</div>
                     <div className="cost">
                         <p className="text text_type_digits-default mr-2">{GetCostOrder(IngredientCardList(ingredients))}</p>

@@ -28,7 +28,7 @@ const FeedsPage: FC = () => {
                 <div className={style.FeedsIngredientsContainer}>
                     {messages.orders.map((el: ElementOrders, index) => 
                         <FeedCard 
-                            key={index}
+                            key={el._id}
                             id={el._id}
                             ingredients={el.ingredients}
                             name={el.name}
@@ -46,7 +46,7 @@ const FeedsPage: FC = () => {
                     </p>
                     <div className={style.numbers}>
                         {done.slice(0, 10).map((el: ElementOrders) => 
-                            <p className="text text_type_digits-default" style={{color: '#00CCCC'}}>{el.number}</p>
+                            <p key={el._id} className="text text_type_digits-default" style={{color: '#00CCCC'}}>{el.number}</p>
                         )}
                     </div>
                 </div>
@@ -56,7 +56,7 @@ const FeedsPage: FC = () => {
                     </p>
                     <div className={style.numbers}>
                         {inwork.slice(0, 10).map((el: ElementOrders) => 
-                                <p className="text text_type_digits-default" style={{color: '#00CCCC'}}>{el.number}</p>
+                                <p key={el._id} className="text text_type_digits-default" style={{color: '#00CCCC'}}>{el.number}</p>
                             )}
                     </div>
                 </div>

@@ -20,7 +20,6 @@ import React, {FC} from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import FeedsPage from '../../pages/feedsPage/feedsPage';
 import { FeedPage } from '../../pages/feedsPage/feedPage/feedPage';
-import ModalSwitchOrder from '../../pages/ModalSwitchOrder';
 import { WS_CONNECTION_START } from '../../redux/actionType/middlewareActions';
 import { WS_PROFILE_CONNECTION_START } from '../../redux/actionType/middlewareProfileOrder';
 
@@ -66,10 +65,11 @@ const App: FC = () => {
         <Route element={<ProtectedRoute autorizeStatus={true} element={<Passwordreset />} name = {true} />} path="/reset-password"/>
         <Route element={<ProtectedRoute autorizeStatus={false} element={<Profile />} />} path="/profile"/>
         <Route element={<ProtectedRoute autorizeStatus={false} element={<ProfileOrders />} />} path="/profile/orders"/>
+        <Route element={<ProtectedRoute autorizeStatus={false} element={<FeedPage />} />} path="/profile/orders/:id"/>
         <Route path='*' element={<NotFound404 />} />
       </Routes>
       <ModalSwitch background={background} />
-      <ModalSwitchOrder background={background} />
+      
     </div>
   );
 }

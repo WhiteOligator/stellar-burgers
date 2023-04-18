@@ -21,36 +21,32 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWSStoreActions | TWS
         if (type === wsInit) {
           socket = new WebSocket(`${wsUrl}?token=${token}`); 
         } 
-        // if (token !== undefined && type === wsInit) {
-        //   socket = new WebSocket(`${wsUrl}?token=${token}`); 
-        //   console.log('orders')
-        // }
+   
 
         if (socket) {
           socket.onopen = event => {
-            dispatch({ type: onOpen, payload: event });
+            dispatch({ type: onOpen});
           };
   
           socket.onerror = event => {
             dispatch({ type: onError, payload: event });
-          };
+          };   
   
           socket.onmessage = event => {
             const { data } = event;
 
-            const parsedData: IMessageResponse = JSON.parse(data);
-            const { success, ...restParsedData } = parsedData;
-  
+            const parsedData = JSON.parse(data);
+      
             dispatch({ type: onMessage, payload: parsedData });
           };
   
           socket.onclose = event => {
-            dispatch({ type: onClose, payload: event });
+            dispatch({ type: onClose});
           };
   
           if (type === wsSendMessage) {
             const payload = action.payload;
-            const message = { ...(payload as IMessage), token: token };
+            const message = { ...(payload), token: token };
             socket.send(JSON.stringify(message));
           }
         }

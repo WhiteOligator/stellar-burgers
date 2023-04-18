@@ -57,6 +57,7 @@
 }
 
 .Order {
+    margin-top: 105px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -65,3 +66,11 @@
     height: 75vh;
     max-height: 920px;
 }
+
+.loading {
+    display: flex;
+    margin-left: 220px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }

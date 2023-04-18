@@ -6,8 +6,9 @@ import { GetCookie, RemoveCookie } from '../../hooks/Cookie';
 import { logoutThunk } from '../../redux/thunk/userThunk';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import FeedCard from '../../components/feedCard/feedCard';
-import { profileOrder } from '../../redux/selectors/selectors';
+import { getPrivateOrder, profileOrder } from '../../redux/selectors/selectors';
 import { ElementOrders, ProfileElementOrders } from '../../utils/TypesAndIntareface';
+import { ProgressBar } from 'react-loader-spinner';
 
 
 const ProfileOrders = () => {
@@ -17,7 +18,7 @@ const ProfileOrders = () => {
 
     const getProfileOrder = useAppSelector(profileOrder)
 
-    console.log(getProfileOrder)
+    const {wsConnected, messages} = useAppSelector(getPrivateOrder)
 
     const logout = () => {
 
@@ -63,9 +64,12 @@ const ProfileOrders = () => {
                     </div>
                 </div>
             </div>
+            {wsConnected ?
+
+            
             <div className={style.Order}>
                 <div className={style.OrderContainer}>
-                    {/* {getProfileOrder.map((el: ProfileElementOrders, index) => 
+                    {messages.orders.map((el: ElementOrders, index) => 
                         <FeedCard 
                             key={index}
                             id={el._id}
@@ -75,9 +79,22 @@ const ProfileOrders = () => {
                             number={el.number}
                             order={el}
                         />
-                    )} */}
+                    )}
                 </div>
-            </div>
+            </div> 
+            :
+            <div className={style.loading}>
+                <ProgressBar 
+                    height="140"
+                    width="140"
+                    ariaLabel="progress-bar-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="progress-bar-wrapper"
+                    barColor = '#8B00FF'
+                    borderColor = '#51E5FF'
+                />   
+            </div>    
+        }
         </div>
     );
 }

@@ -36,6 +36,7 @@ const Authorization: FC = () => {
     });
 
     const handleLogin = () => {
+        dispatch({ type: WS_PROFILE_CONNECTION_START })
         navigate(-1)
         
     }
