@@ -1,3 +1,4 @@
+import { wsProfileReducer } from './middlewareProfileReducer';
 import { openOrderReducer } from './openOrderReducer';
 import { combineReducers } from 'redux';
 import { ingridientsReducer } from './ingridientsReducer';
@@ -15,4 +16,5 @@ export const rootReducer = combineReducers({
     user: userReducer,
     Ws: wsReducer,
     openOrder: openOrderReducer,
+    WsProfile: wsProfileReducer,
 }) 

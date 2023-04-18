@@ -28,7 +28,7 @@ export const dateСhange = (startData: string): string => {
         return `${nowYear - years} года назад, ${time}`
     } else if (mounths !== nowMounth) {
         return `${nowMounth - mounths} месяца назад, ${time}`
-    } else if (days !== nowDays && days - 1 !== nowDays) {
+    } else if (days !== nowDays && days  !== nowDays - 1) {
         return `${nowDays - days} дня назад, ${time}`
     } else if (days !== nowDays) {
         return `Вчера, ${time}`

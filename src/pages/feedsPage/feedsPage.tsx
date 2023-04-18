@@ -9,9 +9,6 @@ import { ElementOrders, TIngredientItem } from "../../utils/TypesAndIntareface";
 import style from "./feedsPage.module.css";
 
 const FeedsPage: FC = () => {
-
-    const dispatch = useAppDispatch()
-
     
     const {wsConnected, messages} = useAppSelector(get_all_orders)
    
@@ -29,9 +26,9 @@ const FeedsPage: FC = () => {
             </div>
             <div className={style.FeedsIngredients}>
                 <div className={style.FeedsIngredientsContainer}>
-                    {messages.orders.map((el: ElementOrders) => 
+                    {messages.orders.map((el: ElementOrders, index) => 
                         <FeedCard 
-                            key={el._id}
+                            key={index}
                             id={el._id}
                             ingredients={el.ingredients}
                             name={el.name}

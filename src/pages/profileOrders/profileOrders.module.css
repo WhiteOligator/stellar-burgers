@@ -38,25 +38,25 @@
     color: #8585AD;
 }
 
-.FeedsIngredientsContainer {
+.OrderContainer {
     overflow-y: scroll;
     overflow: scroll;
     overflow-x:hidden;
   }
   
-.FeedsIngredientsContainer::-webkit-scrollbar {
+.OrderContainer::-webkit-scrollbar {
     width: 8px; /* ширина для вертикального скролла */
     background-color: #2F2F37;
     height:300px;
   }
   
   /* ползунок скроллбара */
-.FeedsIngredientsContainer::-webkit-scrollbar-thumb {
+.OrderContainer::-webkit-scrollbar-thumb {
     background-color: #8585AD;;
   
 }
 
-.FeedsIngredients {
+.Order {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;

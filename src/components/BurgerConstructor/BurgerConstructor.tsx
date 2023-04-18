@@ -12,6 +12,7 @@ import { GetCookie } from "../../hooks/Cookie";
 import { useNavigate } from "react-router-dom";
 import {  useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { TIngredientItem, TIngredientItemDragId } from "../../utils/TypesAndIntareface";
+import { WS_PROFILE_SEND_MESSAGE } from "../../redux/actionType/middlewareProfileOrder";
 
 type TIngredientItemMass = TIngredientItemDragId[] 
 
@@ -89,6 +90,7 @@ const BurgerConstructor: FC = () => {
         let cookieAccessToken = GetCookie('accessToken')
         let cookieRefreshToken = GetCookie('refreshToken')
         if (cookieAccessToken) {
+            dispatch({type: WS_PROFILE_SEND_MESSAGE, payload: [buns[0], ...ingridientConstructor, buns[1]] })
             dispatch(createOrderThunk([buns[0], ...ingridientConstructor, buns[1]], cost))
             dispatch(clearConstructorThunk());
         } else if (cookieRefreshToken) {

@@ -22,6 +22,7 @@ import FeedsPage from '../../pages/feedsPage/feedsPage';
 import { FeedPage } from '../../pages/feedsPage/feedPage/feedPage';
 import ModalSwitchOrder from '../../pages/ModalSwitchOrder';
 import { WS_CONNECTION_START } from '../../redux/actionType/middlewareActions';
+import { WS_PROFILE_CONNECTION_START } from '../../redux/actionType/middlewareProfileOrder';
 
 
 
@@ -34,6 +35,7 @@ const App: FC = () => {
     dispatch({ type: WS_CONNECTION_START });
     if (GetCookie('accessToken')) {
       dispatch(getUserThunk())
+      dispatch({ type: WS_PROFILE_CONNECTION_START })
     }
   }, []);
 

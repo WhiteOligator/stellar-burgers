@@ -50,7 +50,7 @@ const ModalSwitchOrder = ({ background }: backgroundType) => {
             {background && (
                 <Routes>
                     <Route
-                        path='/feed/:id'
+                        path='feed/:id'
                         element={
                             <Modal 
                                 title={'#'+ String(orderName.number)}

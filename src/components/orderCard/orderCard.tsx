@@ -1,14 +1,10 @@
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, {FC, useCallback} from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { getIngredient } from "../../redux/selectors/selectors";
-import { RootState } from "../../redux/store";
-import { ElementOrders, TIngredientItem } from "../../utils/TypesAndIntareface";
-import  './feedCard.css'
-import { IngredientIcon } from "./IngredientIconGroup/IngredientIconGroup";
-import { Link, useLocation } from 'react-router-dom';
-import { openOrder, openOrderModal } from "../../redux/actionCreators/ActionOrder";
-import { dateСhange } from "../../utils/function";
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import React, { useCallback } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import { dateСhange } from '../../utils/function'
+import { IngredientIcon } from '../feedCard/IngredientIconGroup/IngredientIconGroup'
+import style from './orderCard.module.css'
 
 interface FeedCardProps {
     id: string,
@@ -20,7 +16,7 @@ interface FeedCardProps {
 }
 
 
-const FeedCard: FC<FeedCardProps> = ({
+const OrderCard: FC<FeedCardProps> = ({
     id,
     ingredients,
     name,
@@ -29,13 +25,6 @@ const FeedCard: FC<FeedCardProps> = ({
     order,
 }) => {
 
-
-    console.log(id,
-        ingredients,
-        name,
-        createdAt,
-        number,
-        order,)
 
     const location = useLocation();
     const dispatch = useAppDispatch();
@@ -113,4 +102,4 @@ const FeedCard: FC<FeedCardProps> = ({
     );
 }
 
-export default FeedCard
+export default OrderCard

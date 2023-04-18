@@ -4,14 +4,20 @@ import style from './profileOrders.module.css'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { GetCookie, RemoveCookie } from '../../hooks/Cookie';
 import { logoutThunk } from '../../redux/thunk/userThunk';
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import FeedCard from '../../components/feedCard/feedCard';
+import { profileOrder } from '../../redux/selectors/selectors';
+import { ElementOrders, ProfileElementOrders } from '../../utils/TypesAndIntareface';
 
 
 const ProfileOrders = () => {
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
+    const getProfileOrder = useAppSelector(profileOrder)
+
+    console.log(getProfileOrder)
 
     const logout = () => {
 
@@ -55,6 +61,21 @@ const ProfileOrders = () => {
                     <div className={style.FeedsIngredientsContainer}>
                      
                     </div>
+                </div>
+            </div>
+            <div className={style.Order}>
+                <div className={style.OrderContainer}>
+                    {/* {getProfileOrder.map((el: ProfileElementOrders, index) => 
+                        <FeedCard 
+                            key={index}
+                            id={el._id}
+                            ingredients={el.ingredients}
+                            name={el.name}
+                            createdAt={el.createdAt}
+                            number={el.number}
+                            order={el}
+                        />
+                    )} */}
                 </div>
             </div>
         </div>

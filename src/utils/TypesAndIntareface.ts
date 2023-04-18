@@ -1,3 +1,4 @@
+import { WS_PROFILE_CONNECTION_START, WS_PROFILE_CONNECTION_SUCCESS, WS_PROFILE_CONNECTION_ERROR, WS_PROFILE_CONNECTION_CLOSED, WS_PROFILE_GET_MESSAGE, WS_PROFILE_SEND_MESSAGE } from './../redux/actionType/middlewareProfileOrder';
 import { ingredient } from './../redux/selectors/selectors';
 import {
     WS_CONNECTION_START,
@@ -114,6 +115,18 @@ type ElementOrders = {
     _id: string
 }
 
+type ProfileElementOrders = {
+  createdAt: string
+  ingredients: TIngredientItem[]
+  name: string
+  number: number
+  status: string
+  updatedAt: string
+  _id: string
+}
+
+// WS AllOrder
+
 export interface IWSConnectionStart {
     readonly type: typeof WS_CONNECTION_START;
   }
@@ -158,6 +171,54 @@ export type TWSStoreActions = {
     onMessage: typeof  WS_GET_MESSAGE,
   };
 
+//WS ProfileOrder
+
+export interface IWSConnectionProfileStart {
+    readonly type: typeof WS_PROFILE_CONNECTION_START;
+  }
+  
+  export interface IWSConnectionProfileSuccessAction {
+    readonly type: typeof WS_PROFILE_CONNECTION_SUCCESS;
+  }
+  
+  export interface IWSConnectionProfileErrorAction {
+    readonly type: typeof WS_PROFILE_CONNECTION_ERROR;
+    readonly payload: Event;
+  }
+  
+  export interface IWSConnectionProfileClosedAction {
+    readonly type: typeof WS_PROFILE_CONNECTION_CLOSED;
+  }
+  
+  export interface IWSGetProfileMessageAction {
+    readonly type: typeof WS_PROFILE_GET_MESSAGE;
+    readonly payload: IMessage;
+  }
+  
+  export interface IWSSendProfileMessageAction {
+    readonly type: typeof WS_PROFILE_SEND_MESSAGE;
+    readonly payload: {message: string};
+  }
+
+
+export type TWSProfileActions =
+  | IWSConnectionProfileStart
+  | IWSConnectionProfileSuccessAction
+  | IWSConnectionProfileErrorAction
+  | IWSConnectionProfileClosedAction
+  | IWSGetProfileMessageAction
+  | IWSSendProfileMessageAction;
+
+export type TWSStoreProfileActions = {
+    wsInit: typeof  WS_PROFILE_CONNECTION_START,
+    wsSendMessage: typeof  WS_PROFILE_SEND_MESSAGE,
+    onOpen: typeof  WS_PROFILE_CONNECTION_SUCCESS,
+    onClose: typeof WS_PROFILE_CONNECTION_CLOSED,
+    onError: typeof  WS_PROFILE_CONNECTION_ERROR,
+    onMessage: typeof  WS_PROFILE_GET_MESSAGE,
+  };
+
+
 export type {
     Ingredient, 
     RegisterUser,
@@ -174,5 +235,6 @@ export type {
     IResponse,
     TUser,
     IMessage,
-    ElementOrders
+    ElementOrders,
+    ProfileElementOrders
 }

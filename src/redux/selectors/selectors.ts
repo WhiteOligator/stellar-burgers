@@ -43,3 +43,5 @@ export const get_open_order = (state: RootState) => state.openOrder
 export const get_open_order_order = (state: RootState) => state.openOrder.order
 
 export const get_status_modal = (state: RootState) => state.openOrder.openOrderPage
+
+export const profileOrder = (state: RootState) => state.WsProfile.messages.orders

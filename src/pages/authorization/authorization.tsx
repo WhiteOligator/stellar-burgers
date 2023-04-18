@@ -6,6 +6,7 @@ import { loginErrorNullThunk, loginThunk } from '../../redux/thunk/userThunk';
 import { isLog, LoginError } from '../../redux/selectors/selectors';
 import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { WS_PROFILE_CONNECTION_START } from '../../redux/actionType/middlewareProfileOrder';
 
 
 
@@ -34,8 +35,13 @@ const Authorization: FC = () => {
           },
     });
 
+    const handleLogin = () => {
+        navigate(-1)
+        
+    }
 
-    if (isLoggedIn) {navigate(-1)}
+
+    if (isLoggedIn) {handleLogin()}
 
     return (
         <div className={style.content}>

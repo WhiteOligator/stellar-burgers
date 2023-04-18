@@ -1,3 +1,4 @@
+import { TWSProfileActions } from './../utils/TypesAndIntareface';
 import { rootReducer } from './reducers/rootReducer'; 
 import {applyMiddleware, createStore} from "redux";
 import thunkMiddleware from "redux-thunk"; 
@@ -20,10 +21,13 @@ import {
     WS_CONNECTION_ERROR,
     WS_GET_MESSAGE,
 } from '../redux/actionType/middlewareActions'
-import { TWSActions, TWSStoreActions } from '../utils/TypesAndIntareface';
+import { TWSActions, TWSStoreActions, TWSStoreProfileActions } from '../utils/TypesAndIntareface';
 import { TOpenOrderAction } from './actionCreators/ActionOrder';
+import { WS_PROFILE_CONNECTION_START, WS_PROFILE_SEND_MESSAGE, WS_PROFILE_CONNECTION_SUCCESS, WS_PROFILE_CONNECTION_CLOSED, WS_PROFILE_CONNECTION_ERROR, WS_PROFILE_GET_MESSAGE } from './actionType/middlewareProfileOrder';
+import { GetCookie } from '../hooks/Cookie';
 
-const wsUrl: string = 'wss://norma.nomoreparties.space/orders/all';
+const wsUrlAllOrders: string = 'wss://norma.nomoreparties.space/orders/all';
+const wsUrlProfileOrders: string = 'wss://norma.nomoreparties.space/orders';
 
 const wsActions: TWSStoreActions = {
     wsInit: WS_CONNECTION_START,
@@ -34,8 +38,19 @@ const wsActions: TWSStoreActions = {
     onMessage: WS_GET_MESSAGE
   };
 
+const token: string | undefined = GetCookie('accessToken')
+
+const wsProfileActions: TWSStoreProfileActions = {
+    wsInit:   WS_PROFILE_CONNECTION_START,
+    wsSendMessage:   WS_PROFILE_SEND_MESSAGE,
+    onOpen:   WS_PROFILE_CONNECTION_SUCCESS,
+    onClose:  WS_PROFILE_CONNECTION_CLOSED,
+    onError:   WS_PROFILE_CONNECTION_ERROR,
+    onMessage:   WS_PROFILE_GET_MESSAGE,
+  };
+
 export const store = createStore(rootReducer, composeWithDevTools(
-    applyMiddleware(thunkMiddleware, socketMiddleware(wsUrl, wsActions))
+    applyMiddleware(thunkMiddleware, socketMiddleware(wsUrlAllOrders, wsActions), socketMiddleware(wsUrlProfileOrders, wsProfileActions))
 )); 
 
 
@@ -46,7 +61,8 @@ export type TApplicationActions =
     | TOrderAction
     | TUserCreatorsAction
     | TWSActions
-    | TOpenOrderAction;
+    | TOpenOrderAction
+    | TWSProfileActions;
 
 
 
