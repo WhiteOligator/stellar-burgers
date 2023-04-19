@@ -2,13 +2,14 @@ import React, {FC} from "react";
 import style from "./AppHeader.module.css"
 import {BurgerIcon, ListIcon, Logo, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 import { GetCookie } from "../../hooks/Cookie";
 import { getUser } from "../../redux/selectors/selectors";
+import { useAppSelector } from "../../hooks/hooks";
 
 const AppHeader: FC = () => {
 
-    const user = useSelector(getUser);
+    const user = useAppSelector(getUser);
     const isLoggedIn = GetCookie('accessToken');
 
     return (

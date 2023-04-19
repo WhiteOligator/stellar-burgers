@@ -35,10 +35,6 @@ export const openIngridientReducer = (state = initialState, action: TOpenIngredi
                 ingridient: [],
                 openIngridient: true,
             }    
-        default: {
-            return {
-                ...state
-            }
-        }    
+        default: return state
     }
 }

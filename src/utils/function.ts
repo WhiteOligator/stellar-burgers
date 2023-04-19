@@ -3,8 +3,8 @@ import { TIngredientItem } from "./TypesAndIntareface";
 
 export const getCost = (list: string[], ingredients: TIngredientItem[]): number => {
     let cost: number = 0
-    list.map((el: string) => {
-        let ingredient = ingredients.filter((ingr: TIngredientItem) => ingr._id === el)
+    list.map((el) => {
+        let ingredient = ingredients.filter((ingr) => ingr._id === el)
             if (ingredient[0] !== undefined) {
                 cost = cost + ingredient[0].price
             }

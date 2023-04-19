@@ -42,6 +42,7 @@ export const orderReducer = (state = initialState, action: TOrderAction): orderS
             return {
                 ...state,
                 isPost: true,
+                openOrder: true,
             }
         case CREATE_ORDER_FAILED: 
             return {
@@ -54,10 +55,8 @@ export const orderReducer = (state = initialState, action: TOrderAction): orderS
                 ...state,
                 ...initialState,
             }     
-        default: {
-            return {
-                ...state
-            }
-        }    
+        default: return state
+            
+           
     }
 }

@@ -2,18 +2,29 @@ import React, { FC, useEffect } from "react";
 import { ProgressBar } from "react-loader-spinner";
 import FeedCard from "../../components/feedCard/feedCard";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { WS_CONNECTION_START } from "../../redux/actionType/middlewareActions";
-import { get_all_orders } from "../../redux/selectors/selectors";
+import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../../redux/actionType/middlewareActions";
+import { getAllOrders } from "../../redux/selectors/selectors";
 import { RootState } from "../../redux/store";
 import { ElementOrders, TIngredientItem } from "../../utils/TypesAndIntareface";
 import style from "./feedsPage.module.css";
 
 const FeedsPage: FC = () => {
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch({ type: WS_CONNECTION_START });
+
+        return () => {
+            dispatch({type: WS_CONNECTION_CLOSED})
+        }
+        
+    }, [dispatch])
     
-    const {wsConnected, messages} = useAppSelector(get_all_orders)
+    const {wsConnected, messages} = useAppSelector(getAllOrders)
    
-    let done = messages.orders.filter((el: ElementOrders) => el.status === "done" )
-    let inwork = messages.orders.filter((el: ElementOrders) => el.status === "created" )
+    let done = messages.orders.filter((el) => el.status === "done" )
+    let inwork = messages.orders.filter((el) => el.status === "created" )
 
     return (
         <div className={style.content}>
@@ -26,7 +37,7 @@ const FeedsPage: FC = () => {
             </div>
             <div className={style.FeedsIngredients}>
                 <div className={style.FeedsIngredientsContainer}>
-                    {messages.orders.map((el: ElementOrders, index) => 
+                    {messages.orders.map((el) => 
                         <FeedCard 
                             key={el._id}
                             id={el._id}
@@ -45,7 +56,7 @@ const FeedsPage: FC = () => {
                         Готовы:
                     </p>
                     <div className={style.numbers}>
-                        {done.slice(0, 10).map((el: ElementOrders) => 
+                        {done.slice(0, 10).map((el) => 
                             <p key={el._id} className="text text_type_digits-default" style={{color: '#00CCCC'}}>{el.number}</p>
                         )}
                     </div>
@@ -55,7 +66,7 @@ const FeedsPage: FC = () => {
                         В работе:
                     </p>
                     <div className={style.numbers}>
-                        {inwork.slice(0, 10).map((el: ElementOrders) => 
+                        {inwork.slice(0, 10).map((el) => 
                                 <p key={el._id} className="text text_type_digits-default" style={{color: '#00CCCC'}}>{el.number}</p>
                             )}
                     </div>

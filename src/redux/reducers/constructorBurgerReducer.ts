@@ -31,7 +31,7 @@ export const constructorBurgerReducer = (state = initialState, action: TConstruc
         case DELETE_INGRIDIENT_CONSTRUCTOR: 
             return {
                 ...state,
-                ingridients: state.ingridients.filter((el : TIngredientItemDragId) => el.dragId !== action.payload),
+                ingridients: state.ingridients.filter((el) => el.dragId !== action.payload),
             }
         case MOVE_INGRIDIENT_CONSTRUCTOR: 
             return {
@@ -56,9 +56,8 @@ export const constructorBurgerReducer = (state = initialState, action: TConstruc
                 whatKindOfBun: [],
             }     
         default: {
-            return {
-                ...state
-            }
+            return state
+            
         }    
     }
 }

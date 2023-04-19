@@ -39,8 +39,8 @@ const FeedCard: FC<FeedCardProps> = ({
     
     const IngredientCardList = (allIngredients: string[]) => {
         let ingrCard: TIngredientItem[] = []
-        allIngredients.map((el: string) => {
-            let ingr = burgerIngredients.filter((ingr: TIngredientItem) => ingr._id === el)
+        allIngredients.map((el) => {
+            let ingr = burgerIngredients.filter((ingr) => ingr._id === el)
            
             if (ingr.length !== 0 ) {
                 ingrCard.push(ingr[0])
@@ -52,7 +52,7 @@ const FeedCard: FC<FeedCardProps> = ({
 
     const IngredientIconList = (ingrList: TIngredientItem[]) => {
         let newIconList: TIngredientItem[] = []
-        ingrList.map((el: TIngredientItem) => {
+        ingrList.map((el) => {
             if (newIconList.includes(el) === false) {
                 newIconList.push(el)
             }

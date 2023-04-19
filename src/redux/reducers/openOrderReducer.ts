@@ -48,10 +48,6 @@ export const openOrderReducer = (state = initialState, action: TOpenOrderAction)
                 openOrderBool: false,
                 openOrderPage: action.payload,
             }    
-        default: {
-            return {
-                ...state
-            }
-        }    
+        default: return state     
     }
 }

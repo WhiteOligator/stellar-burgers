@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from './IngredientDetails.module.css'
-import type { Ingredient } from '../../utils/TypesAndIntareface';
+import type { Ingredient, TIngredientItem } from '../../utils/TypesAndIntareface';
 
-const IngredientDetails = ({clikIngridients}: any ) =>  {
+interface IngredientDetailsProps {
+    clikIngridients: TIngredientItem
+}
+
+const IngredientDetails: FC<IngredientDetailsProps> = ({clikIngridients} ) =>  {
     return (
         <section>
             {clikIngridients &&

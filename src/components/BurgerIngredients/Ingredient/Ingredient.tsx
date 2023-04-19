@@ -1,6 +1,5 @@
 import { memo, useMemo, useCallback, FC } from 'react';
 import styles from './Ingredient.module.css';
-import { useSelector, useDispatch } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { openIngridientThunk } from '../../../redux/thunk/openIngridients';
@@ -36,8 +35,8 @@ const Ingredient: FC<IngredientProps> = ({item}) => {
     const constructorItemsBuns = useAppSelector(getConstructorItemsBuns)
 
     const countItem = useMemo(() => {
-        if (item.type === 'bun') return constructorItemsBuns.filter((el: TIngredientItem) => el._id === item._id).length;
-          else   return constructorItems.filter((el: TIngredientItem) => el._id === item._id).length;
+        if (item.type === 'bun') return constructorItemsBuns.filter((el) => el._id === item._id).length;
+          else   return constructorItems.filter((el) => el._id === item._id).length;
     }, [constructorItems, item._id, constructorItemsBuns]);
 
     const handleOpen = useCallback((item: TIngredientItem) => {

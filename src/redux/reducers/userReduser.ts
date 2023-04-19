@@ -143,10 +143,6 @@ export const userReducer = (state = initialState, action: TUserCreatorsAction): 
                 ...state,
                 updateStart: true,
             }  
-        default: {
-            return {
-                ...state
-            }
-        }    
+        default: return state 
     }
 }

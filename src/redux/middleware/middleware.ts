@@ -5,8 +5,9 @@ import type { Middleware, MiddlewareAPI } from 'redux';
 import { TWSStoreActions } from '../../utils/TypesAndIntareface';
 import type {AppDispatch, RootState } from '../store';
 
+const BaseWsUrl = 'wss://norma.nomoreparties.space'
 
-export const socketMiddleware = (wsUrl: string, wsActions: TWSStoreActions | TWSStoreProfileActions): Middleware => {
+export const socketMiddleware = (payload: string, wsActions: TWSStoreActions | TWSStoreProfileActions): Middleware => {
     return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
       let socket: WebSocket | null = null;
   
@@ -16,10 +17,10 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWSStoreActions | TWS
         const { wsInit, wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions;
         const token: string | undefined = GetCookie('accessToken')?.trim()
         
-        
+    
         
         if (type === wsInit) {
-          socket = new WebSocket(`${wsUrl}?token=${token}`); 
+          socket = new WebSocket(`${BaseWsUrl}${payload}`); 
         } 
    
 

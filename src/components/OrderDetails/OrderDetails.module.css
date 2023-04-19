@@ -23,3 +23,10 @@
     display: flex;
     color: #8585AD;
 }
+
+.NotOrder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}

@@ -1,6 +1,5 @@
 import {  useEffect, useMemo, useRef, useState, FC } from 'react';
 import styles from './BurgerIngredients.module.css';
-import { useDispatch, useSelector } from 'react-redux';
 import ItemList from './ItemList/ItemList';
 import Tabs from './Tabs/Tabs';
 import { getIngridients } from '../../redux/thunk/getIngridients';
@@ -8,15 +7,16 @@ import { getIngredient, ingridientsSelector } from '../../redux/selectors/select
 import { ProgressBar } from 'react-loader-spinner'
 import { VscWarning } from "react-icons/vsc";
 import { TIngredientItem } from '../../utils/TypesAndIntareface';
+import { useAppSelector } from '../../hooks/hooks';
 
 const BurgerIngredients: FC = () => {
 
     
-    const {ingridients, isIngridientsLoading, error} = useSelector(ingridientsSelector) 
+    const {ingridients, isIngridientsLoading, error} = useAppSelector(ingridientsSelector) 
 
-    const buns = useMemo(() => ingridients.filter((item : TIngredientItem) => item.type === 'bun'), [ingridients]);
-    const mains = useMemo(() => ingridients.filter((item : TIngredientItem) => item.type === 'main'), [ingridients]);
-    const sauces = useMemo(() => ingridients.filter((item : TIngredientItem) => item.type === 'sauce'), [ingridients]);
+    const buns = useMemo(() => ingridients.filter((item ) => item.type === 'bun'), [ingridients]);
+    const mains = useMemo(() => ingridients.filter((item) => item.type === 'main'), [ingridients]);
+    const sauces = useMemo(() => ingridients.filter((item) => item.type === 'sauce'), [ingridients]);
 
     const [currentCategory, setCurrentCategory] = useState<number>(0);
 
@@ -24,7 +24,7 @@ const BurgerIngredients: FC = () => {
     const refs = useRef<HTMLParagraphElement[]>([]);
 
     const setCategory = (index: number) => {
-        refs.current[index].scrollIntoView({ block: 'start', behavior: 'smooth' });
+        // refs.current[index].scrollIntoView({ block: 'start', behavior: 'smooth' });
         setCurrentCategory(Number(index));
     }
 

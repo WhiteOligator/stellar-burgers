@@ -11,10 +11,10 @@ import { fetchWithRefresh } from '../../api/user'
 import { AppDispatch,  AppThunk } from "../store";
 import { TIngredientItem } from '../../utils/TypesAndIntareface'
 
-export const createOrderThunk: AppThunk = (ingridients, cost) => {
+export const createOrderThunk: AppThunk = (ingridients: TIngredientItem[], cost: number) => {
     return async (dispatch: AppDispatch) => {
         let ingredients: string[] = []
-        ingridients.map((el: TIngredientItem) => {
+        ingridients.map((el) => {
             ingredients.push(el?._id)
         })
         try {
@@ -37,6 +37,7 @@ export const createOrderThunk: AppThunk = (ingridients, cost) => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json;charset=utf-8",
+                    Authorization: 'Bearer' + GetCookie('accessToken'),
                 },
                 body: JSON.stringify({
                     ingredients,

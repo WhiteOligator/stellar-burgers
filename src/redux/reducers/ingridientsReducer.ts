@@ -41,9 +41,7 @@ export const ingridientsReducer = (state = initialState, action: TGetIngredients
                 ingredientsId: action.payloadId,
             }       
         default: {
-            return {
-                ...state
-            }
+            return state    
         }    
     }
 }

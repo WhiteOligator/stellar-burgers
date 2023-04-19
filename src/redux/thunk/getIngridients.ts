@@ -17,7 +17,7 @@ export const getIngridients: AppThunk = () => {
           
             let data: TIngredientItem[] = response.data.data 
 
-            data.map((el: TIngredientItem) => {
+            data.map((el) => {
                 massId.push(el._id)
             })
 

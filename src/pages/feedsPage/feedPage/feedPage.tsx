@@ -2,7 +2,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import React, { useMemo } from "react"
 import IngredientStroke from "../../../components/ingredientSroke/ingredientStroke";
 import { useAppSelector } from "../../../hooks/hooks"
-import { get_all_orders, get_open_order_order, get_orders, get_status_modal, ingridientsSelector } from "../../../redux/selectors/selectors";
+import { getOpenOrderOrder, getStatusModal, ingridientsSelector } from "../../../redux/selectors/selectors";
 import { dateСhange, getCost } from "../../../utils/function";
 import { ElementOrders, TIngredientItem } from "../../../utils/TypesAndIntareface";
 import style from './feedPage.module.css'
@@ -21,8 +21,8 @@ export const howStatus = (statusOrder: string) => {
 export const FeedPage = () => {
 
     const {id} = useParams();
-    const order = useAppSelector(get_open_order_order);
-    const openModal = useAppSelector(get_status_modal)
+    const order = useAppSelector(getOpenOrderOrder);
+    const openModal = useAppSelector(getStatusModal)
     const ingredients = useAppSelector(ingridientsSelector)
 
 
@@ -30,7 +30,7 @@ export const FeedPage = () => {
 
   
 
-    const ingredientForStroke = ingredients.ingridients.filter((el: TIngredientItem) => ingredientList.includes(el._id))
+    const ingredientForStroke = ingredients.ingridients.filter((el) => ingredientList.includes(el._id))
 
   
 
@@ -55,7 +55,7 @@ export const FeedPage = () => {
             </div>
             <div className={`${style.Ingredients} `}>
                 <div className={`${style.IngredientsContainer} mb-10`}>
-                    {ingredientForStroke.map((el: TIngredientItem) => 
+                    {ingredientForStroke.map((el) => 
                         <IngredientStroke
                             key={el._id}
                             ingredient={el}

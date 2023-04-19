@@ -6,7 +6,7 @@ import { getClikIngridients, ingridientsSelector, openItem } from '../redux/sele
 import { useEffect } from 'react';
 import { useAppDispatch } from '../hooks/hooks';
 import { TIngredientItem } from '../utils/TypesAndIntareface';
-import { get_open_order, get_open_order_order, get_orders, profileOrder } from '../redux/selectors/selectors';
+import { getOpenOrder, getOpenOrderOrder, getOrders, profileOrder } from '../redux/selectors/selectors';
 import {  useAppSelector } from '../hooks/hooks';
 import { ElementOrders } from '../utils/TypesAndIntareface';
 import { deleteOrder, openOrderModal } from '../redux/actionCreators/ActionOrder';
@@ -23,12 +23,13 @@ const ModalSwitch = ({ background }: backgroundType) => {
     const dispatch = useAppDispatch();
 
     const {ingridients} = useAppSelector(ingridientsSelector)
-    const orders = useAppSelector(get_orders)
-    const {openOrderBool, order} = useAppSelector(get_open_order)
+    const orders = useAppSelector(getOrders)
+    const {openOrderBool, order} = useAppSelector(getOpenOrder)
     const profileOrders = useAppSelector(profileOrder)
-    const orderName = useAppSelector(get_open_order_order);
+    const orderName = useAppSelector(getOpenOrderOrder);
     const openIngredient = useAppSelector(openItem)
     const clikIngridients = useAppSelector(getClikIngridients)
+    const ingredient = clikIngridients[0]
 
     const handleCloseModal = () => {
         dispatch(deleteIngridientThunk());
@@ -83,7 +84,7 @@ const ModalSwitch = ({ background }: backgroundType) => {
                                 active={openIngredient}
                                 onClose={handleCloseModal}
                             >
-                                <IngredientDetails clikIngridients={clikIngridients}/>
+                                <IngredientDetails clikIngridients={ingredient}/>
                             </Modal>
                         }
                     />

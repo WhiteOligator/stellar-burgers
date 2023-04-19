@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppHeader from '../../components/AppHeader/AppHeader';
 import style from './profileOrders.module.css'
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ import FeedCard from '../../components/feedCard/feedCard';
 import { getPrivateOrder, profileOrder } from '../../redux/selectors/selectors';
 import { ElementOrders, ProfileElementOrders } from '../../utils/TypesAndIntareface';
 import { ProgressBar } from 'react-loader-spinner';
+import { WS_PROFILE_CONNECTION_CLOSED, WS_PROFILE_CONNECTION_START } from '../../redux/actionType/middlewareProfileOrder';
 
 
 const ProfileOrders = () => {
@@ -16,7 +17,15 @@ const ProfileOrders = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const getProfileOrder = useAppSelector(profileOrder)
+
+    useEffect(() => {
+        dispatch({type: WS_PROFILE_CONNECTION_START})
+
+        return () => {
+            dispatch({type: WS_PROFILE_CONNECTION_CLOSED})
+        }
+    },[dispatch])
+
 
     const {wsConnected, messages} = useAppSelector(getPrivateOrder)
 
@@ -69,7 +78,7 @@ const ProfileOrders = () => {
             
             <div className={style.Order}>
                 <div className={style.OrderContainer}>
-                    {messages.orders.map((el: ElementOrders, index) => 
+                    {messages.orders.map((el, index) => 
                         <FeedCard 
                             key={index}
                             id={el._id}

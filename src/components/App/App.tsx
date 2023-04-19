@@ -31,10 +31,8 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(getIngridients())
-    dispatch({ type: WS_CONNECTION_START });
     if (GetCookie('accessToken')) {
       dispatch(getUserThunk())
-      dispatch({ type: WS_PROFILE_CONNECTION_START })
     }
   }, []);
 

@@ -62,7 +62,6 @@ const Profile = () => {
         let congig = {
             token: refreshToken
         }
-        dispatch({type: WS_PROFILE_CONNECTION_CLOSED})
         dispatch(logoutThunk(congig))
         RemoveCookie("accessToken");
         RemoveCookie("refreshToken");
