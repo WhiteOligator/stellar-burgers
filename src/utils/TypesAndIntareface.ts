@@ -129,6 +129,7 @@ type ProfileElementOrders = {
 
 export interface IWSConnectionStart {
     readonly type: typeof WS_CONNECTION_START;
+    readonly payload: string;
   }
   
   export interface IWSConnectionSuccessAction {
@@ -175,6 +176,7 @@ export type TWSStoreActions = {
 
 export interface IWSConnectionProfileStart {
     readonly type: typeof WS_PROFILE_CONNECTION_START;
+    readonly payload: string;
   }
   
   export interface IWSConnectionProfileSuccessAction {

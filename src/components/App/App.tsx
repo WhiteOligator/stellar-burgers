@@ -22,6 +22,8 @@ import FeedsPage from '../../pages/feedsPage/feedsPage';
 import { FeedPage } from '../../pages/feedsPage/feedPage/feedPage';
 import { WS_CONNECTION_START } from '../../redux/actionType/middlewareActions';
 import { WS_PROFILE_CONNECTION_START } from '../../redux/actionType/middlewareProfileOrder';
+import WsOrderPage from '../../pages/wsOrderPage/wsOrderPage';
+import WsFeedPage from '../../pages/wsFeedPage/wsFeedPage';
 
 
 
@@ -55,7 +57,7 @@ const App: FC = () => {
         />
         <Route
             path='/feed/:id'
-            element={<FeedPage />}
+            element={<WsOrderPage />}
         />
         <Route element={<ProtectedRoute  autorizeStatus={true} element={<Authorization />} />} path="/login"/>
         <Route element={<ProtectedRoute autorizeStatus={true} element={<Registration />} />} path="/register"/>
@@ -63,7 +65,7 @@ const App: FC = () => {
         <Route element={<ProtectedRoute autorizeStatus={true} element={<Passwordreset />} name = {true} />} path="/reset-password"/>
         <Route element={<ProtectedRoute autorizeStatus={false} element={<Profile />} />} path="/profile"/>
         <Route element={<ProtectedRoute autorizeStatus={false} element={<ProfileOrders />} />} path="/profile/orders"/>
-        <Route element={<ProtectedRoute autorizeStatus={false} element={<FeedPage />} />} path="/profile/orders/:id"/>
+        <Route element={<ProtectedRoute autorizeStatus={false} element={<WsFeedPage />} />} path="/profile/orders/:id"/>
         <Route path='*' element={<NotFound404 />} />
       </Routes>
       <ModalSwitch background={background} />

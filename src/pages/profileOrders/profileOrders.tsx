@@ -19,7 +19,9 @@ const ProfileOrders = () => {
 
 
     useEffect(() => {
-        dispatch({type: WS_PROFILE_CONNECTION_START})
+        let token ='?token=' + GetCookie('accessToken')?.trim()
+
+        dispatch({ type: WS_PROFILE_CONNECTION_START, payload: token });
 
         return () => {
             dispatch({type: WS_PROFILE_CONNECTION_CLOSED})
@@ -73,7 +75,7 @@ const ProfileOrders = () => {
                     </div>
                 </div>
             </div>
-            {wsConnected ?
+            {wsConnected && messages.orders ?
 
             
             <div className={style.Order}>

@@ -7,7 +7,7 @@ import {TIngredientItem} from '../../utils/TypesAndIntareface'
 
 interface openIngridientAction {
     readonly type: typeof OPEN_INGRIDIENT;
-    readonly payload: TIngredientItem[]
+    readonly payload: TIngredientItem
 }
 
 interface deleteIngridientAction {
@@ -23,7 +23,7 @@ export type TOpenIngredientAction =
     | deleteIngridientAction
     | openModalAction;
 
-export const openIngridient = (ingridient: TIngredientItem[]): openIngridientAction => ({
+export const openIngridient = (ingridient: TIngredientItem): openIngridientAction => ({
     type: OPEN_INGRIDIENT,
     payload: ingridient,
 })

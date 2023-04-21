@@ -29,7 +29,7 @@ const ModalSwitch = ({ background }: backgroundType) => {
     const orderName = useAppSelector(getOpenOrderOrder);
     const openIngredient = useAppSelector(openItem)
     const clikIngridients = useAppSelector(getClikIngridients)
-    const ingredient = clikIngridients[0]
+   
 
     const handleCloseModal = () => {
         dispatch(deleteIngridientThunk());
@@ -42,7 +42,13 @@ const ModalSwitch = ({ background }: backgroundType) => {
         navigate(-1);
     }
 
+
+    console.log(background)
+
     useEffect(() => {
+
+        if (background !== null) { dispatch(openOrderModal(false)) }
+
         const local = location.pathname
         if (local.indexOf('ingredients') === 1 && ingridients) {
             const ingredientName = local.slice(13)
@@ -50,26 +56,25 @@ const ModalSwitch = ({ background }: backgroundType) => {
             dispatch(openIngridientThunk(ingredient))
         }
 
-        if (local.indexOf('feed') === 1 && order) {
+        if (local.indexOf('feed') === 1 && order && orders) {
             const orderName = local.slice(6)
-            const order = orders.find((el: ElementOrders) => el._id === orderName )
-          
-            if (order !== undefined) {
-                dispatch(openOrder(order))
+            const orderOne = orders.find((el: ElementOrders) => el._id === orderName )
+            if (orderOne !== undefined) {
+                dispatch(openOrder(orderOne))
             }  
         }
 
-        if (local.indexOf('profile/orders') === 1 && order) {
+        if (local.indexOf('profile/orders') === 1 && order && profileOrders) {
             const orderName = local.slice(16)
-            const order = profileOrders.find((el: ElementOrders) => el._id === orderName )
-          
-            if (order !== undefined) {
-                dispatch(openOrder(order))
+            const orderOne = profileOrders.find((el: ElementOrders) => el._id === orderName )
+            if (orderOne !== undefined) {
+                dispatch(openOrder(orderOne))
             }  
         }
         
-    }, [ingridients, orders, profileOrders]);
+    }, [ingridients, orders, profileOrders, background]);
 
+  
   
 
     return (
@@ -84,7 +89,7 @@ const ModalSwitch = ({ background }: backgroundType) => {
                                 active={openIngredient}
                                 onClose={handleCloseModal}
                             >
-                                <IngredientDetails clikIngridients={ingredient}/>
+                                <IngredientDetails clikIngridients={clikIngridients}/>
                             </Modal>
                         }
                     />

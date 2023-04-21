@@ -13,7 +13,7 @@ const FeedsPage: FC = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch({ type: WS_CONNECTION_START });
+        dispatch({ type: WS_CONNECTION_START, payload: '' });
 
         return () => {
             dispatch({type: WS_CONNECTION_CLOSED})
@@ -28,7 +28,7 @@ const FeedsPage: FC = () => {
 
     return (
         <div className={style.content}>
-            {wsConnected ? 
+            {wsConnected && messages.orders ? 
             <>
             <div className={style.text}>
                     <p className="text text_type_main-large ml-4">

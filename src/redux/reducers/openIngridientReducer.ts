@@ -7,13 +7,13 @@ import {
 } from "../actionType/openIngridient"
 
 type openIngridientState = {
-    ingridient: TIngredientItem[],
+    ingridient: TIngredientItem | null,
     openIngridient: boolean,
 }
 
 
 const initialState: openIngridientState = {
-    ingridient: [],
+    ingridient: null,
     openIngridient: false,  
 }
 
@@ -27,12 +27,12 @@ export const openIngridientReducer = (state = initialState, action: TOpenIngredi
             }
         case DELETE_INGRIDIENT: 
             return {
-                ingridient: [],
+                ingridient: null,
                 openIngridient: false,
             } 
         case OPEN_MODAL: 
             return {
-                ingridient: [],
+                ingridient: null,
                 openIngridient: true,
             }    
         default: return state

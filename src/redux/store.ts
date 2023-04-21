@@ -26,9 +26,9 @@ import { TOpenOrderAction } from './actionCreators/ActionOrder';
 import { WS_PROFILE_CONNECTION_START, WS_PROFILE_SEND_MESSAGE, WS_PROFILE_CONNECTION_SUCCESS, WS_PROFILE_CONNECTION_CLOSED, WS_PROFILE_CONNECTION_ERROR, WS_PROFILE_GET_MESSAGE } from './actionType/middlewareProfileOrder';
 import { GetCookie } from '../hooks/Cookie';
 
-const token: string | undefined = GetCookie('accessToken')?.trim()
-const wsUrlAllOrders: string = '/orders/all';
-const wsUrlProfileOrders: string = `/orders?token=${token}`;
+
+const wsUrlAll: string = 'wss://norma.nomoreparties.space/orders/all';
+const wsUrlProfile: string = 'wss://norma.nomoreparties.space/orders';
 
 
 const wsActions: TWSStoreActions = {
@@ -51,7 +51,7 @@ const wsProfileActions: TWSStoreProfileActions = {
   };
 
 export const store = createStore(rootReducer, composeWithDevTools(
-    applyMiddleware(thunkMiddleware, socketMiddleware(wsUrlAllOrders, wsActions), socketMiddleware(wsUrlProfileOrders, wsProfileActions))
+    applyMiddleware(thunkMiddleware, socketMiddleware(wsUrlAll, wsActions), socketMiddleware(wsUrlProfile, wsProfileActions))
 )); 
 
 

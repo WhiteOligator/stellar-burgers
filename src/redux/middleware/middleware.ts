@@ -5,22 +5,20 @@ import type { Middleware, MiddlewareAPI } from 'redux';
 import { TWSStoreActions } from '../../utils/TypesAndIntareface';
 import type {AppDispatch, RootState } from '../store';
 
-const BaseWsUrl = 'wss://norma.nomoreparties.space'
 
-export const socketMiddleware = (payload: string, wsActions: TWSStoreActions | TWSStoreProfileActions): Middleware => {
+
+export const socketMiddleware = (wsUrl: string, wsActions: TWSStoreActions | TWSStoreProfileActions): Middleware => {
     return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
       let socket: WebSocket | null = null;
-  
+    
       return next => (action: TApplicationActions) => {
-        const { dispatch, getState } = store;
+        const { dispatch } = store;
         const { type } = action;
         const { wsInit, wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions;
-        const token: string | undefined = GetCookie('accessToken')?.trim()
-        
-    
-        
+            
+
         if (type === wsInit) {
-          socket = new WebSocket(`${BaseWsUrl}${payload}`); 
+          socket = new WebSocket(`${wsUrl}${action.payload}`); 
         } 
    
 
@@ -45,11 +43,12 @@ export const socketMiddleware = (payload: string, wsActions: TWSStoreActions | T
             dispatch({ type: onClose});
           };
   
-          if (type === wsSendMessage) {
-            const payload = action.payload;
-            const message = { ...(payload), token: token };
-            socket.send(JSON.stringify(message));
-          }
+          // if (type === wsSendMessage) {
+          //   const payload = action.payload;
+          //   console.log(payload)
+          //   const message = { ...(payload), token: token };
+          //   socket.send(JSON.stringify(message));
+          // }
         }
   
         next(action);

@@ -3,10 +3,12 @@ import style from './IngredientDetails.module.css'
 import type { Ingredient, TIngredientItem } from '../../utils/TypesAndIntareface';
 
 interface IngredientDetailsProps {
-    clikIngridients: TIngredientItem
+    clikIngridients: TIngredientItem | null
 }
 
 const IngredientDetails: FC<IngredientDetailsProps> = ({clikIngridients} ) =>  {
+
+    console.log(clikIngridients)
     return (
         <section>
             {clikIngridients &&
