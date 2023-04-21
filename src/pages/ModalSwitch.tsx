@@ -43,7 +43,7 @@ const ModalSwitch = ({ background }: backgroundType) => {
     }
 
 
-    console.log(background)
+  
 
     useEffect(() => {
 

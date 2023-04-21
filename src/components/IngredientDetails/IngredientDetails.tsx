@@ -8,7 +8,7 @@ interface IngredientDetailsProps {
 
 const IngredientDetails: FC<IngredientDetailsProps> = ({clikIngridients} ) =>  {
 
-    console.log(clikIngridients)
+  
     return (
         <section>
             {clikIngridients &&

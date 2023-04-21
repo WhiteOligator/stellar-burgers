@@ -43,12 +43,7 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWSStoreActions | TWS
             dispatch({ type: onClose});
           };
   
-          // if (type === wsSendMessage) {
-          //   const payload = action.payload;
-          //   console.log(payload)
-          //   const message = { ...(payload), token: token };
-          //   socket.send(JSON.stringify(message));
-          // }
+         
         }
   
         next(action);
