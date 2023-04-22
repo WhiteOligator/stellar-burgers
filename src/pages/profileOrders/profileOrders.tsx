@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppHeader from '../../components/AppHeader/AppHeader';
 import style from './profileOrders.module.css'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { GetCookie, RemoveCookie } from '../../hooks/Cookie';
 import { logoutThunk } from '../../redux/thunk/userThunk';
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import FeedCard from '../../components/feedCard/feedCard';
+import { getPrivateOrder, profileOrder } from '../../redux/selectors/selectors';
+import { ElementOrders, ProfileElementOrders } from '../../utils/TypesAndIntareface';
+import { ProgressBar } from 'react-loader-spinner';
+import { WS_PROFILE_CONNECTION_CLOSED, WS_PROFILE_CONNECTION_START } from '../../redux/actionType/middlewareProfileOrder';
+
 
 const ProfileOrders = () => {
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
+
+    useEffect(() => {
+        let token ='?token=' + GetCookie('accessToken')?.trim()
+
+        dispatch({ type: WS_PROFILE_CONNECTION_START, payload: token });
+
+        return () => {
+            dispatch({type: WS_PROFILE_CONNECTION_CLOSED})
+        }
+    },[dispatch])
+
+
+    const {wsConnected, messages} = useAppSelector(getPrivateOrder)
 
     const logout = () => {
 
@@ -49,10 +69,43 @@ const ProfileOrders = () => {
                 </p>
             </div>
             <div className={style.secondBox}>
-                <p className="text text_type_main-large mt-20">
-                    Лента заказов (СКОРО)
-                </p>
+                <div className={style.FeedsIngredients}>
+                    <div className={style.FeedsIngredientsContainer}>
+                     
+                    </div>
+                </div>
             </div>
+            {wsConnected && messages.orders ?
+
+            
+            <div className={style.Order}>
+                <div className={style.OrderContainer}>
+                    {messages.orders.map((el, index) => 
+                        <FeedCard 
+                            key={index}
+                            id={el._id}
+                            ingredients={el.ingredients}
+                            name={el.name}
+                            createdAt={el.createdAt}
+                            number={el.number}
+                            order={el}
+                        />
+                    )}
+                </div>
+            </div> 
+            :
+            <div className={style.loading}>
+                <ProgressBar 
+                    height="140"
+                    width="140"
+                    ariaLabel="progress-bar-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="progress-bar-wrapper"
+                    barColor = '#8B00FF'
+                    borderColor = '#51E5FF'
+                />   
+            </div>    
+        }
         </div>
     );
 }

@@ -18,7 +18,12 @@ import { ProtectedRoute } from '../../pages/ProtectedRoute/ProtectedRoute';
 import { getIngridients } from '../../redux/thunk/getIngridients';
 import React, {FC} from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import FeedsPage from '../../pages/feedsPage/feedsPage';
+import { FeedPage } from '../../pages/feedsPage/feedPage/feedPage';
+import WsOrderPage from '../../pages/wsOrderPage/wsOrderPage';
+import WsFeedPage from '../../pages/wsFeedPage/wsFeedPage';
 import { TUseLocation } from '../../utils/TypesAndIntareface';
+
 
 
 
@@ -48,15 +53,25 @@ const App: FC = () => {
             path='/ingredients/:ingredientId'
             element={<IngredientDetailsPage />}
         />
+        <Route
+            path='/feed'
+            element={<FeedsPage />}
+        />
+        <Route
+            path='/feed/:id'
+            element={<WsOrderPage />}
+        />
         <Route element={<ProtectedRoute  autorizeStatus={true} element={<Authorization />} />} path="/login"/>
         <Route element={<ProtectedRoute autorizeStatus={true} element={<Registration />} />} path="/register"/>
         <Route element={<ProtectedRoute autorizeStatus={true} element={<ForgotPassword />} />} path="/forgot-password"/>
         <Route element={<ProtectedRoute autorizeStatus={true} element={<Passwordreset />} name = {true} />} path="/reset-password"/>
         <Route element={<ProtectedRoute autorizeStatus={false} element={<Profile />} />} path="/profile"/>
         <Route element={<ProtectedRoute autorizeStatus={false} element={<ProfileOrders />} />} path="/profile/orders"/>
+        <Route element={<ProtectedRoute autorizeStatus={false} element={<WsFeedPage />} />} path="/profile/orders/:id"/>
         <Route path='*' element={<NotFound404 />} />
       </Routes>
       <ModalSwitch background={background} />
+      
     </div>
   );
 }

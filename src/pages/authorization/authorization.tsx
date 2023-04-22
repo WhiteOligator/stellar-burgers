@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 
 
+
 const Authorization: FC = () => {
 
     const dispatch = useAppDispatch()
@@ -34,8 +35,10 @@ const Authorization: FC = () => {
           },
     });
 
-
-    if (isLoggedIn) {navigate(-1)}
+   
+    if (isLoggedIn) {
+        navigate(-1)
+    }
 
     return (
         <div className={style.content}>

@@ -9,6 +9,7 @@ import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ProgressBar } from 'react-loader-spinner'
 import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { WS_PROFILE_CONNECTION_CLOSED } from '../../redux/actionType/middlewareProfileOrder';
 
 
 const Profile = () => {
@@ -61,7 +62,6 @@ const Profile = () => {
         let congig = {
             token: refreshToken
         }
-
         dispatch(logoutThunk(congig))
         RemoveCookie("accessToken");
         RemoveCookie("refreshToken");

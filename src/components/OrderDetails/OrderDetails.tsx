@@ -12,15 +12,24 @@ const OrderDetails = () => {
     return (
         <>
         {isPost  ?
-            <ProgressBar 
-            height="140"
-            width="140"
-            ariaLabel="progress-bar-loading"
-            wrapperStyle={{}}
-            wrapperClass="progress-bar-wrapper"
-            barColor = '#8B00FF'
-            borderColor = '#51E5FF'
-            />   
+            <div className={style.NotOrder}>
+                <p className="text text_type_main-medium">
+                        Ожидайте!!!
+                </p>
+                <p className="text text_type_main-medium">
+                        Ваш заказ генерируется на орбитальной станции
+                </p>
+                <ProgressBar 
+                    height="140"
+                    width="140"
+                    ariaLabel="progress-bar-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="progress-bar-wrapper"
+                    barColor = '#8B00FF'
+                    borderColor = '#51E5FF'
+                /> 
+            </div>
+             
         :
         <section>
             <div className={style.content}>

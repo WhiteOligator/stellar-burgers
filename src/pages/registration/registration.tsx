@@ -3,7 +3,6 @@ import AppHeader from '../../components/AppHeader/AppHeader';
 import style from "./registration.module.css"
 import { NavLink, useNavigate } from "react-router-dom";
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-
 import { registerThunk, setRegisterThunk } from '../../redux/thunk/userThunk';
 import { isRegister, registerError } from '../../redux/selectors/selectors';
 import { registerUserErorrNull } from '../../redux/actionCreators/userCreators';

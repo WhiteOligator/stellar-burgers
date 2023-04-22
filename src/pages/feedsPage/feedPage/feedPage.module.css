@@ -1,0 +1,71 @@
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 640px;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.boxPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 640px;
+    text-align: center;
+    flex-wrap: wrap;
+    margin-top: 150px;
+}
+
+.stroke_center {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 640px;
+}
+
+.stroke {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 640px;
+}
+
+.Ingredients {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 640px;
+}
+
+
+.IngredientsContainer {
+    overflow-y: scroll;
+    overflow: scroll;
+    overflow-x:hidden;
+    height: 312px;
+}
+  
+.IngredientsContainer::-webkit-scrollbar {
+    width: 8px; /* ширина для вертикального скролла */
+    background-color: #2F2F37;
+    height:250px;
+}
+  
+  /* ползунок скроллбара */
+.IngredientsContainer::-webkit-scrollbar-thumb {
+    background-color: #8585AD;;
+  
+}
+
+.endBlock {
+    width: 640px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cost {
+    display: flex;
+}

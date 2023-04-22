@@ -9,6 +9,7 @@ import { useAppSelector } from "../../hooks/hooks";
 const AppHeader: FC = () => {
 
     const user = useAppSelector(getUser);
+
     const isLoggedIn = GetCookie('accessToken')
 
     return (

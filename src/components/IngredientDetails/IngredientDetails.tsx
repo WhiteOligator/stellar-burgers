@@ -1,13 +1,14 @@
 import React, {FC} from 'react';
 import style from './IngredientDetails.module.css'
-import type {  TIngredientItem } from '../../utils/TypesAndIntareface';
+
+import type { Ingredient, TIngredientItem } from '../../utils/TypesAndIntareface';
 
 interface IngredientDetailsProps {
-    clikIngridients: TIngredientItem
+    clikIngridients: TIngredientItem | null
 }
 
-const IngredientDetails: FC<IngredientDetailsProps> = ({clikIngridients}) =>  {
-    console.log(clikIngridients)
+const IngredientDetails: FC<IngredientDetailsProps> = ({clikIngridients} ) =>  {
+
     return (
         <section>
             {clikIngridients &&
