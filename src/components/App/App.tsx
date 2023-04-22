@@ -20,10 +20,10 @@ import React, {FC} from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import FeedsPage from '../../pages/feedsPage/feedsPage';
 import { FeedPage } from '../../pages/feedsPage/feedPage/feedPage';
-import { WS_CONNECTION_START } from '../../redux/actionType/middlewareActions';
-import { WS_PROFILE_CONNECTION_START } from '../../redux/actionType/middlewareProfileOrder';
 import WsOrderPage from '../../pages/wsOrderPage/wsOrderPage';
 import WsFeedPage from '../../pages/wsFeedPage/wsFeedPage';
+import { TUseLocation } from '../../utils/TypesAndIntareface';
+
 
 
 
@@ -39,7 +39,9 @@ const App: FC = () => {
   }, []);
 
   const location = useLocation();
-  let background: null | object = location.state && location.state.background;
+
+ 
+  let background: TUseLocation = location.state && location.state.background;
 
  
   return (

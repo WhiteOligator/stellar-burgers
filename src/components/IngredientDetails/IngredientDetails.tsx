@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import style from './IngredientDetails.module.css'
+
 import type { Ingredient, TIngredientItem } from '../../utils/TypesAndIntareface';
 
 interface IngredientDetailsProps {
@@ -8,7 +9,6 @@ interface IngredientDetailsProps {
 
 const IngredientDetails: FC<IngredientDetailsProps> = ({clikIngridients} ) =>  {
 
-  
     return (
         <section>
             {clikIngridients &&

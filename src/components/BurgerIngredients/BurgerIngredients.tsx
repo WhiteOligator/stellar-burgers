@@ -6,7 +6,6 @@ import { getIngridients } from '../../redux/thunk/getIngridients';
 import { getIngredient, ingridientsSelector } from '../../redux/selectors/selectors';
 import { ProgressBar } from 'react-loader-spinner'
 import { VscWarning } from "react-icons/vsc";
-import { TIngredientItem } from '../../utils/TypesAndIntareface';
 import { useAppSelector } from '../../hooks/hooks';
 
 const BurgerIngredients: FC = () => {
@@ -29,15 +28,18 @@ const BurgerIngredients: FC = () => {
     }
 
     useEffect(() => {
-        const headers: any = {};
+        const headers: {[key: string ]: string | boolean} = {};
 
+        console.log(headers[1], "1")
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 headers[entry.target.id] = entry.isIntersecting;
+                console.log(entry.isIntersecting)
             });
             for (const header in headers) {
                 if (headers[header]) {
                     setCategory(Number(header));
+                    console.log(headers)
                     break;
                 }
             }
