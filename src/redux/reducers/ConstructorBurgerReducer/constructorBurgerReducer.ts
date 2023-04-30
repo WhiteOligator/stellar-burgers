@@ -1,5 +1,5 @@
-import { TConstructorBurger } from './../actionCreators/constructorBurger';
-import { TIngredientItem, TIngredientItemDragId } from '../../utils/TypesAndIntareface';
+import { TConstructorBurger } from '../../actionCreators/ConstructorBurger/constructorBurger';
+import { TIngredientItem, TIngredientItemDragId } from '../../../utils/TypesAndIntareface';
 import {
     ADD_INGRIDIENT_CONSTRUCTOR,
     DELETE_INGRIDIENT_CONSTRUCTOR,
@@ -7,7 +7,7 @@ import {
     ADD_BUN_CONSTRUCTOR,
     GET_COST,
     CLEAR_CONSTRUCTOR,
-} from "../actionType/constructorBurger"
+} from "../../actionType/constructorBurger"
 
 type TConstructorBurgerState = {
     ingridients: TIngredientItemDragId[],
@@ -15,7 +15,7 @@ type TConstructorBurgerState = {
     whatKindOfBun: TIngredientItemDragId[],
 };
 
-const initialState: TConstructorBurgerState = {
+export const initialState: TConstructorBurgerState = {
     ingridients: [],
     costOfTheOrder: 0,
     whatKindOfBun: [],

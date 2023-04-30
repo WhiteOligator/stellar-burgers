@@ -1,7 +1,7 @@
 import { API_ENDPOINT } from './../../api/makeRequest';
 import {api} from '../../api'
 import { TIngredientItem } from '../../utils/TypesAndIntareface'
-import { getIngridientsFailed, getIngridientsStarted, getIngridientsSuccess } from '../actionCreators/getIngridients'
+import { getIngridientsFailed, getIngridientsStarted, getIngridientsSuccess } from '../actionCreators/GetIngridients/getIngridients'
 import { AppDispatch,  AppThunk } from '../store'
 
 

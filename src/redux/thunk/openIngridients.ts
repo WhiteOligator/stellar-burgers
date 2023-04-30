@@ -2,7 +2,7 @@ import {
     openIngridient,
     deleteIngridient,
     openModal
-} from "../actionCreators/openIngridient"
+} from "../actionCreators/OpenIngridient/openIngridient"
 import { AppDispatch,  AppThunk } from "../store";
 
 export const openIngridientThunk: AppThunk = (ingridient) => {

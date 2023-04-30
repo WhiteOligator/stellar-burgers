@@ -1,10 +1,10 @@
 import { wsProfileReducer } from './middlewareProfileReducer';
 import { openOrderReducer } from './openOrderReducer';
 import { combineReducers } from 'redux';
-import { ingridientsReducer } from './ingridientsReducer';
+import { ingridientsReducer } from './IngridientsReducer/ingridientsReducer';
 import { orderReducer } from './orderReducer';
 import { openIngridientReducer } from './openIngridientReducer';
-import { constructorBurgerReducer } from './constructorBurgerReducer';
+import { constructorBurgerReducer } from './ConstructorBurgerReducer/constructorBurgerReducer';
 import { userReducer } from './userReduser';
 import { wsReducer } from './middlewareReducer';
 

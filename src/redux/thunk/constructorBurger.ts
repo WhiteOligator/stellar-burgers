@@ -6,7 +6,7 @@ import {
     moveIngridientsConstructor,
     getCost,
     clearConstructor,
-} from '../actionCreators/constructorBurger'
+} from '../actionCreators/ConstructorBurger/constructorBurger'
 import { AppDispatch, AppThunk } from '../store';
 
 

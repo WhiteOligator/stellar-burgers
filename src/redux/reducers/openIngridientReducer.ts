@@ -1,5 +1,5 @@
 import { TIngredientItem } from "../../utils/TypesAndIntareface"
-import { TOpenIngredientAction } from "../actionCreators/openIngridient"
+import { TOpenIngredientAction } from "../actionCreators/OpenIngridient/openIngridient"
 import {
     OPEN_INGRIDIENT,
     DELETE_INGRIDIENT,

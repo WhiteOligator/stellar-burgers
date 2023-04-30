@@ -1,5 +1,5 @@
 import { ElementOrders } from "../../utils/TypesAndIntareface"
-import { TOpenOrderAction } from "../actionCreators/ActionOrder"
+import { TOpenOrderAction } from "../actionCreators/ActionOrder/ActionOrder"
 import {
     OPEN_ORDER,
     OPEN_ORDER_NE_MODAL,
