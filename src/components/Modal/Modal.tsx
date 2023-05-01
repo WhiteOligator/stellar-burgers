@@ -1,7 +1,7 @@
 import React, {useEffect, FC} from "react";
 import './Modal.css'
 import style from './Modal.module.css'
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { createPortal } from 'react-dom';
 import ModalOverlay from "./ModalOverlay";
 import {ModalProps} from '../../utils/TypesAndIntareface'
@@ -34,6 +34,7 @@ const Modal: FC<ModalProps>  = ({
    
   
     return createPortal( 
+        
             <ModalOverlay active={active} onClose={onClose}>
                 <div className={active ? "content active" : "content"} onClick={e => e.stopPropagation()}>               
                     <header className='ml-10 mt-10'  >
@@ -43,14 +44,15 @@ const Modal: FC<ModalProps>  = ({
                                     {title}
                                 </p>
                             </div>
-                            <div onClick={onClose} className={style.icons}>
-                                <CloseIcon  type="primary" />
-                            </div>
+                            <Button htmlType="button" onClick={onClose}  type="secondary" >
+                                <CloseIcon   type="primary" />
+                            </Button>
                         </div>            
                     </header>
                     {children}
                 </div>
-            </ModalOverlay>, portal);
+            </ModalOverlay>
+            , portal);
 
     }                
  

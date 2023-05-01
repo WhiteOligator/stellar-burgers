@@ -49,7 +49,7 @@ const Ingredient: FC<IngredientProps> = ({item}) => {
             className={styles.Link}
             to={`/ingredients/${item._id}`}
             state={{ background: location }}
-            
+            test-id={'ingredient-item-dnd'}
         >
             <div
                 ref={dragRef}
