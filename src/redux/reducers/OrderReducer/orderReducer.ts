@@ -1,12 +1,11 @@
-import { TIngredientItem } from "../../utils/TypesAndIntareface"
-import { TOrderAction } from "../actionCreators/order"
+import { TIngredientItem } from "../../../utils/TypesAndIntareface"
+import { TOrderAction } from "../../actionCreators/order"
 import {
     CLEARE_ORDER,
     CREATE_ORDER_FAILED,
     CREATE_ORDER_STARTED,
     CREATE_ORDER_SUCCESS,
-    UPDATE_ORDER,
-} from "../actionType/order"
+} from "../../actionType/order"
 
 
 type orderState = {
@@ -18,7 +17,7 @@ type orderState = {
     openOrder: boolean,
 }
 
-const initialState: orderState = {
+export const initialState: orderState = {
     ingridients: [],
     costOfTheOrder: 0,
     orderNumber: 0,
@@ -52,7 +51,6 @@ export const orderReducer = (state = initialState, action: TOrderAction): orderS
             }       
         case CLEARE_ORDER: 
             return {
-                ...state,
                 ...initialState,
             }     
         default: return state

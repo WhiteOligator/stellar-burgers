@@ -1,10 +1,10 @@
-import { TIngredientItem } from "../../utils/TypesAndIntareface"
-import { TOpenIngredientAction } from "../actionCreators/OpenIngridient/openIngridient"
+import { TIngredientItem } from "../../../utils/TypesAndIntareface"
+import { TOpenIngredientAction } from "../../actionCreators/OpenIngridient/openIngridient"
 import {
     OPEN_INGRIDIENT,
     DELETE_INGRIDIENT,
     OPEN_MODAL,
-} from "../actionType/openIngridient"
+} from "../../actionType/openIngridient"
 
 type openIngridientState = {
     ingridient: TIngredientItem | null,
@@ -12,7 +12,7 @@ type openIngridientState = {
 }
 
 
-const initialState: openIngridientState = {
+export const initialState: openIngridientState = {
     ingridient: null,
     openIngridient: false,  
 }

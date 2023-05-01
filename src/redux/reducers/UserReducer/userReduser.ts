@@ -1,5 +1,5 @@
-import { TUser } from "../../utils/TypesAndIntareface"
-import { TUserCreatorsAction } from "../actionCreators/userCreators"
+import { TUser } from "../../../utils/TypesAndIntareface"
+import { TUserCreatorsAction } from "../../actionCreators/userCreators"
 import {
     REGISTER_USER_ERROR,
     REGISTER_USER_ERROR_NULL,
@@ -19,7 +19,7 @@ import {
     UPDATE_ERROR,
     UPDATE_SUCCESS,
     UPDATE_START
-} from "../actionType/userType"
+} from "../../actionType/userType"
 
 type userState = {
     user: TUser,
@@ -32,7 +32,7 @@ type userState = {
     updateStart: boolean,
 }
 
-const initialState: userState = {
+export const initialState: userState = {
     user: {
         email: '',
         name: '',
