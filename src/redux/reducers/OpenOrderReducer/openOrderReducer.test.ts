@@ -6,20 +6,6 @@ describe('openOrderReducer', () => {
   
     it('открыть ингридиент', () => {
 
-        const initialState = { 
-            order: {
-                createdAt: '',
-                ingredients: [],
-                name: '',
-                number: 0,
-                status: '',
-                updatedAt: '',
-                _id: '',
-            },
-            openOrderBool: false,  
-            openOrderPage: true,
-          }
-
         const action = {
             type: type.OPEN_ORDER,
             payload: testOrder,
@@ -34,26 +20,17 @@ describe('openOrderReducer', () => {
 
     it('Удалить заказ', () => { 
 
-        const initialState = { 
-            order: {
-                createdAt: '',
-                ingredients: [],
-                name: '',
-                number: 0,
-                status: '',
-                updatedAt: '',
-                _id: '',
-            },
+        const newInitialState = { 
+            ...initialState,
             openOrderBool: true,  
-            openOrderPage: true,
           }
 
         const action = {
           type: type.DELETE_ORDER,
         }
     
-        expect(openOrderReducer(initialState, action)).toEqual({
-            ...initialState,
+        expect(openOrderReducer(newInitialState, action)).toEqual({
+            ...newInitialState,
             order: initialState.order,
             openOrderBool: false,
         })
@@ -61,16 +38,8 @@ describe('openOrderReducer', () => {
 
     it('Открыть страницу заказа', () => {
 
-        const initialState = { 
-            order: {
-                createdAt: '',
-                ingredients: [],
-                name: '',
-                number: 0,
-                status: '',
-                updatedAt: '',
-                _id: '',
-            },
+        const newinitialState = { 
+            ...initialState,
             openOrderBool: true,  
             openOrderPage: false,
         }
@@ -80,8 +49,8 @@ describe('openOrderReducer', () => {
           payload: true,
         }
     
-        expect(openOrderReducer(initialState, action)).toEqual({
-            ...initialState,
+        expect(openOrderReducer(newinitialState, action)).toEqual({
+            ...newinitialState,
             openOrderBool: false,
             openOrderPage: action.payload,
         })

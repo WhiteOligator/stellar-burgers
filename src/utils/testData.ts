@@ -102,3 +102,22 @@ export const messages = {
   total: 111,
   totalToday: 212,
 }
+
+export const oneIngridient: string = "643d69a5c3f7b9001cfa093c";
+
+export const stringError: string = 'error';
+
+export const evt = new Event("error");
+
+export const numTest: number = 1111;
+
+export const testUser = {
+  email: 'PAPA@yandex.ru',
+  name: 'PAPA',
+}
+
+
+export const testUserNull = {
+  email: '',
+  name: '',
+}

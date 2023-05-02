@@ -1,29 +1,26 @@
-import { ingridientMass } from './../../../utils/testData';
+import { ingridientMass, numTest, stringError } from './../../../utils/testData';
 import *as type from '../../actionType/order'
 import {initialState, orderReducer} from './orderReducer';
+
+const isPostTrueInitialState = {
+    ...initialState,
+    isPost: true,
+}
 
 describe('orderReducer', () => { 
   
     it('Создать успешный заказ', () => {
 
-        const initialState = { 
-            ingridients: [],
-            costOfTheOrder: 0,
-            orderNumber: 0,
-            isPost: true,
-            error: false,
-            openOrder: false,
-          }
 
         const action = {
             type: type.CREATE_ORDER_SUCCESS,
             ingridients: ingridientMass,
-            cost: 1213,
-            orderNumber: 11118,
+            cost: numTest,
+            orderNumber: numTest,
         }
   
-        expect(orderReducer(initialState, action)).toEqual({
-            ...initialState,
+        expect(orderReducer(isPostTrueInitialState, action)).toEqual({
+            ...isPostTrueInitialState,
             ingridients: action.ingridients,
             costOfTheOrder: action.cost,
             orderNumber: action.orderNumber,
@@ -33,15 +30,6 @@ describe('orderReducer', () => {
     })
 
     it('Начать создавать заказ', () => { 
-
-        const initialState = { 
-            ingridients: [],
-            costOfTheOrder: 0,
-            orderNumber: 0,
-            isPost: false,
-            error: false,
-            openOrder: false,
-          }
 
         const action = {
           type: type.CREATE_ORDER_STARTED,
@@ -55,23 +43,14 @@ describe('orderReducer', () => {
       })
 
     it('Ошибка открытия страницы заказа', () => {
-
-        const initialState = { 
-            ingridients: [],
-            costOfTheOrder: 0,
-            orderNumber: 0,
-            isPost: true,
-            error: false,
-            openOrder: false,
-          }
-          
+        
         const action = {
           type: type.CREATE_ORDER_FAILED,
-          payload: 'error',
+          payload: stringError,
         }
     
-        expect(orderReducer(initialState, action)).toEqual({
-            ...initialState,
+        expect(orderReducer(isPostTrueInitialState, action)).toEqual({
+            ...isPostTrueInitialState,
             error: true,
             isPost: false,
         })

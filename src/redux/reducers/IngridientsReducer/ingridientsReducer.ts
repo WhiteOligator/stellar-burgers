@@ -4,7 +4,7 @@ import { TIngredientItem } from "../../../utils/TypesAndIntareface"
 import { GET_INGRIDIENTS_FAILED, GET_INGRIDIENTS_STARTED, GET_INGRIDIENTS_SUCCESS } from "../../actionType/getIngridients"
 
 
-type ingridientsReducerState = {
+export type ingridientsReducerState = {
     ingridients: TIngredientItem[],
     ingredientsId: string[],
     isIngridientsLoading: boolean,

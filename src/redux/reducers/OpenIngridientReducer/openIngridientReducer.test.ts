@@ -6,11 +6,6 @@ describe('openIngridientReducer', () => {
   
     it('открыть ингридиент', () => {
 
-        const initialState = { 
-            ingridient: null,
-            openIngridient: false, 
-          }
-
         const action = {
             type: type.OPEN_INGRIDIENT,
             payload: ingridient,
@@ -25,16 +20,16 @@ describe('openIngridientReducer', () => {
 
     it('Удалить ингридиент', () => { 
 
-        const initialState = { 
-            ingridient: ingridient,
-            openIngridient: true,
-          }
+        const newInitialState = {
+          ingridient: ingridient,
+          openIngridient: true,
+        }
 
         const action = {
           type: type.DELETE_INGRIDIENT,
         }
     
-        expect(openIngridientReducer(initialState, action)).toEqual({
+        expect(openIngridientReducer(newInitialState, action)).toEqual({
             ingridient: null,
             openIngridient: false,
         })
@@ -42,7 +37,7 @@ describe('openIngridientReducer', () => {
 
     it('Открыть модальное окно', () => {
 
-        const initialState = { 
+        const newInitialState = { 
             ingridient: ingridient,
             openIngridient: false,
           }
@@ -51,7 +46,7 @@ describe('openIngridientReducer', () => {
           type: type.OPEN_MODAL,
         }
     
-        expect(openIngridientReducer(initialState, action)).toEqual({
+        expect(openIngridientReducer(newInitialState, action)).toEqual({
             ingridient: null,
             openIngridient: true,
         })

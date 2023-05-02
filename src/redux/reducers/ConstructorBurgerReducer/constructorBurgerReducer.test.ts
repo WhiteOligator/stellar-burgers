@@ -1,4 +1,4 @@
-import { ingridientDrag, ingridientDragMass } from './../../../utils/testData';
+import { ingridientDrag, ingridientDragMass, numTest, oneIngridient } from './../../../utils/testData';
 import  { initialState, constructorBurgerReducer } from './constructorBurgerReducer'
 import * as type from '../../actionType/constructorBurger'
 
@@ -8,7 +8,7 @@ describe('constructorBurgerReducer', () => {
     it('Обновить стоимость', () => { 
       const action = {
         type: type.GET_COST,
-        payload: 111,
+        payload: numTest,
       }
   
       expect(constructorBurgerReducer(initialState, action)).toEqual({
@@ -60,7 +60,7 @@ describe('constructorBurgerReducer', () => {
           
         const action = {
           type: type.DELETE_INGRIDIENT_CONSTRUCTOR,
-          payload: "643d69a5c3f7b9001cfa093c",
+          payload: oneIngridient,
         }
     
         expect(constructorBurgerReducer(initialState, action)).toEqual({

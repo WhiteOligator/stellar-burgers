@@ -1,7 +1,17 @@
-import { ingridientDragMass, ingridientList } from './../../../utils/testData';
+import { ingridientDragMass, ingridientList, stringError, testUser, testUserNull } from './../../../utils/testData';
 import { initialState, userReducer } from "./userReduser"
 import *as type from '../../actionType/userType'
 
+
+const errorTrueInitialState = {
+  ...initialState,
+  error: stringError,
+}
+
+const testUserTrueInitialState = {
+  ...initialState,
+  user: testUser
+}
 
 describe('userReducer', () => { 
   
@@ -9,7 +19,7 @@ describe('userReducer', () => {
 
       const action = {
         type: type.REGISTER_USER_ERROR,
-        payload: 'error',
+        payload: stringError,
       }
   
       expect(userReducer(initialState, action)).toEqual({
@@ -20,82 +30,37 @@ describe('userReducer', () => {
 
     it('Обнуление ошибки', () => {
 
-        const initialState = {
-            user: {
-                email: '',
-                name: '',
-            },
-            error: "Ошибка",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: false,
-        }
-
         const action = {
           type: type.REGISTER_USER_ERROR_NULL,
         }
     
-        expect(userReducer(initialState, action)).toEqual({
-          ...initialState,
+        expect(userReducer(errorTrueInitialState, action)).toEqual({
+          ...errorTrueInitialState,
           error: "",
         })
       })
 
       it('Успешная регистрация', () => {
 
-        const initialState = {
-            user: {
-                email: '',
-                name: '',
-            },
-            error: "Ошибка",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: false,
-        }
-
         const action = {
           type: type.REGISTER_USER_SUCCESS,
         }
     
-        expect(userReducer(initialState, action)).toEqual({
-          ...initialState,
+        expect(userReducer(errorTrueInitialState, action)).toEqual({
+          ...errorTrueInitialState,
           register: !initialState.register,
         })
       })
 
       it('Сохранить данные о пользователе', () => {
 
-        const initialState = {
-            user: {
-                email: '',
-                name: '',
-            },
-            error: "Ошибка",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: false,
-        }
-
         const action = {
           type: type.SET_USER,
-          user: {
-              email: 'PAPA@yandex.ru',
-              name: 'PAPA'
-          }
+          user: testUser
         }
     
-        expect(userReducer(initialState, action)).toEqual({
-          ...initialState,
+        expect(userReducer(errorTrueInitialState, action)).toEqual({
+          ...errorTrueInitialState,
           user: action.user,
           error: "",
           login: true,
@@ -104,10 +69,9 @@ describe('userReducer', () => {
 
       it('Ошибка авторизации', () => {
 
-    
         const action = {
           type: type.LOGIN_USER_ERROR,
-          payload: 'error',
+          payload: stringError,
         }
     
         expect(userReducer(initialState, action)).toEqual({
@@ -119,66 +83,35 @@ describe('userReducer', () => {
 
       it('Обнуление ошибки авторизации', () => {
 
-        const initialState = {
-            user: {
-                email: '',
-                name: '',
-            },
-            error: "Ошибка",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: false,
-        }
-
         const action = {
           type: type.LOGIN_USER_ERROR_NULL,
         }
     
-        expect(userReducer(initialState, action)).toEqual({
-          ...initialState,
+        expect(userReducer(errorTrueInitialState, action)).toEqual({
+          ...errorTrueInitialState,
           error: "",
         })
       })
 
       it('Выход пользователя', () => {
 
-        const initialState = {
-            user: {
-                email: 'papa',
-                name: 'papa',
-            },
-            error: "",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: false,
-        }
 
         const action = {
           type: type.LOGOUT,
         }
     
-        expect(userReducer(initialState, action)).toEqual({
-            ...initialState,
-            user: {
-                email: '',
-                name: '',
-            }
+        expect(userReducer(testUserTrueInitialState, action)).toEqual({
+            ...testUserTrueInitialState,
+            user: testUserNull,
         })
       })
 
 
       it('Изменение пароля', () => {
-
     
         const action = {
           type: type.FORGOT_PASSWORD_ERROR,
-          payload: 'error',
+          payload: stringError,
         }
     
         expect(userReducer(initialState, action)).toEqual({
@@ -190,45 +123,18 @@ describe('userReducer', () => {
 
       it('Обнуление ошибки изменения пароля', () => {
 
-        const initialState = {
-            user: {
-                email: '',
-                name: '',
-            },
-            error: "Ошибка",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: false,
-        }
 
         const action = {
           type: type.FORGOT_PASSWORD_ERROR_NULL,
         }
     
-        expect(userReducer(initialState, action)).toEqual({
-          ...initialState,
+        expect(userReducer(errorTrueInitialState, action)).toEqual({
+          ...errorTrueInitialState,
           error: "",
         })
       })
 
       it('Успешная Смена пароля', () => {
-
-        const initialState = {
-            user: {
-                email: '',
-                name: '',
-            },
-            error: "",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: false,
-        }
 
         const action = {
           type: type.FORGOT_PASSWORD_SUCCESS,
@@ -245,7 +151,7 @@ describe('userReducer', () => {
     
         const action = {
           type: type.RESET_PASSWORD_ERROR,
-          payload: 'error',
+          payload: stringError,
         }
     
         expect(userReducer(initialState, action)).toEqual({
@@ -256,45 +162,17 @@ describe('userReducer', () => {
 
       it('Обнуление ошибки изменения пароля 2 этап', () => {
 
-        const initialState = {
-            user: {
-                email: '',
-                name: '',
-            },
-            error: "Ошибка",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: false,
-        }
-
         const action = {
           type: type.RESET_PASSWORD_ERROR_NULL,
         }
     
-        expect(userReducer(initialState, action)).toEqual({
-          ...initialState,
+        expect(userReducer(errorTrueInitialState, action)).toEqual({
+          ...errorTrueInitialState,
           error: "",
         })
       })
 
       it('Успешная Смена пароля 2 этап', () => {
-
-        const initialState = {
-            user: {
-                email: '',
-                name: '',
-            },
-            error: "",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: false,
-        }
 
         const action = {
           type: type.RESET_PASSWORD_SUCCESS,
@@ -308,26 +186,9 @@ describe('userReducer', () => {
 
       it('Получение пользователя', () => {
 
-        const initialState = {
-            user: {
-                email: '',
-                name: '',
-            },
-            error: "",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: false,
-        }
-
         const action = {
           type: type.GET_USER,
-          payload: {
-              email: 'papa',
-              name: 'papa'
-          }
+          payload: testUser,
         }
     
         expect(userReducer(initialState, action)).toEqual({
@@ -338,56 +199,30 @@ describe('userReducer', () => {
 
       it('Обновление данных пользователя', () => {
 
-        const initialState = {
-            user: {
-                email: 'papa',
-                name: 'papa',
-            },
-            error: "",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: false,
-        }
-
         const action = {
           type: type.UPDATE_USER,
-          payload: {
-              email: 'papa2',
-              name: 'papa2'
-          }
+          payload: testUser,
         }
     
-        expect(userReducer(initialState, action)).toEqual({
-          ...initialState,
+        expect(userReducer(testUserTrueInitialState, action)).toEqual({
+          ...testUserTrueInitialState,
           user: action.payload,
         })
       })
 
       it('Ошибка обновления данных пользователя', () => {
 
-        const initialState = {
-            user: {
-                email: 'papa',
-                name: 'papa',
-            },
-            error: "",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
+        const newInitialState = {
+            ...initialState,
             updateStart: true,
         }
 
         const action = {
           type: type.UPDATE_ERROR,
-          payload: 'error',
+          payload: stringError,
         }
     
-        expect(userReducer(initialState, action)).toEqual({
+        expect(userReducer(newInitialState, action)).toEqual({
           ...initialState,
           error: action.payload,
           updateStart: false,
@@ -396,26 +231,18 @@ describe('userReducer', () => {
 
       it('Успешное обновление пользователя', () => {
 
-        const initialState = {
-            user: {
-                email: 'papa',
-                name: 'papa',
-            },
-            error: "error",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: true,
+        const newinitialState = {
+            ...initialState,
+            user: testUser,
+            error: stringError,
         }
 
         const action = {
           type: type.UPDATE_SUCCESS,
         }
     
-        expect(userReducer(initialState, action)).toEqual({
-          ...initialState,
+        expect(userReducer(newinitialState, action)).toEqual({
+          ...newinitialState,
           updateSuccess: !initialState.updateSuccess,
           updateStart: false,
           error: "",
@@ -424,26 +251,12 @@ describe('userReducer', () => {
 
       it('начала обновления пользователя', () => {
 
-        const initialState = {
-            user: {
-                email: 'papa',
-                name: 'papa',
-            },
-            error: "",
-            login: false,
-            register: false,
-            forgotPassword: false,
-            resetPassword: false,
-            updateSuccess: false,
-            updateStart: false,
-        }
-
         const action = {
           type: type.UPDATE_START,
         }
     
-        expect(userReducer(initialState, action)).toEqual({
-          ...initialState,
+        expect(userReducer(testUserTrueInitialState, action)).toEqual({
+          ...testUserTrueInitialState,
           updateStart: true,
         })
       })

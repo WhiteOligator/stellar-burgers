@@ -1,5 +1,6 @@
-import { ingridientDragMass, ingridientList } from './../../../utils/testData';
-import { initialState, ingridientsReducer } from "./ingridientsReducer"
+
+import { ingridientDragMass, ingridientList, stringError } from './../../../utils/testData';
+import { initialState, ingridientsReducer} from "./ingridientsReducer"
 import *as type from '../../actionType/getIngridients'
 
 
@@ -7,39 +8,37 @@ describe('constructorBurgerReducer', () => {
   
     it('Начать получать ингридиенты', () => {
 
-        const initialState = { 
-            ingridients: [],
-            ingredientsId: ['ssasdadasd'],
+        const newInitialState = {
+            ...initialState,
+            ingredientsId: ingridientList,
             isIngridientsLoading: false,
-            error: false,
-          }
-
+        }
+   
       const action = {
         type: type.GET_INGRIDIENTS_STARTED,
       }
   
-      expect(ingridientsReducer(initialState, action)).toEqual({
-        ...initialState,
+      expect(ingridientsReducer(newInitialState, action)).toEqual({
+        ...newInitialState,
         isIngridientsLoading: true,
       })
     })
 
     it('Ошибка получения ингридиентов', () => { 
 
-        const initialState = { 
-            ingridients: [],
-            ingredientsId: ['ssasdadasd'],
-            isIngridientsLoading: true,
-            error: false,
-          }
+        const newInitialState = {
+          ...initialState,
+          ingredientsId: ingridientList,
+          isIngridientsLoading: true,
+        }
 
         const action = {
           type: type.GET_INGRIDIENTS_FAILED,
-          payload: 'error'
+          payload: stringError,
         }
     
-        expect(ingridientsReducer(initialState, action)).toEqual({
-            ...initialState,
+        expect(ingridientsReducer(newInitialState, action)).toEqual({
+            ...newInitialState,
             ingridients: [],
             ingredientsId: [],
             isIngridientsLoading: false,
@@ -49,21 +48,19 @@ describe('constructorBurgerReducer', () => {
 
     it('Успешная загрузка', () => {
 
-        const initialState = { 
-            ingridients: [],
-            ingredientsId: [],
-            isIngridientsLoading: true,
-            error: false
-          }
-          
+        const newInitialState = {
+          ...initialState,
+          isIngridientsLoading: true,
+        }
+
         const action = {
           type: type.GET_INGRIDIENTS_SUCCESS,
           payload: ingridientDragMass,
           payloadId: ingridientList,
         }
     
-        expect(ingridientsReducer(initialState, action)).toEqual({
-          ...initialState,
+        expect(ingridientsReducer(newInitialState, action)).toEqual({
+          ...newInitialState,
           isIngridientsLoading: false,
           ingridients: action.payload,
           ingredientsId: action.payloadId,
