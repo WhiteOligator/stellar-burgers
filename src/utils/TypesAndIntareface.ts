@@ -96,11 +96,12 @@ interface ModalOverlayProps  {
 
 type TIngredientItemMass = TIngredientItem[];
 
+
 type TUser = {
     email: string,
     name: string,
 }
-
+ 
 interface IResponse {
     success: boolean
 }
@@ -239,4 +240,5 @@ export type {
     IMessage,
     ElementOrders,
     ProfileElementOrders
+
 }

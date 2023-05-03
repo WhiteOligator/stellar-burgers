@@ -4,7 +4,7 @@ import Modal from '../components/Modal/Modal'
 import IngredientDetails from '../components/IngredientDetails/IngredientDetails';
 import { getClikIngridients, ingridientsSelector, openItem } from '../redux/selectors/selectors';
 import { useEffect } from 'react';
-import { useAppDispatch } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { TIngredientItem } from '../utils/TypesAndIntareface';
 import { getOpenOrder, getOpenOrderOrder, getOrders, profileOrder } from '../redux/selectors/selectors';
 import {  useAppSelector } from '../hooks/hooks';
@@ -20,8 +20,8 @@ type backgroundType = {
 const ModalSwitch = ({ background }: backgroundType) => {
     const navigate = useNavigate();
     const location = useLocation();
-    const dispatch = useAppDispatch();
 
+    const dispatch = useAppDispatch();
     const {ingridients} = useAppSelector(ingridientsSelector)
     const orders = useAppSelector(getOrders)
     const {openOrderBool, order} = useAppSelector(getOpenOrder)
@@ -29,7 +29,7 @@ const ModalSwitch = ({ background }: backgroundType) => {
     const orderName = useAppSelector(getOpenOrderOrder);
     const openIngredient = useAppSelector(openItem)
     const clikIngridients = useAppSelector(getClikIngridients)
-   
+
 
     const handleCloseModal = () => {
         dispatch(deleteIngridientThunk());

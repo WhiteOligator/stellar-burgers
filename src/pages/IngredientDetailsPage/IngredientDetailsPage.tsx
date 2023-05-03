@@ -14,11 +14,11 @@ const IngredientDetailsPage = () =>  {
     
     const ingredientsItems = useAppSelector(ingredient);
 
-    const ingredientItem = useMemo(() => {
+    const ingredientItem: TIngredientItem = useMemo(() => {
         return ingredientsItems.find((item: TIngredientItem) => item._id === ingredientId);
     }, [ingredientId, ingredientsItems]);
 
-
+    
     return (
         <div className={style.content}>
         {ingredientItem &&

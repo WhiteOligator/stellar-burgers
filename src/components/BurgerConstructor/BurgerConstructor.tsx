@@ -1,7 +1,6 @@
 import React, { useEffect, FC} from "react";
 import style from './BurgerConstructor.module.css'
 import { ConstructorElement, Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-
 import { useDrop } from "react-dnd";
 import { addBunConstructorThunk, addIngridientsConstructorThunk, clearConstructorThunk, getCostThunk } from "../../redux/thunk/constructorBurger";
 import { v4 as uuidv4 } from 'uuid';
