@@ -28,6 +28,7 @@ export const socketMiddleware = (wsUrl: string, wsActions: TWSStoreActions | TWS
           };
   
           socket.onerror = event => {
+            console.log(event)
             dispatch({ type: onError, payload: event });
           };   
   

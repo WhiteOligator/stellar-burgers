@@ -9,9 +9,9 @@ import { TIngredientItem } from '../utils/TypesAndIntareface';
 import { getOpenOrder, getOpenOrderOrder, getOrders, profileOrder } from '../redux/selectors/selectors';
 import {  useAppSelector } from '../hooks/hooks';
 import { ElementOrders } from '../utils/TypesAndIntareface';
-import { deleteOrder, openOrderModal } from '../redux/actionCreators/ActionOrder';
+import { deleteOrder, openOrderModal } from '../redux/actionCreators/ActionOrder/ActionOrder';
 import { FeedPage } from './feedsPage/feedPage/feedPage';
-import { openOrder } from '../redux/actionCreators/ActionOrder'
+import { openOrder } from '../redux/actionCreators/ActionOrder/ActionOrder'
 
 type backgroundType = {
     background: null | object

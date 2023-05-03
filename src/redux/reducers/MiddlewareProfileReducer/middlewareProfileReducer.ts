@@ -4,8 +4,8 @@ import {
     WS_PROFILE_CONNECTION_SUCCESS,
     WS_PROFILE_CONNECTION_ERROR,
     WS_PROFILE_GET_MESSAGE,
-} from './../actionType/middlewareProfileOrder';
-import {IMessage, TWSActions, TWSProfileActions} from '../../utils/TypesAndIntareface'
+} from '../../actionType/middlewareProfileOrder';
+import {IMessage, TWSActions, TWSProfileActions} from '../../../utils/TypesAndIntareface'
 
 type TWSState = {
     wsConnected: boolean;
@@ -14,7 +14,7 @@ type TWSState = {
     error?: Event;
   }
   
-const initialState: TWSState = {
+export const initialState: TWSState = {
       wsConnected: false,
       messages: {
         success: false,

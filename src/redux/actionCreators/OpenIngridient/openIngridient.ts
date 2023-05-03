@@ -2,8 +2,8 @@ import {
     OPEN_INGRIDIENT,
     DELETE_INGRIDIENT,
     OPEN_MODAL
-} from "../actionType/openIngridient"
-import {TIngredientItem} from '../../utils/TypesAndIntareface'
+} from "../../actionType/openIngridient"
+import {TIngredientItem} from '../../../utils/TypesAndIntareface'
 
 interface openIngridientAction {
     readonly type: typeof OPEN_INGRIDIENT;

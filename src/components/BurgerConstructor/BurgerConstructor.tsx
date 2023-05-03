@@ -101,7 +101,7 @@ const BurgerConstructor: FC = () => {
    
 
     return (
-            <section className={style.box}>
+            <section className={style.box} test-id={'constructor'}>
                <div className="mt-25">
                     <div className={ style.constructorPole }>
                             <div  className="ml-8">
@@ -149,7 +149,7 @@ const BurgerConstructor: FC = () => {
                                             </div>    
                                         :
                                         <div className={isHoverBun1 ? borderColorBun1 : borderColorBun2}>
-                                            <p className="text text_type_main-medium">
+                                            <p className="text text_type_main-medium" test-id={'constructor-search'}>
                                                 Please add buns
                                             </p>
                                         </div>}

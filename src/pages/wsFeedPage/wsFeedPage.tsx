@@ -4,7 +4,7 @@ import { GetCookie } from '../../hooks/Cookie';
 import { useAppDispatch } from "../../hooks/hooks";
 import { WS_CONNECTION_CLOSED, WS_CONNECTION_START } from "../../redux/actionType/middlewareActions";
 import { WS_PROFILE_CONNECTION_CLOSED, WS_PROFILE_CONNECTION_START } from '../../redux/actionType/middlewareProfileOrder';
-import { wsProfileReducer } from "../../redux/reducers/middlewareProfileReducer"
+import { wsProfileReducer } from "../../redux/reducers/MiddlewareProfileReducer/middlewareProfileReducer"
 import { FeedPage } from "../feedsPage/feedPage/feedPage"
 
 

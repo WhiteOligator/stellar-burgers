@@ -1,12 +1,12 @@
-import { wsProfileReducer } from './middlewareProfileReducer';
-import { openOrderReducer } from './openOrderReducer';
+import { wsProfileReducer } from './MiddlewareProfileReducer/middlewareProfileReducer';
+import { openOrderReducer } from './OpenOrderReducer/openOrderReducer';
 import { combineReducers } from 'redux';
-import { ingridientsReducer } from './ingridientsReducer';
-import { orderReducer } from './orderReducer';
-import { openIngridientReducer } from './openIngridientReducer';
-import { constructorBurgerReducer } from './constructorBurgerReducer';
-import { userReducer } from './userReduser';
-import { wsReducer } from './middlewareReducer';
+import { ingridientsReducer } from './IngridientsReducer/ingridientsReducer';
+import { orderReducer } from './OrderReducer/orderReducer';
+import { openIngridientReducer } from './OpenIngridientReducer/openIngridientReducer';
+import { constructorBurgerReducer } from './ConstructorBurgerReducer/constructorBurgerReducer';
+import { userReducer } from './UserReducer/userReduser';
+import { wsReducer } from './MiddlewareReducer/middlewareReducer';
 
 export const rootReducer = combineReducers({
     ingridients: ingridientsReducer,

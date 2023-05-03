@@ -4,9 +4,9 @@ import {applyMiddleware, createStore} from "redux";
 import thunkMiddleware from "redux-thunk"; 
 import { composeWithDevTools } from '@redux-devtools/extension';
 
-import {TConstructorBurger} from '../redux/actionCreators/constructorBurger'
-import {TGetIngredientsAction} from '../redux/actionCreators/getIngridients'
-import {TOpenIngredientAction} from '../redux/actionCreators/openIngridient'
+import {TConstructorBurger} from './actionCreators/ConstructorBurger/constructorBurger'
+import {TGetIngredientsAction} from './actionCreators/GetIngridients/getIngridients'
+import {TOpenIngredientAction} from './actionCreators/OpenIngridient/openIngridient'
 import {TOrderAction} from '../redux/actionCreators/order'
 import {TUserCreatorsAction} from '../redux/actionCreators/userCreators';
 import { ThunkAction } from 'redux-thunk';
@@ -22,7 +22,7 @@ import {
     WS_GET_MESSAGE,
 } from '../redux/actionType/middlewareActions'
 import { TWSActions, TWSStoreActions, TWSStoreProfileActions } from '../utils/TypesAndIntareface';
-import { TOpenOrderAction } from './actionCreators/ActionOrder';
+import { TOpenOrderAction } from './actionCreators/ActionOrder/ActionOrder';
 import { WS_PROFILE_CONNECTION_START, WS_PROFILE_SEND_MESSAGE, WS_PROFILE_CONNECTION_SUCCESS, WS_PROFILE_CONNECTION_CLOSED, WS_PROFILE_CONNECTION_ERROR, WS_PROFILE_GET_MESSAGE } from './actionType/middlewareProfileOrder';
 import { GetCookie } from '../hooks/Cookie';
 

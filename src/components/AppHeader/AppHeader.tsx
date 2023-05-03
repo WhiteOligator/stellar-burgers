@@ -20,7 +20,7 @@ const AppHeader: FC = () => {
                             {({ isActive }) => (
                                 <>
                                     <BurgerIcon type={isActive ? 'primary' : 'secondary'} />
-                                    <span className={`text text_type_main-default ${isActive ? style.text_color_active : 'text_color_inactive'} ml-2`}>
+                                    <span className={`text text_type_main-default ${isActive ? style.text_color_active : 'text_color_inactive'} ml-2`} test-id={'constructorButton'}>
                                         Конструктор
                                     </span>
                                 </>
@@ -56,7 +56,7 @@ const AppHeader: FC = () => {
                         {({ isActive }) => (
                             <>
                                 <ProfileIcon type={isActive ? 'primary' : 'secondary'} />
-                                <span className={`text text_type_main-default ${isActive ? style.text_color_active : 'text_color_inactive'} ml-2`}>
+                                <span className={`text text_type_main-default ${isActive ? style.text_color_active : 'text_color_inactive'} ml-2`} test-id={'username'}>
                                     {isLoggedIn ? user.name : 'Личный кабинет'}
                                 </span>
                             </>

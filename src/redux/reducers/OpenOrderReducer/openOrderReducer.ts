@@ -1,10 +1,10 @@
-import { ElementOrders } from "../../utils/TypesAndIntareface"
-import { TOpenOrderAction } from "../actionCreators/ActionOrder"
+import { ElementOrders } from "../../../utils/TypesAndIntareface"
+import { TOpenOrderAction } from "../../actionCreators/ActionOrder/ActionOrder"
 import {
     OPEN_ORDER,
     OPEN_ORDER_NE_MODAL,
     DELETE_ORDER,
-} from "../actionType/openOrder"
+} from "../../actionType/openOrder"
 
 type openOrderState = {
     order: ElementOrders,
@@ -13,7 +13,7 @@ type openOrderState = {
 }
 
 
-const initialState: openOrderState = {
+export const initialState: openOrderState = {
     order: {
         createdAt: '',
         ingredients: [],

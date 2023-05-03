@@ -1,17 +1,17 @@
-import { ingredient } from './../selectors/selectors';
-import { TGetIngredientsAction } from './../actionCreators/getIngridients';
-import { TIngredientItem } from "../../utils/TypesAndIntareface"
-import { GET_INGRIDIENTS_FAILED, GET_INGRIDIENTS_STARTED, GET_INGRIDIENTS_SUCCESS } from "../actionType/getIngridients"
+import { ingredient } from '../../selectors/selectors';
+import { TGetIngredientsAction } from '../../actionCreators/GetIngridients/getIngridients';
+import { TIngredientItem } from "../../../utils/TypesAndIntareface"
+import { GET_INGRIDIENTS_FAILED, GET_INGRIDIENTS_STARTED, GET_INGRIDIENTS_SUCCESS } from "../../actionType/getIngridients"
 
 
-type ingridientsReducerState = {
+export type ingridientsReducerState = {
     ingridients: TIngredientItem[],
     ingredientsId: string[],
     isIngridientsLoading: boolean,
     error: boolean,
 }
 
-const initialState: ingridientsReducerState = {
+export const initialState: ingridientsReducerState = {
     ingridients: [],
     ingredientsId: [],
     isIngridientsLoading: true,

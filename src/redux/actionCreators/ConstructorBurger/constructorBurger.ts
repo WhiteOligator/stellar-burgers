@@ -5,8 +5,8 @@ import {
     ADD_BUN_CONSTRUCTOR,
     GET_COST,
     CLEAR_CONSTRUCTOR,
-} from '../actionType/constructorBurger'
-import { TIngredientItemDragId} from '../../utils/TypesAndIntareface'
+} from '../../actionType/constructorBurger'
+import { TIngredientItemDragId} from '../../../utils/TypesAndIntareface'
 
 interface addIngridientsConstructorAction {
     readonly type: typeof ADD_INGRIDIENT_CONSTRUCTOR;

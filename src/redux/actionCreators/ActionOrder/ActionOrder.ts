@@ -2,8 +2,8 @@ import {
     OPEN_ORDER,
     OPEN_ORDER_NE_MODAL,
     DELETE_ORDER,
-} from "../actionType/openOrder"
-import {ElementOrders, TIngredientItem} from '../../utils/TypesAndIntareface'
+} from "../../actionType/openOrder"
+import {ElementOrders, TIngredientItem} from '../../../utils/TypesAndIntareface'
 
 interface openOrderAction {
     readonly type: typeof OPEN_ORDER;

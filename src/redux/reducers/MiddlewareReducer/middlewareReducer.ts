@@ -6,8 +6,8 @@ import {
     WS_CONNECTION_SUCCESS,
     WS_GET_MESSAGE,
     WS_SEND_MESSAGE,
-} from '../actionType/middlewareActions'
-import {IMessage, TWSActions} from '../../utils/TypesAndIntareface'
+} from '../../actionType/middlewareActions'
+import {IMessage, TWSActions} from '../../../utils/TypesAndIntareface'
 
 type TWSState = {
     wsConnected: boolean;
@@ -16,7 +16,7 @@ type TWSState = {
     error?: Event;
   }
   
-const initialState: TWSState = {
+export const initialState: TWSState = {
       wsConnected: false,
       messages: {
         success: false,

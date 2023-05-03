@@ -7,7 +7,7 @@ import { ElementOrders, TIngredientItem } from "../../utils/TypesAndIntareface";
 import  './feedCard.css'
 import { IngredientIcon } from "./IngredientIconGroup/IngredientIconGroup";
 import { Link, useLocation } from 'react-router-dom';
-import { openOrder, openOrderModal } from "../../redux/actionCreators/ActionOrder";
+import { openOrder, openOrderModal } from "../../redux/actionCreators/ActionOrder/ActionOrder";
 import { dateСhange } from "../../utils/function";
 import { howStatus } from "../../pages/feedsPage/feedPage/feedPage";
 

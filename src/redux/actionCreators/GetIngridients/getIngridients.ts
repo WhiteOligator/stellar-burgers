@@ -2,8 +2,8 @@ import {
     GET_INGRIDIENTS_FAILED,
     GET_INGRIDIENTS_STARTED,
     GET_INGRIDIENTS_SUCCESS,
-} from '../actionType/getIngridients'
-import {TIngredientItem} from '../../utils/TypesAndIntareface'
+} from '../../actionType/getIngridients'
+import {TIngredientItem} from '../../../utils/TypesAndIntareface'
 
 interface getIngridientsSuccessAction {
     readonly type: typeof GET_INGRIDIENTS_SUCCESS;
