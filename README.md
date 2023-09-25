@@ -19,5 +19,5 @@
 Для запуска проекта введите npm start.
 Для деплоя проекта введите команду npm run deploy.
 
-После чего перейдите по ссылке "https://whiteoligator.github.io/stellar-burgers/" на задепоиный проект
+После чего перейдите по ссылке "https://whiteoligator.github.io/stellar-burgers/" на задеплоиный проект
 
