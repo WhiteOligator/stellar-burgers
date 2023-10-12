@@ -239,6 +239,5 @@ export type {
     TUser,
     IMessage,
     ElementOrders,
-    ProfileElementOrders
-
+    ProfileElementOrders,
 }

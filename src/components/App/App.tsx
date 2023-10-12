@@ -22,8 +22,13 @@ import FeedsPage from '../../pages/feedsPage/feedsPage';
 import { FeedPage } from '../../pages/feedsPage/feedPage/feedPage';
 import WsOrderPage from '../../pages/wsOrderPage/wsOrderPage';
 import WsFeedPage from '../../pages/wsFeedPage/wsFeedPage';
-import { TUseLocation } from '../../utils/TypesAndIntareface';
 
+
+interface LocationState {
+  from: {
+    pathname: string;
+  };
+}
 
 
 
@@ -41,7 +46,7 @@ const App: FC = () => {
   const location = useLocation();
 
  
-  let background: TUseLocation = location.state && location.state.background;
+  let background = location.state && location.state.background as LocationState
 
  
   return (

@@ -14,7 +14,7 @@ const IngredientDetailsPage = () =>  {
     
     const ingredientsItems = useAppSelector(ingredient);
 
-    const ingredientItem: TIngredientItem = useMemo(() => {
+    const ingredientItem = useMemo(() => {
         return ingredientsItems.find((item: TIngredientItem) => item._id === ingredientId);
     }, [ingredientId, ingredientsItems]);
 
